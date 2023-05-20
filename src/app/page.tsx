@@ -1,11 +1,6 @@
 // ** Component Imports
 import Header from "@/components/Home/Header";
-
-// ** Services Imports
-import { usePosts } from "@/services/api/getPosts";
-
-// ** Lib Imports
-import Landing from "@/components/Home/Home";
+import Home from "@/components/Home/Home";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -15,14 +10,9 @@ export default async function Main() {
   // We are forcing a loading time.
   await wait(500);
 
-  const { getPosts } = usePosts();
-  const initialData = await getPosts();
-
-  console.log(initialData);
-
   return (
     <main>
-      <Landing props={initialData} />
+      <Home />
     </main>
   );
 }

@@ -18,25 +18,24 @@ import {
 } from "@mui/material";
 
 import { useGlobalStore } from "@/zustand/store";
+import LanguageDropdown from "./LanguageDropdown";
+import { useSettings } from "@/@core/hooks/useSettings";
+import { useTranslateString } from "@/utils/TranslateString";
 
 // ** Top Level Component
 const Header = () => {
+  const TranslateString = useTranslateString();
+  const { settings, saveSettings } = useSettings();
   const router = useRouter();
   const { postData, setTitle, title } = useGlobalStore();
 
-  React.useEffect(() => {
-    setTitle("TESTING ZUSTAND");
-  }, []);
-
-  console.log(`Header`, title);
-
-  const [headerBg, setHeaderBg] = React.useState("transparent");
+  const [headerBg, setHeaderBg] = React.useState("rgba(33, 31, 27, 0.8)");
 
   const listenScrollEvent = () => {
     if (window.scrollY < 5) {
-      return setHeaderBg("transparent");
+      return setHeaderBg("rgba(33, 31, 27, 0.8)");
     } else if (window.scrollY > 5) {
-      return setHeaderBg("rgba(0, 0, 0, 0.5)");
+      return setHeaderBg("transparent");
     }
   };
 
@@ -47,49 +46,18 @@ const Header = () => {
 
   return (
     <Box sx={{ ...styles.container, backgroundColor: headerBg }}>
-      <Box>
+      <Box sx={styles.spacer}></Box>
+      <Box sx={styles.middleBox}>
         <Image
-          src="/images/header/header-fiba.png"
-          alt="ambassador"
-          width={170}
-          height={40}
-        />
-        <Image
-          src="/images/header/header-ambassador.png"
-          alt="ambassador"
-          width={120}
-          height={40}
-        />
-      </Box>
-
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          position: {
-            sm: "absolute",
-            md: "absolute",
-            lg: "revert",
-          },
-          left: "18%",
-          zIndex: 1500,
-          gap: 2,
-          mt: 2,
-        }}
-      >
-        <Image
-          src="./images/header/header-title.svg"
+          src="/images/header/11ic.svg"
           alt="main-logo"
           width={200}
-          height={40}
+          height={45}
           priority
         />
         <TopTabNavigation />
       </Box>
-
-      <Box sx={{ display: "flex", gap: "0.60em" }}>
+      <Box sx={styles.rightBox}>
         <Image
           src="./images/header/header-download.svg"
           alt="download"
@@ -101,15 +69,16 @@ const Header = () => {
           sx={styles.loginButton}
           onClick={() => router.push("/dashboard")}
         >
-          Log in
+          {TranslateString(`Login`)}
         </Button>
         <Button
           variant="contained"
           sx={styles.signUpButton}
           onClick={() => router.push("/users/1")}
         >
-          Sign up
+          {TranslateString(`Sign Up`)}
         </Button>
+        <LanguageDropdown settings={settings} saveSettings={saveSettings} />
       </Box>
     </Box>
   );
@@ -130,22 +99,25 @@ function TopTabNavigation() {
       onChange={handleTabChange}
       sx={{
         ".Mui-selected": {
-          color: `#ffd346 !important`,
+          color: `#F3B867 !important`,
         },
       }}
       TabIndicatorProps={{
         style: {
-          backgroundColor: "#ffd346",
+          backgroundColor: "#F3B867",
         },
       }}
     >
       <Tab value="1" label="Home" sx={styles.tabs} />
-      <Tab value="2" label="Live Casino" sx={styles.tabs} />
-      <Tab value="3" label="Slots" sx={styles.tabs} />
-      <Tab value="4" label="Blockchain Games" sx={styles.tabs} />
-      <Tab value="5" label="Sports" sx={styles.tabs} />
-      <Tab value="6" label="J9BC" sx={styles.tabs} />
-      <Tab value="7" label="J9 Brand" sx={styles.tabs} />
+      <Tab value="2" label="Sports" sx={styles.tabs} />
+      <Tab value="3" label="Live Casino" sx={styles.tabs} />
+      <Tab value="4" label="Rummy" sx={styles.tabs} />
+      <Tab value="5" label="Slots" sx={styles.tabs} />
+      <Tab value="6" label="Lottery" sx={styles.tabs} />
+      <Tab value="7" label="VIP" sx={styles.tabs} />ß
+      <Tab value="8" label="Promotions" sx={styles.tabs} />
+      <Tab value="9" label="Commission" sx={styles.tabs} />
+      <Tab value="10" label="Blog" sx={styles.tabs} />
     </Tabs>
   );
 }
@@ -158,7 +130,7 @@ const styles = {
     alignItems: "flex-start",
     position: "fixed",
     width: "100%",
-    height: "14dvh",
+    height: "128px",
     zIndex: 1000, // High z-index to ensure the header is on top
     p: 2,
   },
@@ -171,18 +143,19 @@ const styles = {
     color: "#FFF",
   },
   loginButton: {
-    color: "#000",
-    backgroundColor: "#FFF",
+    color: "#F3B867",
+    backgroundColor: "#000",
+    border: "1px solid #F3B867",
     width: "106px",
-    height: "3dvh",
+    height: "36px",
     borderRadius: "16px",
     textTransform: "none",
   },
   signUpButton: {
     color: "#000",
-    backgroundColor: "#ffd346",
+    backgroundColor: "#F3B867",
     width: "106px",
-    height: "3dvh",
+    height: "36px",
     borderRadius: "16px",
     textTransform: "none",
 
@@ -204,6 +177,23 @@ const styles = {
         boxShadow: "0 0 0 0 rgba(204, 169, 44, 0)",
       },
     },
+  },
+  spacer: {
+    flex: 1,
+  },
+
+  middleBox: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+
+  rightBox: {
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    gap: "0.60em",
+    flex: 1,
   },
 };
 

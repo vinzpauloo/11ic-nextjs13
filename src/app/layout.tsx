@@ -9,6 +9,8 @@ import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 import { MuiSetup } from "@/providers/MuiSetup";
 import QueryProvider from "@/providers/QueryProvider";
 
+import "../configs/i18n";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -25,11 +27,12 @@ export default function RootLayout({
       <body
         className={inter.className}
         style={{
-          backgroundImage:
-            "url('https://j9.io/assets/PC-Background-d2a73e39.png')",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          // backgroundImage:
+          //   "url('https://j9.io/assets/PC-Background-d2a73e39.png')",
+          // backgroundRepeat: "no-repeat",
+          // backgroundSize: "cover",
+          // backgroundPosition: "center",
+          backgroundColor: "#171717",
           minHeight: "180dvh",
         }}
       >
