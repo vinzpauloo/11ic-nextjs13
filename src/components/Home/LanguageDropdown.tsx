@@ -1,3 +1,9 @@
+// ** Next Imports
+import Image from "next/image";
+
+// ** MUI Imports
+import { Box, Typography } from "@mui/material";
+
 // ** Icon Imports
 import Icon from "../../@core/components/icon";
 
@@ -7,15 +13,16 @@ import { useTranslation } from "react-i18next";
 // ** Custom Components Imports
 import OptionsMenu from "../../@core/components/option-menu";
 
-// ** Type Import
+// ** Core Imports
 import { Settings } from "../../@core/context/settingsContext";
+
+// ** Image Imports
+import IndianFlag from "../../../public/images/header/India@3x.png";
 
 interface Props {
   settings: Settings;
   saveSettings: (values: Settings) => void;
 }
-
-import { initReactI18next } from "react-i18next";
 
 const LanguageDropdown = ({ settings, saveSettings }: Props) => {
   // ** Hook
@@ -30,7 +37,8 @@ const LanguageDropdown = ({ settings, saveSettings }: Props) => {
 
   return (
     <OptionsMenu
-      icon={<Icon icon="mdi:web" />}
+      // icon={currentIcon}
+      icon={<Icon />}
       menuProps={{ sx: { "& .MuiMenu-paper": { mt: 4, minWidth: 130 } } }}
       iconButtonProps={{
         color: "inherit",
@@ -38,7 +46,18 @@ const LanguageDropdown = ({ settings, saveSettings }: Props) => {
       }}
       options={[
         {
-          text: "Hindi",
+          icon: (
+            <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Image
+                src={IndianFlag}
+                alt="Indian Flag"
+                width={20}
+                height={20}
+              />
+              <Typography>Hindi</Typography>
+            </Box>
+          ),
+          text: "",
           menuItemProps: {
             sx: { py: 2 },
             selected: i18n.language === "zh_CN",
