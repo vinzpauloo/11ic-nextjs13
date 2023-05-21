@@ -47,7 +47,7 @@ const Slider = () => {
           delay: 2000,
           disableOnInteraction: false,
         }}
-        navigation={true}
+        // navigation={true}
         pagination={{ clickable: true, type: "bullets" }}
         modules={[Autoplay, EffectFade, Navigation, Pagination]}
       >

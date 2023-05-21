@@ -12,9 +12,8 @@ import { Box, Button, Container, Typography } from "@mui/material";
 // ** Custom Component Imports
 import NoticeTicker from "./components/Notice";
 import Carousel from "./components/Carousel";
-import Image from "next/image";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import Sports from "./components/Sports";
+import Casino from "./components/Casino";
 
 const Home = () => {
   return (
@@ -27,16 +26,17 @@ const Home = () => {
           gap: 5,
         }}
       >
+        {/* First Container / Carousel and Notice */}
         <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          {/* Main Sliper/Carousel */}
           <Carousel />
-
-          {/* Notice Ticker */}
           <NoticeTicker />
         </Box>
 
-        {/* 11ic Sports */}
+        {/* Second Container / 11ic Sports */}
         <Sports />
+
+        {/* Third Container / Live Casino */}
+        <Casino />
       </Box>
     </Container>
   );

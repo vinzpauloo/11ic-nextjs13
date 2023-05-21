@@ -18,7 +18,7 @@ import Header from "@/components/Header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "J9.COM--the first cryptocurrency casino based on Web3.0",
+  title: "11iC.COM--the first cryptocurrency casino based on Web3.0",
   description: "j9.io",
 };
 export default function RootLayout({
