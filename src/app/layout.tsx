@@ -5,11 +5,15 @@ import "../styles/globals.css";
 import { Inter } from "next/font/google";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 
-// ** Lib Imports
+// ** Provider Imports
 import { MuiSetup } from "@/providers/MuiSetup";
 import QueryProvider from "@/providers/QueryProvider";
 
+// ** Third Party Imports
 import "../configs/i18n";
+
+// ** Custom Components Imports
+import Header from "@/components/Home/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +41,10 @@ export default function RootLayout({
         }}
       >
         <QueryProvider>
-          <MuiSetup>{children}</MuiSetup>
+          <MuiSetup>
+            <Header />
+            {children}
+          </MuiSetup>
         </QueryProvider>
       </body>
     </html>

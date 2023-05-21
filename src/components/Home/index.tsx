@@ -2,7 +2,6 @@
 import React, { use } from "react";
 import Ticker from "react-ticker";
 import { Box, Button, Container, Typography } from "@mui/material";
-import Header from "@/components/Home/Header";
 
 const Home = () => {
   const newsItems = [
@@ -14,7 +13,6 @@ const Home = () => {
 
   return (
     <Container maxWidth={false} disableGutters sx={{ position: "relative" }}>
-      <Header />
       <Box
         sx={{
           paddingTop: "164px",
