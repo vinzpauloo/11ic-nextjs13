@@ -5,19 +5,19 @@ import Image from "next/image";
 import { Box, Typography } from "@mui/material";
 
 // ** Icon Imports
-import Icon from "../../@core/components/icon";
+import Icon from "../../../@core/components/icon";
 
 // ** Third Party Import
 import { useTranslation } from "react-i18next";
 
 // ** Custom Components Imports
-import OptionsMenu from "../../@core/components/option-menu";
+import OptionsMenu from "../../../@core/components/option-menu";
 
 // ** Core Imports
-import { Settings } from "../../@core/context/settingsContext";
+import { Settings } from "../../../@core/context/settingsContext";
 
 // ** Image Imports
-import IndianFlag from "../../../public/images/header/India@3x.png";
+import IndianFlag from "../../../../public/images/header/India@3x.png";
 
 interface Props {
   settings: Settings;

@@ -84,7 +84,8 @@ const OptionsMenu = (props: OptionsMenuType) => {
         onClick={handleClick}
         {...iconButtonProps}
       >
-        {icon ? icon : <Icon icon="mdi:dots-vertical" {...iconProps} />}
+        {icon ? icon : <Icon />}
+        {/* {icon ? icon : <Icon icon="mdi:dots-vertical" {...iconProps} />} */}
       </IconButton>
       <Menu
         keepMounted

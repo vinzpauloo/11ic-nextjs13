@@ -13,7 +13,7 @@ import QueryProvider from "@/providers/QueryProvider";
 import "../configs/i18n";
 
 // ** Custom Components Imports
-import Header from "@/components/Home/Header";
+import Header from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 

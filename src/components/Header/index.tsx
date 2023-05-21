@@ -21,7 +21,7 @@ import {
 import { useGlobalStore } from "@/zustand/store";
 
 // ** Custom Components Imports
-import LanguageDropdown from "./LanguageDropdown";
+import LanguageDropdown from "./components/Language";
 
 // ** Core Imports
 import { useSettings } from "@/@core/hooks/useSettings";
@@ -48,7 +48,7 @@ const Header = () => {
     if (window.scrollY < 5) {
       return setHeaderBg("rgba(33, 31, 27, 0.8)");
     } else if (window.scrollY > 5) {
-      return setHeaderBg("transparent");
+      return setHeaderBg("rgba(0, 0, 0, 0.5)");
     }
   };
 
