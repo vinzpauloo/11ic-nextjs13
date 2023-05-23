@@ -14,6 +14,7 @@ import NoticeTicker from "./components/Notice";
 import Carousel from "./components/Carousel";
 import Sports from "./components/Sports";
 import Casino from "./components/Casino";
+import Games from "./components/Games";
 
 const Home = () => {
   return (
@@ -37,6 +38,32 @@ const Home = () => {
 
         {/* Third Container / Live Casino */}
         <Casino />
+
+        {/* Fourth Container / Rummy */}
+        <Games
+          title="Rummy"
+          firstBackground="linear-gradient(90deg, #F87700 0%, #F2D53C 100%)"
+          firstGameTitle="Jili"
+          firstBackgroundImage="/images/games/jili.png"
+          firstAltName="Jili"
+          secondBackground="linear-gradient(90deg, #931E1E 0%, #ED215E 100%)"
+          secondGameTitle="MPoker"
+          secondBackgroundImage="/images/games/mpoker.png"
+          secondAltName="MPoker"
+        />
+
+        {/* Fifth Container / Lottery */}
+        <Games
+          title="Lottery"
+          firstBackground="linear-gradient(90deg, #201E93 0%, #5621ED 100%)"
+          firstGameTitle="Saba Lottery"
+          firstBackgroundImage="/images/games/saba-lottery.png"
+          firstAltName="saba"
+          secondBackground="linear-gradient(90deg, #0069B6 0%, #00D8B1 100%);"
+          secondGameTitle="Lottery786"
+          secondBackgroundImage="/images/games/lottery-786.png"
+          secondAltName="786"
+        />
       </Box>
     </Container>
   );

@@ -65,7 +65,7 @@ const Casino = () => {
   return (
     <Box
       sx={{
-        height: "472px",
+        // height: "472px",
         // backgroundColor: "#606060",
         mx: {
           xs: 3,
