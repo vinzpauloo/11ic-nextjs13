@@ -14,6 +14,7 @@ import "../configs/i18n";
 
 // ** Custom Components Imports
 import Header from "@/components/Header";
+import FloatingActionButton from "@/components/FloatingAction";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,6 +44,7 @@ export default function RootLayout({
         <QueryProvider>
           <MuiSetup>
             <Header />
+            <FloatingActionButton />
             {children}
           </MuiSetup>
         </QueryProvider>
