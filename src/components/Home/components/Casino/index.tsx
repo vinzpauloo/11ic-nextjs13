@@ -63,58 +63,12 @@ const secondRowSliderImages = [
 
 const Casino = () => {
   return (
-    <Box
-      sx={{
-        // height: "472px",
-        // backgroundColor: "#606060",
-        mx: {
-          xs: 3,
-          sm: 5,
-          md: 5,
-          lg: 25,
-        },
-        borderRadius: "16px",
-      }}
-    >
-      {/* Casino Row Starts Here */}
+    <Box sx={styles.container}>
       <Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            mb: 2,
-          }}
-        >
-          <Typography
-            sx={{
-              color: "#FFF",
-              textTransform: "uppercase",
-              fontWeight: 900,
-            }}
-          >
-            Live Casino
-          </Typography>
-          <Button
-            sx={{
-              backgroundColor: "#FFF",
-              height: "25px",
-              cursor: "pointer",
-              "&:hover": {
-                backgroundColor: "#ffd346",
-              },
-            }}
-          >
-            <Typography
-              sx={{
-                color: "#000",
-                textTransform: "uppercase",
-                fontWeight: 900,
-                fontSize: 12,
-              }}
-            >
-              More
-            </Typography>
+        <Box sx={styles.headerWrapper}>
+          <Typography sx={styles.title}>Live Casino</Typography>
+          <Button sx={styles.button}>
+            <Typography sx={styles.buttonText}>More</Typography>
           </Button>
         </Box>
         {/* CASINO SLIDER */}
@@ -123,6 +77,43 @@ const Casino = () => {
       </Box>
     </Box>
   );
+};
+
+const styles = {
+  container: {
+    mx: {
+      xs: 3,
+      sm: 5,
+      md: 5,
+      lg: 25,
+    },
+    borderRadius: "16px",
+  },
+  headerWrapper: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    mb: 2,
+  },
+  title: {
+    color: "#FFF",
+    textTransform: "uppercase",
+    fontWeight: 900,
+  },
+  button: {
+    backgroundColor: "#FFF",
+    height: "25px",
+    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "#ffd346",
+    },
+  },
+  buttonText: {
+    color: "#000",
+    textTransform: "uppercase",
+    fontWeight: 900,
+    fontSize: 12,
+  },
 };
 
 export default Casino;

@@ -18,28 +18,14 @@ import Games from "./components/Games";
 
 const Home = () => {
   return (
-    <Container maxWidth={false} disableGutters sx={{ position: "relative" }}>
-      <Box
-        sx={{
-          paddingTop: "164px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 5,
-        }}
-      >
-        {/* First Container / Carousel and Notice */}
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+    <Container maxWidth={false} disableGutters sx={styles.container}>
+      <Box sx={styles.innerContainer}>
+        <Box sx={styles.carouselWrapper}>
           <Carousel />
           <NoticeTicker />
         </Box>
-
-        {/* Second Container / 11ic Sports */}
         <Sports />
-
-        {/* Third Container / Live Casino */}
         <Casino />
-
-        {/* Fourth Container / Rummy */}
         <Games
           title="Rummy"
           firstBackground="linear-gradient(90deg, #F87700 0%, #F2D53C 100%)"
@@ -51,8 +37,6 @@ const Home = () => {
           secondBackgroundImage="/images/games/mpoker.png"
           secondAltName="MPoker"
         />
-
-        {/* Fifth Container / Lottery */}
         <Games
           title="Lottery"
           firstBackground="linear-gradient(90deg, #201E93 0%, #5621ED 100%)"
@@ -67,6 +51,23 @@ const Home = () => {
       </Box>
     </Container>
   );
+};
+
+const styles = {
+  container: {
+    position: "relative",
+  },
+  innerContainer: {
+    paddingTop: "164px",
+    display: "flex",
+    flexDirection: "column",
+    gap: 5,
+  },
+  carouselWrapper: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 2,
+  },
 };
 
 export default Home;

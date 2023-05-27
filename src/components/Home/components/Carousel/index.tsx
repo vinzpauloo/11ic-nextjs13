@@ -27,19 +27,7 @@ const sliderImages = [
 
 const Slider = () => {
   return (
-    <Box
-      sx={{
-        height: "424px",
-        backgroundColor: "#606060",
-        mx: {
-          xs: 3,
-          sm: 5,
-          md: 5,
-          lg: 25,
-        },
-        borderRadius: "16px",
-      }}
-    >
+    <Box sx={styles.container}>
       <Swiper
         slidesPerView={1}
         loop={true}
@@ -47,38 +35,15 @@ const Slider = () => {
           delay: 2000,
           disableOnInteraction: false,
         }}
-        // navigation={true}
         pagination={{ clickable: true, type: "bullets" }}
         modules={[Autoplay, EffectFade, Navigation, Pagination]}
       >
         {sliderImages.map((item, index) => (
           <SwiperSlide key={index}>
-            <Box
-              sx={{
-                width: "100%",
-                height: "425px",
-              }}
-            >
+            <Box sx={styles.slideWrapper}>
               <Box
                 component="img"
-                sx={{
-                  height: {
-                    xs: "425px",
-                    sm: "425px",
-                    md: "425px",
-                    lg: "480px",
-                    xl: "900px",
-                  },
-                  width: "100%",
-                  objectFit: {
-                    xs: "cover",
-                    sm: "cover",
-                    md: "cover",
-                    lg: "cover",
-                    xl: "cover",
-                  },
-                  objectPosition: "center",
-                }}
+                sx={styles.image}
                 alt="main-slider-images"
                 src={item.image}
               />
@@ -88,6 +53,42 @@ const Slider = () => {
       </Swiper>
     </Box>
   );
+};
+
+const styles = {
+  container: {
+    height: "424px",
+    backgroundColor: "#606060",
+    mx: {
+      xs: 3,
+      sm: 5,
+      md: 5,
+      lg: 25,
+    },
+    borderRadius: "16px",
+  },
+  slideWrapper: {
+    width: "100%",
+    height: "425px",
+  },
+  image: {
+    height: {
+      xs: "425px",
+      sm: "425px",
+      md: "425px",
+      lg: "480px",
+      xl: "900px",
+    },
+    width: "100%",
+    objectFit: {
+      xs: "cover",
+      sm: "cover",
+      md: "cover",
+      lg: "cover",
+      xl: "cover",
+    },
+    objectPosition: "center",
+  },
 };
 
 export default Slider;

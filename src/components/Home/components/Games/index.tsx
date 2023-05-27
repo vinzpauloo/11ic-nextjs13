@@ -29,37 +29,9 @@ const Games: React.FC<GamesProps> = ({
   secondAltName,
 }) => {
   return (
-    <Box
-      sx={{
-        mx: {
-          xs: 3,
-          sm: 5,
-          md: 5,
-          lg: 25,
-        },
-        borderRadius: "16px",
-      }}
-    >
-      <Typography
-        sx={{
-          color: "#FFF",
-          textTransform: "uppercase",
-          fontWeight: 900,
-          mb: 2,
-        }}
-      >
-        {title}
-      </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: {
-            xs: "column",
-            sm: "row",
-          },
-          gap: 2,
-        }}
-      >
+    <Box sx={styles.container}>
+      <Typography sx={styles.title}>{title}</Typography>
+      <Box sx={styles.cardsWrapper}>
         <Cards
           background={firstBackground}
           gameTitle={firstGameTitle}
@@ -75,6 +47,32 @@ const Games: React.FC<GamesProps> = ({
       </Box>
     </Box>
   );
+};
+
+const styles = {
+  container: {
+    mx: {
+      xs: 3,
+      sm: 5,
+      md: 5,
+      lg: 25,
+    },
+    borderRadius: "16px",
+  },
+  title: {
+    color: "#FFF",
+    textTransform: "uppercase",
+    fontWeight: 900,
+    mb: 2,
+  },
+  cardsWrapper: {
+    display: "flex",
+    flexDirection: {
+      xs: "column",
+      sm: "row",
+    },
+    gap: 2,
+  },
 };
 
 export default Games;

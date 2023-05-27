@@ -8,62 +8,16 @@ import { Box, Button, Typography } from "@mui/material";
 const NoticeTicker = () => {
   const newsItems = [
     "Virtual Currency is a currency that does not have a physical form and only exists in digital form, also known as digital currency.",
-    // "Sports: Local team wins championship",
-    // "Weather: Rain expected all week",
-    // "Entertainment: New blockbuster movie released",
   ];
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        mx: {
-          xs: 3,
-          sm: 5,
-          md: 5,
-          lg: 25,
-        },
-        position: "relative",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Box
-        sx={{
-          backgroundColor: "#FFF",
-          borderTopLeftRadius: "7px",
-          borderBottomLeftRadius: "7px",
-          p: {
-            xs: 0.5,
-          },
-          textAlign: "center",
-          width: "100px",
-        }}
-      >
-        <Typography
-          textTransform="uppercase"
-          sx={{
-            fontSize: {
-              xs: 15,
-              sm: 16,
-            },
-          }}
-        >
+    <Box sx={styles.container}>
+      <Box sx={styles.titleWrapper}>
+        <Typography textTransform="uppercase" sx={styles.title}>
           Notice
         </Typography>
       </Box>
-      <Box
-        sx={{
-          width: "100%",
-          backgroundColor: "#232323",
-          color: "#FFF",
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-          p: {
-            xs: 0.5,
-          },
-        }}
-      >
+      <Box sx={styles.tickerWrapper}>
         <Ticker offset="run-in" speed={10}>
           {({ index }) => (
             <>
@@ -72,26 +26,67 @@ const NoticeTicker = () => {
           )}
         </Ticker>
 
-        <Box
-          sx={{
-            backgroundColor: "#ffd346",
-            borderRadius: "12px",
-            position: "absolute",
-            top: {
-              xs: 3,
-            },
-            right: 5,
-          }}
-        >
+        <Box sx={styles.buttonWrapper}>
           <Button>
-            <Typography fontSize={8} color="black" fontWeight={900}>
-              Check More
-            </Typography>
+            <Typography sx={styles.checkMoreText}>Check More</Typography>
           </Button>
         </Box>
       </Box>
     </Box>
   );
+};
+
+const styles = {
+  container: {
+    display: "flex",
+    mx: {
+      xs: 3,
+      sm: 5,
+      md: 5,
+      lg: 25,
+    },
+    position: "relative",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  titleWrapper: {
+    backgroundColor: "#FFF",
+    borderTopLeftRadius: "7px",
+    borderBottomLeftRadius: "7px",
+    p: {
+      xs: 0.5,
+    },
+    textAlign: "center",
+    width: "100px",
+  },
+  title: {
+    fontSize: "14px",
+    fontWeight: 900,
+  },
+  tickerWrapper: {
+    width: "100%",
+    backgroundColor: "#232323",
+    color: "#FFF",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    p: {
+      xs: 0.5,
+    },
+  },
+  buttonWrapper: {
+    backgroundColor: "#ffd346",
+    borderRadius: "12px",
+    position: "absolute",
+    top: {
+      xs: 3,
+    },
+    right: 5,
+  },
+  checkMoreText: {
+    fontSize: 8,
+    color: "#000",
+    fontWeight: 900,
+  },
 };
 
 export default NoticeTicker;

@@ -15,6 +15,7 @@ import "../configs/i18n";
 // ** Custom Components Imports
 import Header from "@/components/Header";
 import FloatingActionButton from "@/components/FloatingAction";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,7 +39,6 @@ export default function RootLayout({
           // backgroundSize: "cover",
           // backgroundPosition: "center",
           backgroundColor: "#171717",
-          minHeight: "180dvh",
         }}
       >
         <QueryProvider>
@@ -46,6 +46,7 @@ export default function RootLayout({
             <Header />
             <FloatingActionButton />
             {children}
+            <Footer />
           </MuiSetup>
         </QueryProvider>
       </body>

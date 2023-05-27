@@ -58,24 +58,13 @@ const Header = () => {
   }, []);
 
   return (
-    <Box
-      sx={{
-        backgroundColor: headerBg,
-        position: "fixed",
-        width: "100%",
-        height: "128px",
-        zIndex: 1000, // High z-index to ensure the header is on top
-        p: 2,
-      }}
-    >
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+    <Box sx={{ ...styles.container, backgroundColor: headerBg }}>
+      <Box sx={styles.firstWrapper}>
+        <Box sx={styles.fillerContainer} />
         <Box
-          sx={{
-            flex: { sm: null, md: 1.3, lg: 1.3 },
-            display: { sm: "none", md: "block", lg: "block" },
-          }}
-        />
-        <Box sx={{ flex: 1 }}>
+          sx={{ flex: 1, cursor: "pointer" }}
+          onClick={() => router.push("/")}
+        >
           <Image
             src="/images/header/11ic.svg"
             alt="main-logo"
@@ -85,26 +74,10 @@ const Header = () => {
           />
         </Box>
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.20em",
-            flex: 0,
-          }}
-        >
+        <Box sx={styles.logoAndLoginSignUpWrapper}>
           <Box
             component="img"
-            sx={{
-              height: 20,
-              width: 20,
-              display: {
-                xs: "none",
-                sm: "block",
-                md: "block",
-                lg: "block",
-              },
-            }}
+            sx={styles.downloadIcon}
             alt="download"
             src="./images/header/header-download.svg"
           />
@@ -126,16 +99,7 @@ const Header = () => {
         </Box>
       </Box>
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minWidth: 0,
-        }}
-      >
-        <TopTabNavigation />
-      </Box>
+      <TopTabNavigation />
     </Box>
   );
 };
@@ -148,48 +112,70 @@ function TopTabNavigation() {
   };
 
   return (
-    <Tabs
-      orientation="horizontal"
-      variant="scrollable"
-      scrollButtons="auto"
-      value={selectedTab}
-      onChange={handleTabChange}
-      sx={{
-        ".Mui-selected": {
-          color: `#F3B867 !important`,
-        },
-      }}
-      TabIndicatorProps={{
-        style: {
-          backgroundColor: "#F3B867",
-        },
-      }}
-    >
-      <Tab value="1" label="Home" sx={styles.tabs} />
-      <Tab value="2" label="Sports" sx={styles.tabs} />
-      <Tab value="3" label="Live Casino" sx={styles.tabs} />
-      <Tab value="4" label="Rummy" sx={styles.tabs} />
-      <Tab value="5" label="Slots" sx={styles.tabs} />
-      <Tab value="6" label="Lottery" sx={styles.tabs} />
-      <Tab value="7" label="VIP" sx={styles.tabs} />ß
-      <Tab value="8" label="Promotions" sx={styles.tabs} />
-      <Tab value="9" label="Commission" sx={styles.tabs} />
-      <Tab value="10" label="Blog" sx={styles.tabs} />
-    </Tabs>
+    <Box sx={styles.tabsWrapper}>
+      <Tabs
+        orientation="horizontal"
+        variant="scrollable"
+        scrollButtons="auto"
+        value={selectedTab}
+        onChange={handleTabChange}
+        sx={{
+          ".Mui-selected": {
+            color: `#F3B867 !important`,
+          },
+        }}
+        TabIndicatorProps={{
+          style: {
+            backgroundColor: "#F3B867",
+          },
+        }}
+      >
+        <Tab value="1" label="Home" sx={styles.tabs} />
+        <Tab value="2" label="Sports" sx={styles.tabs} />
+        <Tab value="3" label="Live Casino" sx={styles.tabs} />
+        <Tab value="4" label="Rummy" sx={styles.tabs} />
+        <Tab value="5" label="Slots" sx={styles.tabs} />
+        <Tab value="6" label="Lottery" sx={styles.tabs} />
+        <Tab value="7" label="VIP" sx={styles.tabs} />ß
+        <Tab value="8" label="Promotions" sx={styles.tabs} />
+        <Tab value="9" label="Commission" sx={styles.tabs} />
+        <Tab value="10" label="Blog" sx={styles.tabs} />
+      </Tabs>
+    </Box>
   );
 }
 
 // ** Styles
 const styles = {
-  tabs: {
-    fontFamily: '"Montserrat", sans-serif',
-    fontWeight: "600",
-    fontSize: 12,
-    textTransform: "uppercase",
-    cursor: "pointer",
-    color: "#FFF",
-    width: {
-      // sm: "200px",
+  container: {
+    position: "fixed",
+    width: "100%",
+    height: "128px",
+    zIndex: 1000, // High z-index to ensure the header is on top
+    p: 2,
+  },
+  firstWrapper: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  fillerContainer: {
+    flex: { sm: null, md: 1.3, lg: 1.3 },
+    display: { sm: "none", md: "block", lg: "block" },
+  },
+  logoAndLoginSignUpWrapper: {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.20em",
+    flex: 0,
+  },
+  downloadIcon: {
+    height: 20,
+    width: 20,
+    display: {
+      xs: "none",
+      sm: "block",
+      md: "block",
+      lg: "block",
     },
   },
   loginButton: {
@@ -240,6 +226,25 @@ const styles = {
         transform: "scale(1)",
         boxShadow: "0 0 0 0 rgba(204, 169, 44, 0)",
       },
+    },
+  },
+
+  // Tabs
+  tabsWrapper: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minWidth: 0,
+  },
+  tabs: {
+    fontFamily: '"Montserrat", sans-serif',
+    fontWeight: "600",
+    fontSize: 12,
+    textTransform: "uppercase",
+    cursor: "pointer",
+    color: "#FFF",
+    width: {
+      // sm: "200px",
     },
   },
 };

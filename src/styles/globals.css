@@ -87,6 +87,7 @@ video {
   font: inherit;
   vertical-align: baseline;
   overscroll-behavior-y: none;
+  overscroll-x: hidden;
 }
 /* This will affect the whole document */
 * {

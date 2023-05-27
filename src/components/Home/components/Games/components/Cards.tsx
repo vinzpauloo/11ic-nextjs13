@@ -21,50 +21,59 @@ const Cards: React.FC<CardProps> = ({
     <Box
       sx={{
         background: background,
-        backgroundBlendMode: "overlay",
-        height: "200px",
-        width: "100%",
-        borderRadius: "16px",
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        overflow: "hidden",
+        ...styles.container,
       }}
     >
-      <Box sx={{ pl: { xs: 2, sm: 4 }, position: "absolute", zIndex: 1000 }}>
-        <Typography
-          sx={{
-            fontSize: "40px",
-            fontWeight: 900,
-            color: "#FFF",
-            textTransform: "uppercase",
-            wordWrap: "break-word",
-            overflowWrap: "break-word",
-            maxWidth: "200px",
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-          }}
-        >
-          {gameTitle}
-        </Typography>
+      <Box sx={styles.titleWrapper}>
+        <Typography sx={styles.gameTitle}>{gameTitle}</Typography>
       </Box>
       <Box
         component="img"
-        sx={{
-          position: "absolute",
-          right: {
-            xs: -70,
-            sm: 0,
-          },
-          height: "100%",
-          objectFit: "contain",
-          objectPosition: "center",
-        }}
+        sx={styles.image}
         alt={altName}
         src={backgroundImage}
       />
     </Box>
   );
+};
+
+const styles = {
+  container: {
+    backgroundBlendMode: "overlay",
+    height: "200px",
+    width: "100%",
+    borderRadius: "16px",
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    overflow: "hidden",
+  },
+  titleWrapper: {
+    pl: { xs: 2, sm: 4 },
+    position: "absolute",
+    zIndex: 1000,
+  },
+  gameTitle: {
+    fontSize: "40px",
+    fontWeight: 900,
+    color: "#FFF",
+    textTransform: "uppercase",
+    wordWrap: "break-word",
+    overflowWrap: "break-word",
+    maxWidth: "200px",
+    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+  },
+  image: {
+    position: "absolute",
+    right: {
+      xs: -70,
+      sm: 0,
+    },
+    height: "100%",
+    objectFit: "contain",
+    objectPosition: "center",
+  },
 };
 
 export default Cards;
