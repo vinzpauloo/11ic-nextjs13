@@ -1,7 +1,11 @@
 import DashboardContent from "@/components/DashboardContent";
 
 const Dashboard = () => {
-  return <DashboardContent />;
+  return (
+    <main>
+      <DashboardContent />
+    </main>
+  );
 };
 
 export default Dashboard;
