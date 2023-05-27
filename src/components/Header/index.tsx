@@ -211,6 +211,7 @@ const styles = {
     color: "#000",
     backgroundColor: "#F3B867",
     width: {
+      xs: "20px",
       sm: "90px",
       md: "90px",
       lg: "90px",
@@ -220,6 +221,7 @@ const styles = {
     borderRadius: "16px",
     textTransform: "none",
     fontSize: 12,
+    whiteSpace: "nowrap",
 
     "&:hover": {
       backgroundColor: "#ffd346",
