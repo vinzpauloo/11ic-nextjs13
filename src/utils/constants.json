@@ -1,0 +1,34 @@
+{
+  "color": {
+    "gray": "#8F887D"
+  },
+  "form": {
+    "inputType": {
+      "text": "text",
+      "password": "password"
+    },
+    "error": {
+      "email": "*Please enter a valid email.",
+      "mobile": "*Invalid mobile number.",
+      "notNumber": "*Invalid number.",
+      "firstNameMin": "*First name must be at least 2 characters.",
+      "lastNameMin": "*Last name must be at least 2 characters.",
+      "passwordMin": "*Password must be at least 7 characters.",
+      "passwordMax": "*Password must be at most 32 characters.",
+      "passwordConfirm": "*Password don't match.",
+      "missingOtp": "Please input your OTP code.",
+      "searchMin": "Search keyword must be at least 3 characters.",
+      "reviewOption": "Please select one option for review!",
+      "reviewRating": "Please select your rating!",
+      "reviewFeedback": "Please submit any feedback!"
+    },
+    "success": {
+      "updateProfile": "Customer profile updated successfully!",
+      "updatePassword": "You have successfully changed your password!",
+      "cancelOrder": "Your order has been canceled!",
+      "reviewRider": "Rider feedback success!",
+      "reviewRestaurant": "Restaurant feedback success!"
+    }
+  },
+  "otpCountdown": 300
+}

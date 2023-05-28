@@ -1,6 +1,6 @@
 "use client";
 // ** React Imports
-import React from "react";
+import React, { useRef } from "react";
 
 // ** Next Imports
 import Image from "next/image";
@@ -19,9 +19,12 @@ import {
 
 // ** Zustand Store Imports
 import { useGlobalStore } from "@/zustand/store";
+import { useAccountStore } from "@/zustand/account-store";
 
 // ** Custom Components Imports
 import LanguageDropdown from "./components/Language";
+import TopTabNavigation from "./components/TopTabNavigation";
+import LoginSignUpModal from "../Account/index";
 
 // ** Core Imports
 import { useSettings } from "@/@core/hooks/useSettings";
@@ -29,7 +32,6 @@ import { useSettings } from "@/@core/hooks/useSettings";
 // ** Utility Imports
 import { useTranslateString } from "@/utils/TranslateString";
 
-// ** Top Level Component
 const Header = () => {
   // * Router
   const router = useRouter();
@@ -40,9 +42,14 @@ const Header = () => {
   // * Store
   const { settings, saveSettings } = useSettings();
   const { postData, setTitle, title } = useGlobalStore();
+  const { buttonClicked, setButtonClicked } = useAccountStore();
+
+  // ** Ref
+  const modalRef = useRef<{ clearForm: () => void } | null>(null);
 
   // * States
   const [headerBg, setHeaderBg] = React.useState("rgba(33, 31, 27, 0.8)");
+  const [open, setOpen] = React.useState(false);
 
   const listenScrollEvent = () => {
     if (window.scrollY < 5) {
@@ -57,14 +64,23 @@ const Header = () => {
     return () => window.removeEventListener("scroll", listenScrollEvent);
   }, []);
 
+  const handleOpen = (button: string) => {
+    setButtonClicked(button);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    if (modalRef.current) {
+      modalRef.current.clearForm();
+    }
+    setOpen(false);
+  };
+
   return (
     <Box sx={{ ...styles.container, backgroundColor: headerBg }}>
       <Box sx={styles.firstWrapper}>
         <Box sx={styles.fillerContainer} />
-        <Box
-          sx={{ flex: 1, cursor: "pointer" }}
-          onClick={() => router.push("/")}
-        >
+        <Box sx={styles.logoWrapper} onClick={() => router.push("/")}>
           <Image
             src="/images/header/11ic.svg"
             alt="main-logo"
@@ -84,66 +100,25 @@ const Header = () => {
           <Button
             variant="contained"
             sx={styles.loginButton}
-            onClick={() => router.push("/dashboard")}
+            onClick={() => handleOpen("login")}
           >
             {TranslateString(`Login`)}
           </Button>
           <Button
             variant="contained"
             sx={styles.signUpButton}
-            onClick={() => router.push("/dashboard")}
+            onClick={() => handleOpen("register")}
           >
             {TranslateString(`Sign Up`)}
           </Button>
           <LanguageDropdown settings={settings} saveSettings={saveSettings} />
         </Box>
+        <LoginSignUpModal ref={modalRef} open={open} onClose={handleClose} />
       </Box>
-
       <TopTabNavigation />
     </Box>
   );
 };
-
-// ** Child Components **
-function TopTabNavigation() {
-  const [selectedTab, setSelectedTab] = React.useState("1");
-  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
-    setSelectedTab(newValue);
-  };
-
-  return (
-    <Box sx={styles.tabsWrapper}>
-      <Tabs
-        orientation="horizontal"
-        variant="scrollable"
-        scrollButtons="auto"
-        value={selectedTab}
-        onChange={handleTabChange}
-        sx={{
-          ".Mui-selected": {
-            color: `#F3B867 !important`,
-          },
-        }}
-        TabIndicatorProps={{
-          style: {
-            backgroundColor: "#F3B867",
-          },
-        }}
-      >
-        <Tab value="1" label="Home" sx={styles.tabs} />
-        <Tab value="2" label="Sports" sx={styles.tabs} />
-        <Tab value="3" label="Live Casino" sx={styles.tabs} />
-        <Tab value="4" label="Rummy" sx={styles.tabs} />
-        <Tab value="5" label="Slots" sx={styles.tabs} />
-        <Tab value="6" label="Lottery" sx={styles.tabs} />
-        <Tab value="7" label="VIP" sx={styles.tabs} />ß
-        <Tab value="8" label="Promotions" sx={styles.tabs} />
-        <Tab value="9" label="Commission" sx={styles.tabs} />
-        <Tab value="10" label="Blog" sx={styles.tabs} />
-      </Tabs>
-    </Box>
-  );
-}
 
 // ** Styles
 const styles = {
@@ -161,6 +136,10 @@ const styles = {
   fillerContainer: {
     flex: { sm: null, md: 1.3, lg: 1.3 },
     display: { sm: "none", md: "block", lg: "block" },
+  },
+  logoWrapper: {
+    flex: 1,
+    cursor: "pointer",
   },
   logoAndLoginSignUpWrapper: {
     display: "flex",
@@ -226,25 +205,6 @@ const styles = {
         transform: "scale(1)",
         boxShadow: "0 0 0 0 rgba(204, 169, 44, 0)",
       },
-    },
-  },
-
-  // Tabs
-  tabsWrapper: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    minWidth: 0,
-  },
-  tabs: {
-    fontFamily: '"Montserrat", sans-serif',
-    fontWeight: "600",
-    fontSize: 12,
-    textTransform: "uppercase",
-    cursor: "pointer",
-    color: "#FFF",
-    width: {
-      // sm: "200px",
     },
   },
 };
