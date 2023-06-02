@@ -1,5 +1,5 @@
 // ** Component Imports
-import Home from "@/components/Home";
+import Home from "@/pages/Home";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 

@@ -13,9 +13,9 @@ import QueryProvider from "@/providers/QueryProvider";
 import "../configs/i18n";
 
 // ** Custom Components Imports
-import Header from "@/components/Header";
-import FloatingActionButton from "@/components/FloatingAction";
-import Footer from "@/components/Footer";
+import Header from "@/pages/Header";
+import FloatingActionButton from "@/pages/FloatingAction";
+import Footer from "@/pages/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
