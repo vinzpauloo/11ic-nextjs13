@@ -10,6 +10,8 @@ import {
   DialogTitle,
   IconButton,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 
 // ** Third Party Imports
@@ -32,6 +34,7 @@ import Login from "@/pages/Account/Login";
 
 // ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";
+import Title from "./components/Title";
 
 // ** Types
 interface ModalProps {
@@ -90,6 +93,14 @@ const LoginSignUpModal = ({ open, onClose }: ModalProps, ref: any) => {
     },
   }));
 
+  // ** Zustand Store **
+  const { buttonClicked } = useAccountStore();
+
+  // ** MUI Theme **
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
+  // ** Functions **
   const handleFormSubmit = async (data: FormValues) => {
     console.log(`SUCCESS SUBMIT FORM`, data);
     const formData = new FormData();
@@ -106,10 +117,14 @@ const LoginSignUpModal = ({ open, onClose }: ModalProps, ref: any) => {
     } catch (e: any) {}
   };
 
-  const { buttonClicked } = useAccountStore();
-
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="lg"
+      fullWidth
+      fullScreen={fullScreen}
+    >
       <DialogContent sx={styles.container}>
         <Box sx={styles.imageWrapper}>
           <Box component="img" src="/images/modal/IPL.png" sx={styles.image} />
@@ -120,15 +135,21 @@ const LoginSignUpModal = ({ open, onClose }: ModalProps, ref: any) => {
           </IconButton>
 
           {buttonClicked === "login" ? (
-            <Login />
+            <>
+              <Title title="Sign In" />
+              <Login />
+            </>
           ) : buttonClicked === "register" ? (
-            <Registration
-              handleSubmit={handleSubmit}
-              handleFormSubmit={handleFormSubmit}
-              control={control}
-              errors={errors}
-              formState={formState}
-            />
+            <>
+              <Title title="Sign Up" />
+              <Registration
+                handleSubmit={handleSubmit}
+                handleFormSubmit={handleFormSubmit}
+                control={control}
+                errors={errors}
+                formState={formState}
+              />
+            </>
           ) : (
             false
           )}
@@ -148,6 +169,7 @@ const styles = {
     width: "100%",
   },
   imageWrapper: {
+    display: { xs: "none", sm: "block" },
     flex: 1,
     width: "100%",
     height: { xs: "50%", sm: "100%" },
