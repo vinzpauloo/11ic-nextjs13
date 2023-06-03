@@ -7,7 +7,8 @@ export default async function Main() {
   // This is only for testing purposes
   // In the event that we are going to add something like check server status..
   // We are forcing a loading time.
-  await wait(500);
+
+  // await wait(500);
 
   return (
     <main>

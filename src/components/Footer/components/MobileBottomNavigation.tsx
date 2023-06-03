@@ -13,27 +13,31 @@ import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import PersonIcon from "@mui/icons-material/Person";
 
 const MobileBottomNavigation = () => {
+  // ** Next Router **
   const router = useRouter();
+
+  // ** States **
   const [value, setValue] = React.useState(0);
 
+  // ** Functions **
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
 
     switch (newValue) {
       case 0:
-        console.log(`Home`);
+        router.push("/");
         break;
       case 1:
-        console.log(`Sports`);
+        alert(`Sports, still unavailable`);
         break;
       case 2:
-        console.log(`Deposit`);
+        router.push("/profile/deposit");
         break;
       case 3:
-        console.log(`Promo`);
+        router.push("/promotions");
         break;
       case 4:
-        console.log(`Profile`);
+        router.push("/profile");
         break;
       default:
         break;

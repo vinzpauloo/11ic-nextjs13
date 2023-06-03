@@ -24,7 +24,7 @@ import { useAccountStore } from "@/zustand/account-store";
 // ** Custom Components Imports
 import LanguageDropdown from "./components/Language";
 import TopTabNavigation from "./components/TopTabNavigation";
-import LoginSignUpModal from "../Account/index";
+import LoginSignUpModal from "../Account";
 
 // ** Core Imports
 import { useSettings } from "@/@core/hooks/useSettings";

@@ -28,9 +28,9 @@ import {
 
 // ** Custom Component Imports
 import InputField from "@/shared-components/InputField";
-import Registration from "@/pages/Account/Registration";
+import Registration from "@/components/Account/Registration";
 import IconifyIcon from "@/shared-components/Icon";
-import Login from "@/pages/Account/Login";
+import Login from "@/components/Account/Login";
 
 // ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";

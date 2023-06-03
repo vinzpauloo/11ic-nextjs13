@@ -24,18 +24,19 @@ import IconifyIcon from "@/shared-components/Icon";
 
 // ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";
+import axios from "axios";
 
 // ** Types
 interface FormValues {
   [key: string]: any;
-  username: string;
+  player_id: string;
   password: string;
 }
 
 const schema = yup.object().shape({
-  username: yup
+  player_id: yup
     .string()
-    .min(7, "Username must be at least 7 characters")
+    .min(4, "Username must be at least 4 characters")
     .required("Username is required"),
   password: yup
     .string()
@@ -58,18 +59,40 @@ const Login = () => {
 
   const handleFormSubmit = async (data: FormValues) => {
     console.log(`SUCCESS SUBMIT FORM`, data);
-    const formData = new FormData();
+    // const formData = new FormData();
 
-    for (const key in data) {
-      formData.append(key, data[key]);
-    }
+    // for (const key in data) {
+    //   formData.append(key, data[key]);
+    // }
 
-    const form: any = {
-      data: formData,
-    };
+    // formData.append(`ipaddress`, `12.23.24.23`);
+    // formData.append(`fp`, `233`);
+    // formData.append(`device`, 4);
+
+    // const form: any = {
+    //   data: formData,
+    // };
+
+    data.ipaddress = "12.23.24.23";
+    data.fp = "233";
+    data.device = 4;
+
+    console.log(`final FORM`, data);
 
     try {
-    } catch (e: any) {}
+      const response = await axios.post(
+        "http://159.223.75.83:81/api/login",
+        data,
+        {
+          headers: {
+            // "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (e: any) {
+      console.log(`ERROR`, e);
+    }
   };
 
   const { setButtonClicked } = useAccountStore();
@@ -79,14 +102,14 @@ const Login = () => {
       <InputField
         marginTop=""
         width="100%"
-        controllerName="username"
+        controllerName="player_id"
         control={control}
         placeholder="Username"
         variant="outlined"
         fullWidth={true}
-        error={!!errors.username}
-        helperText={errors.username?.message}
-        name="username"
+        error={!!errors.player_id}
+        helperText={errors.player_id?.message}
+        name="player_id"
         muiIcon={
           <PersonIcon
             fontSize="large"

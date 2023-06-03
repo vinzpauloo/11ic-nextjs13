@@ -56,6 +56,7 @@ const Home = () => {
 const styles = {
   container: {
     position: "relative",
+    minHeight: "100dvh",
   },
   innerContainer: {
     paddingTop: "164px",

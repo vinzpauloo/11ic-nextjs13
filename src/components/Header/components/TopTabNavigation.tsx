@@ -1,13 +1,39 @@
 // ** React Imports
 import React from "react";
 
+// ** Next Imports
+import { useRouter } from "next/navigation";
+
 // ** MUI Imports
 import { Box, Tab, Tabs } from "@mui/material";
 
 const TopTabNavigation = () => {
+  // ** Next Router **
+  const router = useRouter();
+
+  // ** States **
   const [selectedTab, setSelectedTab] = React.useState("1");
+
+  // ** Functions **
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     setSelectedTab(newValue);
+
+    switch (newValue) {
+      case "1":
+        router.push("/");
+        break;
+      case "7":
+        router.push("/vip");
+        break;
+      case "8":
+        router.push("/promotions");
+        break;
+      case "10":
+        router.push("/blog");
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -45,7 +71,6 @@ const TopTabNavigation = () => {
 };
 
 const styles = {
-  // Tabs
   tabsWrapper: {
     display: "flex",
     justifyContent: "center",
@@ -59,9 +84,6 @@ const styles = {
     textTransform: "uppercase",
     cursor: "pointer",
     color: "#FFF",
-    width: {
-      // sm: "200px",
-    },
   },
 };
 
