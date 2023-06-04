@@ -73,6 +73,8 @@ const schema = yup.object().shape({
     .required("Mobile number is required"),
 });
 
+// ========================================================================
+
 const LoginSignUpModal = ({ open, onClose }: ModalProps, ref: any) => {
   const {
     control,

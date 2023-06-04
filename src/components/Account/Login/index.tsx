@@ -1,5 +1,9 @@
 // ** React Imports
-import React from "react";
+import React, { useEffect } from "react";
+
+// ** Next Imports
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 // ** MUI Imports
 import { Box, Button, Typography } from "@mui/material";
@@ -24,7 +28,6 @@ import IconifyIcon from "@/shared-components/Icon";
 
 // ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";
-import axios from "axios";
 
 // ** Types
 interface FormValues {
@@ -44,7 +47,10 @@ const schema = yup.object().shape({
     .required("Password is required"),
 });
 
+// ========================================================================
+
 const Login = () => {
+  // ** React Hook Form
   const {
     control,
     handleSubmit,
@@ -57,45 +63,32 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
+  // ** Next Auth
+  const session = useSession();
+
+  // ** Store
+  const { setButtonClicked } = useAccountStore();
+
+  // ** Functions
   const handleFormSubmit = async (data: FormValues) => {
     console.log(`SUCCESS SUBMIT FORM`, data);
-    // const formData = new FormData();
-
-    // for (const key in data) {
-    //   formData.append(key, data[key]);
-    // }
-
-    // formData.append(`ipaddress`, `12.23.24.23`);
-    // formData.append(`fp`, `233`);
-    // formData.append(`device`, 4);
-
-    // const form: any = {
-    //   data: formData,
-    // };
 
     data.ipaddress = "12.23.24.23";
     data.fp = "233";
     data.device = 4;
 
-    console.log(`final FORM`, data);
-
     try {
-      const response = await axios.post(
-        "http://159.223.75.83:81/api/login",
-        data,
-        {
-          headers: {
-            // "Content-Type": "multipart/form-data",
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      await signIn("credentials", { ...data });
     } catch (e: any) {
       console.log(`ERROR`, e);
     }
   };
 
-  const { setButtonClicked } = useAccountStore();
+  const handleLogout = () => {
+    signOut({ callbackUrl: "https://www.google.com" });
+  };
+
+  console.log(`CHECK SESSION@@@@`, session);
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -137,6 +130,22 @@ const Login = () => {
           />
         }
       />
+
+      <Button
+        sx={{
+          width: "100%",
+          backgroundColor: `#F3B867`,
+          color: "#000",
+          mt: 10,
+          "&:hover": {
+            backgroundColor: "#F9B957",
+          },
+        }}
+        disabled={session?.status === "unauthenticated"}
+        onClick={handleLogout}
+      >
+        Logout
+      </Button>
 
       <Button
         type="submit"

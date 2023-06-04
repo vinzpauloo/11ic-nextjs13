@@ -4,6 +4,7 @@ import React from "react";
 
 // ** MUI Imports
 import { Box, Container, Typography } from "@mui/material";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 const VIPContent = () => {
   return (
@@ -28,4 +29,4 @@ const styles = {
   },
 };
 
-export default VIPContent;
+export default ProtectedRoute(VIPContent);

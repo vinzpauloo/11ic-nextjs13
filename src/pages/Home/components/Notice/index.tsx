@@ -74,7 +74,7 @@ const styles = {
     },
   },
   buttonWrapper: {
-    backgroundColor: "#ffd346",
+    backgroundColor: "#F3B867",
     borderRadius: "12px",
     position: "absolute",
     top: {

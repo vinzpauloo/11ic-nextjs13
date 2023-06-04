@@ -3,19 +3,47 @@ import React from "react";
 
 // ** Next Imports
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 // ** MUI Imports
 import { Box, Tab, Tabs } from "@mui/material";
 
+// ** Custom Component Imports
+import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
+import { useAccountStore } from "@/zustand/account-store";
+
+import { decrypt } from "@/utils/encryption";
+
+// ========================================================================
+
 const TopTabNavigation = () => {
-  // ** Next Router **
+  // ** Next **
   const router = useRouter();
+  const session = useSession();
+
+  // ** Store **
+  const { handleOpen } = useAccountStore((state) => ({
+    handleOpen: state.handleOpen,
+  }));
 
   // ** States **
   const [selectedTab, setSelectedTab] = React.useState("1");
 
+  // ** Hooks **
+  const { isAuthenticated } = useCheckAuthentication();
+
   // ** Functions **
-  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleTabChange = async (
+    event: React.SyntheticEvent,
+    newValue: string
+  ) => {
+    // Check for restricted tabs for unauthenticated users
+    if (!isAuthenticated && newValue === "7") {
+      handleOpen("login");
+
+      return;
+    }
+
     setSelectedTab(newValue);
 
     switch (newValue) {
@@ -23,7 +51,11 @@ const TopTabNavigation = () => {
         router.push("/");
         break;
       case "7":
-        router.push("/vip");
+        if (isAuthenticated) {
+          router.push("/vip");
+        } else {
+          router.push("/");
+        }
         break;
       case "8":
         router.push("/promotions");
@@ -35,6 +67,14 @@ const TopTabNavigation = () => {
         break;
     }
   };
+
+  if (session?.data?.acdivo.advP) {
+    console.log(`ENCRYPTED`, session.data.acdivo.advP);
+    const token = decrypt(session.data.acdivo.advP);
+    console.log(`TOKEN`, token);
+  } else {
+    console.log("No encrypted data found");
+  }
 
   return (
     <Box sx={styles.tabsWrapper}>

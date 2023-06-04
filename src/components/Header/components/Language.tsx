@@ -37,7 +37,6 @@ const LanguageDropdown = ({ settings, saveSettings }: Props) => {
 
   return (
     <OptionsMenu
-      // icon={currentIcon}
       icon={<Icon />}
       menuProps={{ sx: { "& .MuiMenu-paper": { mt: 4, minWidth: 130 } } }}
       iconButtonProps={{

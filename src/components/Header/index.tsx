@@ -8,8 +8,10 @@ import { useRouter } from "next/navigation";
 
 // ** MUI Imports
 import {
+  Avatar,
   Box,
   Button,
+  Chip,
   Divider,
   Stack,
   Tab,
@@ -18,19 +20,23 @@ import {
 } from "@mui/material";
 
 // ** Zustand Store Imports
-import { useGlobalStore } from "@/zustand/store";
 import { useAccountStore } from "@/zustand/account-store";
 
 // ** Custom Components Imports
+import LoginSignUpModal from "../Account";
 import LanguageDropdown from "./components/Language";
 import TopTabNavigation from "./components/TopTabNavigation";
-import LoginSignUpModal from "../Account";
+import DepositChip from "./components/DepositChip";
+import ProfileAvatar from "./components/ProfileAvatar";
+import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
 
 // ** Core Imports
 import { useSettings } from "@/@core/hooks/useSettings";
 
 // ** Utility Imports
 import { useTranslateString } from "@/utils/TranslateString";
+
+// ========================================================================
 
 const Header = () => {
   // * Router
@@ -39,17 +45,25 @@ const Header = () => {
   // * Utils
   const TranslateString = useTranslateString();
 
+  // * Hooks
+  const { isAuthenticated } = useCheckAuthentication();
+
   // * Store
   const { settings, saveSettings } = useSettings();
-  const { postData, setTitle, title } = useGlobalStore();
-  const { buttonClicked, setButtonClicked } = useAccountStore();
+  const {
+    buttonClicked,
+    setButtonClicked,
+    headerBg,
+    setHeaderBg,
+    open,
+    setOpen,
+  } = useAccountStore();
+  const { handleOpen } = useAccountStore((state) => ({
+    handleOpen: state.handleOpen,
+  }));
 
   // ** Ref
   const modalRef = useRef<{ clearForm: () => void } | null>(null);
-
-  // * States
-  const [headerBg, setHeaderBg] = React.useState("rgba(33, 31, 27, 0.8)");
-  const [open, setOpen] = React.useState(false);
 
   const listenScrollEvent = () => {
     if (window.scrollY < 5) {
@@ -62,12 +76,8 @@ const Header = () => {
   React.useEffect(() => {
     window.addEventListener("scroll", listenScrollEvent);
     return () => window.removeEventListener("scroll", listenScrollEvent);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const handleOpen = (button: string) => {
-    setButtonClicked(button);
-    setOpen(true);
-  };
 
   const handleClose = () => {
     if (modalRef.current) {
@@ -97,20 +107,31 @@ const Header = () => {
             alt="download"
             src="./images/header/header-download.svg"
           />
-          <Button
-            variant="contained"
-            sx={styles.loginButton}
-            onClick={() => handleOpen("login")}
-          >
-            {TranslateString(`Login`)}
-          </Button>
-          <Button
-            variant="contained"
-            sx={styles.signUpButton}
-            onClick={() => handleOpen("register")}
-          >
-            {TranslateString(`Sign Up`)}
-          </Button>
+
+          {isAuthenticated ? (
+            <>
+              <DepositChip />
+              <ProfileAvatar />
+            </>
+          ) : (
+            <>
+              <Button
+                variant="contained"
+                sx={styles.loginButton}
+                onClick={() => handleOpen("login")}
+              >
+                {TranslateString(`Login`)}
+              </Button>
+              <Button
+                variant="contained"
+                sx={styles.signUpButton}
+                onClick={() => handleOpen("register")}
+              >
+                {TranslateString(`Sign Up`)}
+              </Button>
+            </>
+          )}
+
           <LanguageDropdown settings={settings} saveSettings={saveSettings} />
         </Box>
         <LoginSignUpModal ref={modalRef} open={open} onClose={handleClose} />

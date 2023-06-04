@@ -16,12 +16,13 @@ import "../configs/i18n";
 import Header from "@/components/Header";
 import FloatingActionButton from "@/components/FloatingAction";
 import Footer from "@/components/Footer";
+import AuthContext from "@/providers/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "11iC.COM--the first cryptocurrency casino based on Web3.0",
-  description: "j9.io",
+  description: "11iC.com",
 };
 export default function RootLayout({
   children,
@@ -41,14 +42,16 @@ export default function RootLayout({
           backgroundColor: "#171717",
         }}
       >
-        <QueryProvider>
-          <MuiSetup>
-            <Header />
-            <FloatingActionButton />
-            {children}
-            <Footer />
-          </MuiSetup>
-        </QueryProvider>
+        <AuthContext>
+          <QueryProvider>
+            <MuiSetup>
+              <Header />
+              <FloatingActionButton />
+              {children}
+              <Footer />
+            </MuiSetup>
+          </QueryProvider>
+        </AuthContext>
       </body>
     </html>
   );
