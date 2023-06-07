@@ -12,6 +12,7 @@ import { Box, Tab, Tabs } from "@mui/material";
 import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
 import { useAccountStore } from "@/zustand/account-store";
 
+// ** Utils Imports
 import { decrypt } from "@/utils/encryption";
 
 // ========================================================================
@@ -37,8 +38,9 @@ const TopTabNavigation = () => {
     event: React.SyntheticEvent,
     newValue: string
   ) => {
+    const restrictedValues = ["2", "3", "4", "5", "6", "7", "8", "9", "10"];
     // Check for restricted tabs for unauthenticated users
-    if (!isAuthenticated && newValue === "7") {
+    if (!isAuthenticated && restrictedValues.includes(newValue)) {
       handleOpen("login");
 
       return;
@@ -50,6 +52,41 @@ const TopTabNavigation = () => {
       case "1":
         router.push("/");
         break;
+      case "2":
+        if (isAuthenticated) {
+          alert(`Not yet available`);
+        } else {
+          router.push("/");
+        }
+        break;
+      case "3":
+        if (isAuthenticated) {
+          alert(`Not yet available`);
+        } else {
+          router.push("/");
+        }
+        break;
+      case "4":
+        if (isAuthenticated) {
+          alert(`Not yet available`);
+        } else {
+          router.push("/");
+        }
+        break;
+      case "5":
+        if (isAuthenticated) {
+          alert(`Not yet available`);
+        } else {
+          router.push("/");
+        }
+        break;
+      case "6":
+        if (isAuthenticated) {
+          alert(`Not yet available`);
+        } else {
+          router.push("/");
+        }
+        break;
       case "7":
         if (isAuthenticated) {
           router.push("/vip");
@@ -58,10 +95,25 @@ const TopTabNavigation = () => {
         }
         break;
       case "8":
-        router.push("/promotions");
+        if (isAuthenticated) {
+          router.push("/promotions");
+        } else {
+          router.push("/");
+        }
+        break;
+      case "9":
+        if (isAuthenticated) {
+          alert(`Not yet available`);
+        } else {
+          router.push("/");
+        }
         break;
       case "10":
-        router.push("/blog");
+        if (isAuthenticated) {
+          router.push("/blog");
+        } else {
+          router.push("/");
+        }
         break;
       default:
         break;

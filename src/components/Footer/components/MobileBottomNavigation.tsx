@@ -11,16 +11,36 @@ import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import PersonIcon from "@mui/icons-material/Person";
+import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
+import { useAccountStore } from "@/zustand/account-store";
+
+// ========================================================================
 
 const MobileBottomNavigation = () => {
   // ** Next Router **
   const router = useRouter();
 
+  // ** Store **
+  const { handleOpen } = useAccountStore((state) => ({
+    handleOpen: state.handleOpen,
+  }));
+
   // ** States **
   const [value, setValue] = React.useState(0);
 
+  // ** Hooks **
+  const { isAuthenticated } = useCheckAuthentication();
+
   // ** Functions **
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    const restrictedValues = [1, 2, 3, 4];
+    // Check for restricted tabs for unauthenticated users
+    if (!isAuthenticated && restrictedValues.includes(newValue)) {
+      handleOpen("login");
+
+      return;
+    }
+
     setValue(newValue);
 
     switch (newValue) {
@@ -28,16 +48,32 @@ const MobileBottomNavigation = () => {
         router.push("/");
         break;
       case 1:
-        alert(`Sports, still unavailable`);
+        if (isAuthenticated) {
+          alert(`Not yet available`);
+        } else {
+          router.push("/");
+        }
         break;
       case 2:
-        router.push("/profile/deposit");
+        if (isAuthenticated) {
+          router.push("/profile/deposit");
+        } else {
+          router.push("/");
+        }
         break;
       case 3:
-        router.push("/promotions");
+        if (isAuthenticated) {
+          router.push("/promotions");
+        } else {
+          router.push("/");
+        }
         break;
       case 4:
-        router.push("/profile");
+        if (isAuthenticated) {
+          router.push("/profile");
+        } else {
+          router.push("/");
+        }
         break;
       default:
         break;

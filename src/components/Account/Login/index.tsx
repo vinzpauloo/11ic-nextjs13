@@ -73,12 +73,11 @@ const Login = () => {
   const session = useSession();
 
   // ** Store
-  const { setButtonClicked } = useAccountStore();
-  const [remember, setRemember] = React.useState(false);
+  const { remember, setRemember, setButtonClicked } = useAccountStore();
 
   React.useEffect(() => {
     // Retrieve stored user data
-    const storedData = localStorage.getItem("user");
+    const storedData = localStorage.getItem("Ci11");
     if (storedData) {
       const decryptedData = CryptoJS.AES.decrypt(
         storedData,
@@ -88,7 +87,7 @@ const Login = () => {
       reset(parsedData); // reset form with stored values
       setRemember(true);
     }
-  }, [reset]);
+  }, [reset, setRemember]);
 
   // ** Functions
   const handleFormSubmit = async (data: FormValues) => {
@@ -111,7 +110,7 @@ const Login = () => {
       localStorage.setItem("Ci11", encryptedData);
     } else {
       // Remove user data from localStorage
-      localStorage.removeItem("user");
+      localStorage.removeItem("Ci11");
     }
 
     try {
@@ -122,7 +121,7 @@ const Login = () => {
   };
 
   const handleLogout = () => {
-    signOut({ callbackUrl: "https://www.google.com" });
+    signOut({ callbackUrl: "/" });
   };
 
   console.log(`CHECK SESSION@@@@`, session);
