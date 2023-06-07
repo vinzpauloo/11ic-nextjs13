@@ -1,12 +1,18 @@
 // ** React Imports
-import React, { useEffect } from "react";
+import React from "react";
 
 // ** Next Imports
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 // ** MUI Imports
-import { Box, Button, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Typography,
+} from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 
@@ -21,10 +27,10 @@ import {
   FieldErrors,
   FormState,
 } from "react-hook-form";
+import CryptoJS from "crypto-js";
 
 // ** Custom Component Imports
 import InputField from "@/shared-components/InputField";
-import IconifyIcon from "@/shared-components/Icon";
 
 // ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";
@@ -68,6 +74,21 @@ const Login = () => {
 
   // ** Store
   const { setButtonClicked } = useAccountStore();
+  const [remember, setRemember] = React.useState(false);
+
+  React.useEffect(() => {
+    // Retrieve stored user data
+    const storedData = localStorage.getItem("user");
+    if (storedData) {
+      const decryptedData = CryptoJS.AES.decrypt(
+        storedData,
+        "secret key"
+      ).toString(CryptoJS.enc.Utf8);
+      const parsedData = JSON.parse(decryptedData);
+      reset(parsedData); // reset form with stored values
+      setRemember(true);
+    }
+  }, [reset]);
 
   // ** Functions
   const handleFormSubmit = async (data: FormValues) => {
@@ -76,6 +97,22 @@ const Login = () => {
     data.ipaddress = "12.23.24.23";
     data.fp = "233";
     data.device = 4;
+
+    if (remember) {
+      // Encrypt and save user credentials to localStorage
+      const userData = {
+        player_id: data.player_id,
+        password: data.password,
+      };
+      const encryptedData = CryptoJS.AES.encrypt(
+        JSON.stringify(userData),
+        "secret key"
+      ).toString();
+      localStorage.setItem("Ci11", encryptedData);
+    } else {
+      // Remove user data from localStorage
+      localStorage.removeItem("user");
+    }
 
     try {
       await signIn("credentials", { ...data });
@@ -131,59 +168,49 @@ const Login = () => {
         }
       />
 
-      <Button
+      <Box
         sx={{
-          width: "100%",
-          backgroundColor: `#F3B867`,
-          color: "#000",
-          mt: 10,
-          "&:hover": {
-            backgroundColor: "#F9B957",
-          },
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
         }}
-        disabled={session?.status === "unauthenticated"}
-        onClick={handleLogout}
       >
-        Logout
-      </Button>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={remember}
+              onChange={(e) => setRemember(e.target.checked)}
+              size="small"
+            />
+          }
+          label={
+            <Typography sx={styles.titleText}>Remember password</Typography>
+          }
+        />
+
+        <Button sx={styles.forgotPassButton}>
+          <Typography sx={styles.titleText}>Forgot Password?</Typography>
+        </Button>
+      </Box>
 
       <Button
         type="submit"
         sx={{
-          width: "100%",
+          ...styles.signInButton,
           backgroundColor:
             !formState.isValid || formState.isSubmitting ? `grey` : `#F3B867`,
-          color: "#000",
-          mt: 10,
-          "&:hover": {
-            backgroundColor: "#F9B957",
-          },
         }}
         disabled={!formState.isValid || formState.isSubmitting}
       >
         Sign In
       </Button>
 
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Typography sx={{ color: "#FFF", fontSize: 12 }}>
+      <Box sx={styles.bottomWrapper}>
+        <Typography sx={styles.titleText}>
           Don&lsquo;t you have an account?
         </Typography>
         <Button
-          sx={{
-            textTransform: "capitalize",
-            color: "#F3B867",
-            fontWeight: 900,
-            fontSize: 12,
-            "&:hover": {
-              backgroundColor: "transparent",
-            },
-          }}
+          sx={styles.signUpButton}
           onClick={() => setButtonClicked("register")}
         >
           Sign Up
@@ -191,6 +218,39 @@ const Login = () => {
       </Box>
     </form>
   );
+};
+
+const styles = {
+  forgotPassButton: {
+    cursor: "pointer",
+  },
+  titleText: {
+    fontSize: 11,
+    color: "rgba(255, 255, 255, 0.6)",
+    textTransform: "capitalize",
+  },
+  signInButton: {
+    width: "100%",
+    color: "#000",
+    mt: 10,
+    "&:hover": {
+      backgroundColor: "#F9B957",
+    },
+  },
+  bottomWrapper: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  signUpButton: {
+    textTransform: "capitalize",
+    color: "#F3B867",
+    fontWeight: 900,
+    fontSize: 12,
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
+  },
 };
 
 export default Login;

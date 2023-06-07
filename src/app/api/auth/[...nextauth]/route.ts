@@ -1,5 +1,5 @@
 // ** Next Auth Imports
-import NextAuth, { NextAuthOptions, RequestInternal, AuthOptions } from "next-auth"
+import NextAuth, { NextAuthOptions, RequestInternal } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
 // ** Lib Imports
