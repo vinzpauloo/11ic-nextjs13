@@ -4,6 +4,7 @@ import React, { ChangeEvent, KeyboardEventHandler } from "react";
 // ** MUI Imports
 import {
   Box,
+  Button,
   Input,
   InputAdornment,
   MenuItem,
@@ -42,6 +43,7 @@ interface TextFieldProps {
   disabled?: boolean;
   muiIcon?: React.ReactNode;
   isMobile?: boolean;
+  isVerification?: boolean;
 }
 
 type InputFieldProps = ControllerProps & ContainerProps & TextFieldProps;
@@ -65,6 +67,7 @@ const InputField = ({
   disabled,
   muiIcon,
   isMobile,
+  isVerification,
 }: InputFieldProps) => {
   const { field } = useController({ name, control });
   const [phone, setPhone] = React.useState(field.value || "");
@@ -140,6 +143,22 @@ const InputField = ({
                     </Select>
                   </InputAdornment>
                 ),
+                endAdornment: isVerification && (
+                  <InputAdornment position="end">
+                    <Button
+                      variant="text"
+                      sx={{
+                        color: "#F3B867",
+                        fontSize: { xs: 8, sm: 10, md: 14 },
+                      }}
+                      onClick={() => {
+                        // TODO: Add function here
+                      }}
+                    >
+                      Get Verification Code
+                    </Button>
+                  </InputAdornment>
+                ),
               }}
             />
           ) : (
@@ -171,6 +190,22 @@ const InputField = ({
                 },
                 startAdornment: (
                   <InputAdornment position="start">{muiIcon}</InputAdornment>
+                ),
+                endAdornment: isVerification && (
+                  <InputAdornment position="end">
+                    <Button
+                      variant="text"
+                      sx={{
+                        color: "#F3B867",
+                        fontSize: { xs: 8, sm: 10, md: 14 },
+                      }}
+                      onClick={() => {
+                        // TODO: Add function here
+                      }}
+                    >
+                      Get Verification Code
+                    </Button>
+                  </InputAdornment>
                 ),
               }}
             />

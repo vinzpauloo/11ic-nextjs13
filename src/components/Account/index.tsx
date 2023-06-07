@@ -35,6 +35,7 @@ import Login from "@/components/Account/Login";
 // ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";
 import Title from "./components/Title";
+import ForgotPassword from "./ForgotPassword";
 
 // ** Types
 interface ModalProps {
@@ -152,6 +153,8 @@ const LoginSignUpModal = ({ open, onClose }: ModalProps, ref: any) => {
                 formState={formState}
               />
             </>
+          ) : buttonClicked === "forgot-password" ? (
+            <ForgotPassword />
           ) : (
             false
           )}

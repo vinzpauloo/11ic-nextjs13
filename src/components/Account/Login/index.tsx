@@ -167,13 +167,7 @@ const Login = () => {
         }
       />
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+      <Box sx={styles.forgotPassWrapper}>
         <FormControlLabel
           control={
             <Checkbox
@@ -187,7 +181,10 @@ const Login = () => {
           }
         />
 
-        <Button sx={styles.forgotPassButton}>
+        <Button
+          sx={styles.forgotPassButton}
+          onClick={() => setButtonClicked("forgot-password")}
+        >
           <Typography sx={styles.titleText}>Forgot Password?</Typography>
         </Button>
       </Box>
@@ -220,6 +217,11 @@ const Login = () => {
 };
 
 const styles = {
+  forgotPassWrapper: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   forgotPassButton: {
     cursor: "pointer",
   },

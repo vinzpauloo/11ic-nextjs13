@@ -2,37 +2,32 @@
 import React from "react";
 
 // ** MUI Imports
-import { Box, Button, Typography } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
+import { Button } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
+import SecurityIcon from "@mui/icons-material/Security";
 
 // ** Third Party Imports
 import {
   Control,
   FieldErrors,
   FormState,
-  UseFormGetValues,
   UseFormHandleSubmit,
 } from "react-hook-form";
 
 // ** Custom Component Imports
 import InputField from "@/shared-components/InputField";
-import IconifyIcon from "@/shared-components/Icon";
-
-// ** Zustand Store Imports
-import { useAccountStore } from "@/zustand/account-store";
 
 // ** Types
 interface FormValues {
   [key: string]: any;
   username: string;
-  password: string;
+  new_password: string;
   password_confirmation: string;
   mobile: string;
-  invitation_code?: string;
+  verification_code?: string;
 }
 
-interface RegisterProps {
+interface SMSRecoveryProps {
   handleSubmit: UseFormHandleSubmit<FormValues, undefined>;
   handleFormSubmit: (data: FormValues) => Promise<void>;
   control: Control<FormValues, any>;
@@ -42,30 +37,65 @@ interface RegisterProps {
 
 // ========================================================================
 
-const Registration = ({
+const SMSRecovery = ({
   handleSubmit,
   handleFormSubmit,
   control,
   errors,
   formState,
-}: RegisterProps) => {
-  const { setButtonClicked } = useAccountStore();
-
+}: SMSRecoveryProps) => {
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)}>
+    <form
+      onSubmit={handleSubmit(handleFormSubmit)}
+      style={{ display: "flex", flexDirection: "column", gap: 10 }}
+    >
       <InputField
         marginTop=""
         width="100%"
         controllerName="username"
         control={control}
-        placeholder="Username"
+        placeholder="Username or Phone Number"
         variant="outlined"
         fullWidth={true}
         error={!!errors.username}
         helperText={errors.username?.message}
         name="username"
+      />
+
+      <InputField
+        marginTop={2}
+        width="100%"
+        controllerName="mobile"
+        control={control}
+        placeholder="Phone No."
+        variant="outlined"
+        fullWidth={true}
+        error={!!errors.mobile}
+        helperText={errors.mobile?.message}
+        name="mobile"
+        onKeyPress={(e) => {
+          // Allow only numbers and the '+' symbol
+          if (!/[0-9+]/.test(e.key)) {
+            e.preventDefault();
+          }
+        }}
+        isMobile={true}
+        isVerification
+      />
+
+      <InputField
+        marginTop={2}
+        width="100%"
+        controllerName="verification_code"
+        control={control}
+        placeholder="Verification Code"
+        variant="outlined"
+        fullWidth={true}
+        error={!!errors.verification_code}
+        helperText={errors.verification_code?.message}
+        name="verification_code"
         muiIcon={
-          <PersonIcon
+          <SecurityIcon
             fontSize="large"
             sx={{ color: "rgba(255, 255, 255, 0.6)" }}
           />
@@ -75,14 +105,14 @@ const Registration = ({
       <InputField
         marginTop={2}
         width="100%"
-        controllerName="password"
+        controllerName="new_password"
         control={control}
-        placeholder="Password"
+        placeholder="New Password"
         variant="outlined"
         fullWidth={true}
-        error={!!errors.password}
-        helperText={errors.password?.message}
-        name="password"
+        error={!!errors.new_password}
+        helperText={errors.new_password?.message}
+        name="new_password"
         type="password"
         muiIcon={
           <LockIcon
@@ -112,92 +142,32 @@ const Registration = ({
         }
       />
 
-      <InputField
-        marginTop={2}
-        width="100%"
-        controllerName="mobile"
-        control={control}
-        placeholder="Phone No."
-        variant="outlined"
-        fullWidth={true}
-        error={!!errors.mobile}
-        helperText={errors.mobile?.message}
-        name="mobile"
-        onKeyPress={(e) => {
-          // Allow only numbers and the '+' symbol
-          if (!/[0-9+]/.test(e.key)) {
-            e.preventDefault();
-          }
-        }}
-        isMobile={true}
-      />
-
-      <InputField
-        marginTop={2}
-        width="100%"
-        controllerName="invitation_code"
-        control={control}
-        placeholder="Invitation Code (optional)"
-        variant="outlined"
-        fullWidth={true}
-        error={!!errors.invitation_code}
-        helperText={errors.invitation_code?.message}
-        name="invitation_code"
-      />
-
       <Button
         type="submit"
         sx={{
           backgroundColor:
             !formState.isValid || formState.isSubmitting ? `grey` : `#F3B867`,
-          ...styles.registerButton,
+          ...styles.recoverButton,
         }}
         disabled={!formState.isValid || formState.isSubmitting}
       >
-        Sign Up
+        Recover
       </Button>
-
-      <Box sx={styles.bottomWrapper}>
-        <Typography sx={styles.title}>Already have an account?</Typography>
-        <Button
-          sx={styles.loginButton}
-          onClick={() => setButtonClicked("login")}
-        >
-          Log in
-        </Button>
-      </Box>
     </form>
   );
 };
 
 const styles = {
-  registerButton: {
+  recoverButton: {
     width: "100%",
-
+    height: "50px",
+    textTransform: "capitalize",
     color: "#000",
-    mt: 10,
+    mt: 2,
     "&:hover": {
       backgroundColor: "#F9B957",
     },
   },
-  bottomWrapper: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    color: "rgba(255, 255, 255, 0.6)",
-    fontSize: 12,
-  },
-  loginButton: {
-    textTransform: "capitalize",
-    color: "#F3B867",
-    fontWeight: 900,
-    fontSize: 12,
-    "&:hover": {
-      backgroundColor: "transparent",
-    },
-  },
 };
 
-export default Registration;
+export default SMSRecovery;
