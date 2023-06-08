@@ -120,10 +120,6 @@ const Login = () => {
     }
   };
 
-  const handleLogout = () => {
-    signOut({ callbackUrl: "/" });
-  };
-
   console.log(`CHECK SESSION@@@@`, session);
 
   return (
