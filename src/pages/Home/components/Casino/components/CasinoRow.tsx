@@ -75,7 +75,7 @@ const CasinoRow = (props: CasinoRowProps) => {
       {sliderImages &&
         sliderImages?.map((item, index) => (
           <SwiperSlide key={index}>
-            <Link href="www.google.com" style={{ textDecoration: "none" }}>
+            <Link href="/" style={{ textDecoration: "none" }}>
               <Box
                 component="img"
                 sx={{
