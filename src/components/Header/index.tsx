@@ -35,6 +35,7 @@ import { useSettings } from "@/@core/hooks/useSettings";
 
 // ** Utility Imports
 import { useTranslateString } from "@/utils/TranslateString";
+import Logout from "../Account/Logout";
 
 // ========================================================================
 
@@ -46,9 +47,10 @@ const Header = () => {
   const TranslateString = useTranslateString();
 
   // * Hooks
-  const { isAuthenticated } = useCheckAuthentication();
+  const { isAuthenticated, handleModalClose } = useCheckAuthentication();
 
   // * Store
+  const { isLogoutModalOpen, setLogoutModalOpen } = useAccountStore();
   const { settings, saveSettings } = useSettings();
   const {
     buttonClicked,
@@ -84,6 +86,7 @@ const Header = () => {
       modalRef.current.clearForm();
     }
     setOpen(false);
+    setLogoutModalOpen(true);
   };
 
   return (
@@ -135,6 +138,7 @@ const Header = () => {
           <LanguageDropdown settings={settings} saveSettings={saveSettings} />
         </Box>
         <LoginSignUpModal ref={modalRef} open={open} onClose={handleClose} />
+        <Logout open={isLogoutModalOpen} onClose={() => handleModalClose()} />
       </Box>
       <TopTabNavigation />
     </Box>

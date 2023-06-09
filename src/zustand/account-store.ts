@@ -7,6 +7,7 @@ interface AccountProps {
     buttonClicked: string | "";
     remember: boolean;
     forgotPasswordTab: string;
+    isLogoutModalOpen: boolean;
 
     // Defined actions
     setHeaderBg: (headerBg: string) => void;
@@ -14,6 +15,7 @@ interface AccountProps {
     setButtonClicked: (buttonClicked: string | "") => void;
     setRemember: (remember: boolean) => void;
     setForgotPasswordTab: (forgotPasswordTab: string) => void;
+    setLogoutModalOpen: (isLogoutModalOpen: boolean) => void;
 
     // Functions
     handleOpen: (button: string) => void;
@@ -26,6 +28,7 @@ export const useAccountStore = create<AccountProps>((set) => ({
     buttonClicked: "",
     remember: false,
     forgotPasswordTab: "1",
+    isLogoutModalOpen: false,
 
     // Define actions
     setHeaderBg: (headerBg) => set({ headerBg }),
@@ -33,6 +36,7 @@ export const useAccountStore = create<AccountProps>((set) => ({
     setButtonClicked: (buttonClicked) => set({ buttonClicked }),
     setRemember: (remember) => set({ remember }),
     setForgotPasswordTab: (forgotPasswordTab) => set({ forgotPasswordTab }),
+    setLogoutModalOpen: (isLogoutModalOpen) => set({ isLogoutModalOpen }),
 
     // Functions
     handleOpen: (button: string) => {

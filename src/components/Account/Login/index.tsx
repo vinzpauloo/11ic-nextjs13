@@ -114,7 +114,7 @@ const Login = () => {
     }
 
     try {
-      await signIn("credentials", { ...data });
+      await signIn("credentials", { ...data, callbackUrl: "/" });
     } catch (e: any) {
       console.log(`ERROR`, e);
     }
