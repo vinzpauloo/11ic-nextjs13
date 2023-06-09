@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { AlertColor } from "@mui/material/Alert";
 
 interface AccountProps {
     // Defined state properties
@@ -8,6 +9,10 @@ interface AccountProps {
     remember: boolean;
     forgotPasswordTab: string;
     isLogoutModalOpen: boolean;
+    fingerprintJsData: { [key: string]: any } | undefined
+    openSnack: boolean
+    snackMessage: string
+    snackSeverity: AlertColor | undefined
 
     // Defined actions
     setHeaderBg: (headerBg: string) => void;
@@ -16,6 +21,10 @@ interface AccountProps {
     setRemember: (remember: boolean) => void;
     setForgotPasswordTab: (forgotPasswordTab: string) => void;
     setLogoutModalOpen: (isLogoutModalOpen: boolean) => void;
+    setFingerprintJsData: (fingerprintJsData: { [key: string]: any } | undefined) => void;
+    setOpenSnack: (openSnack: boolean) => void;
+    setSnackMessage: (snackMessage: string) => void;
+    setSnackSeverity: (snackSeverity: AlertColor | undefined) => void;
 
     // Functions
     handleOpen: (button: string) => void;
@@ -29,6 +38,10 @@ export const useAccountStore = create<AccountProps>((set) => ({
     remember: false,
     forgotPasswordTab: "1",
     isLogoutModalOpen: false,
+    fingerprintJsData: {},
+    openSnack: false,
+    snackMessage: "",
+    snackSeverity: "success",
 
     // Define actions
     setHeaderBg: (headerBg) => set({ headerBg }),
@@ -37,6 +50,10 @@ export const useAccountStore = create<AccountProps>((set) => ({
     setRemember: (remember) => set({ remember }),
     setForgotPasswordTab: (forgotPasswordTab) => set({ forgotPasswordTab }),
     setLogoutModalOpen: (isLogoutModalOpen) => set({ isLogoutModalOpen }),
+    setFingerprintJsData: (fingerprintJsData) => set({ fingerprintJsData }),
+    setOpenSnack: (openSnack) => set({ openSnack }),
+    setSnackMessage: (snackMessage) => set({ snackMessage }),
+    setSnackSeverity: (snackSeverity) => set({ snackSeverity }),
 
     // Functions
     handleOpen: (button: string) => {

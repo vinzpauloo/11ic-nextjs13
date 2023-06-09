@@ -8,6 +8,8 @@ import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 // ** Provider Imports
 import { MuiSetup } from "@/providers/MuiSetup";
 import QueryProvider from "@/providers/QueryProvider";
+import AuthContext from "@/providers/AuthContext";
+import FingerprintJSProvider from "@/providers/FingerPrintJS";
 
 // ** Third Party Imports
 import "../configs/i18n";
@@ -16,7 +18,6 @@ import "../configs/i18n";
 import Header from "@/components/Header";
 import FloatingActionButton from "@/components/FloatingAction";
 import Footer from "@/components/Footer";
-import AuthContext from "@/providers/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,14 +44,16 @@ export default function RootLayout({
         }}
       >
         <AuthContext>
-          <QueryProvider>
-            <MuiSetup>
-              <Header />
-              <FloatingActionButton />
-              {children}
-              <Footer />
-            </MuiSetup>
-          </QueryProvider>
+          <FingerprintJSProvider>
+            <QueryProvider>
+              <MuiSetup>
+                <Header />
+                <FloatingActionButton />
+                {children}
+                <Footer />
+              </MuiSetup>
+            </QueryProvider>
+          </FingerprintJSProvider>
         </AuthContext>
       </body>
     </html>

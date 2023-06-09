@@ -2,8 +2,7 @@
 import React from "react";
 
 // ** Next Imports
-import { signIn, signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 // ** MUI Imports
 import {
@@ -28,6 +27,7 @@ import {
   FormState,
 } from "react-hook-form";
 import CryptoJS from "crypto-js";
+import { useVisitorData } from "@fingerprintjs/fingerprintjs-pro-react";
 
 // ** Custom Component Imports
 import InputField from "@/shared-components/InputField";
@@ -69,12 +69,16 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  // ** Next Auth
-  const session = useSession();
-
   // ** Store
-  const { remember, setRemember, setButtonClicked } = useAccountStore();
+  const {
+    remember,
+    setRemember,
+    setButtonClicked,
+    fingerprintJsData,
+    setFingerprintJsData,
+  } = useAccountStore();
 
+  // ** Password Remember Me & Encryption
   React.useEffect(() => {
     // Retrieve stored user data
     const storedData = localStorage.getItem("Ci11");
@@ -89,13 +93,19 @@ const Login = () => {
     }
   }, [reset, setRemember]);
 
+  // ** Fingerprint JS
+  const {
+    isLoading,
+    error,
+    data: fpjsData,
+    getData: getFpjsData,
+  } = useVisitorData({ extendedResult: true }, { immediate: true });
+
   // ** Functions
   const handleFormSubmit = async (data: FormValues) => {
-    console.log(`SUCCESS SUBMIT FORM`, data);
-
-    data.ipaddress = "12.23.24.23";
-    data.fp = "233";
-    data.device = 4;
+    data.ipaddress = fpjsData ? fpjsData.ip : "No Ipaddress";
+    data.fp = fpjsData ? fpjsData.visitorId : "No FP";
+    data.device = fpjsData ? fpjsData.device : "No device";
 
     if (remember) {
       // Encrypt and save user credentials to localStorage
@@ -119,8 +129,6 @@ const Login = () => {
       console.log(`ERROR`, e);
     }
   };
-
-  console.log(`CHECK SESSION@@@@`, session);
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
