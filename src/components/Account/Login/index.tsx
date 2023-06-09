@@ -2,7 +2,8 @@
 import React from "react";
 
 // ** Next Imports
-import { signIn } from "next-auth/react";
+import { SignInResponse, signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 // ** MUI Imports
 import {
@@ -14,6 +15,7 @@ import {
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
+import { AlertColor } from "@mui/material/Alert";
 
 // ** Third Party Imports
 import * as yup from "yup";
@@ -31,6 +33,7 @@ import { useVisitorData } from "@fingerprintjs/fingerprintjs-pro-react";
 
 // ** Custom Component Imports
 import InputField from "@/shared-components/InputField";
+import SnackbarAlert from "../components/SnackbarAlert";
 
 // ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";
@@ -69,6 +72,8 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
+  const router = useRouter();
+
   // ** Store
   const {
     remember,
@@ -76,6 +81,10 @@ const Login = () => {
     setButtonClicked,
     fingerprintJsData,
     setFingerprintJsData,
+    setOpen,
+    setSnackMessage,
+    setSnackSeverity,
+    setOpenSnack,
   } = useAccountStore();
 
   // ** Password Remember Me & Encryption
@@ -124,11 +133,33 @@ const Login = () => {
     }
 
     try {
-      await signIn("credentials", { ...data, callbackUrl: "/" });
+      const response: SignInResponse | undefined = await signIn("credentials", {
+        ...data,
+        callbackUrl: "/",
+        redirect: false,
+      });
+      if (response?.error === "CredentialsSignin") {
+        handleClick(`Login Failed! Invalid Credentials`, "error");
+      } else {
+        handleClick(`Login Successful!`, "success");
+        setTimeout(() => {
+          setOpen(false);
+        }, 500);
+      }
     } catch (e: any) {
       console.log(`ERROR`, e);
     }
   };
+
+  // ** Snackbar Function **
+  const handleClick = React.useCallback(
+    (message: string, severity: AlertColor) => {
+      setSnackMessage(message);
+      setSnackSeverity(severity);
+      setOpenSnack(true);
+    },
+    [setSnackMessage, setSnackSeverity, setOpenSnack]
+  );
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -216,6 +247,7 @@ const Login = () => {
           Sign Up
         </Button>
       </Box>
+      <SnackbarAlert />
     </form>
   );
 };
