@@ -1,3 +1,4 @@
+"use client";
 // ** React Imports
 import React, { useImperativeHandle, forwardRef } from "react";
 
@@ -39,7 +40,8 @@ import SnackbarAlert from "./components/SnackbarAlert";
 import { useAccountStore } from "@/zustand/account-store";
 
 // ** API Services Imports
-import { CreateAccount } from "@/services/api/CreateAccount";
+// import { CreateAccount } from "@/services/api/CreateAccount"; // Client side API, uncomment in Services
+import { postRegister } from "@/services/api/CreateAccount"; // Server side API
 
 // ** Types
 interface ModalProps {
@@ -108,7 +110,7 @@ const LoginSignUpModal = ({ open, onClose }: ModalProps, ref: any) => {
   const [loginCredentials, setLoginCredentials] = React.useState<{}>({});
 
   // ** API Services **
-  const { postRegister } = CreateAccount();
+  // const { postRegister } = CreateAccount(); // Client side API, uncomment in Services
   const mutation = useMutation(postRegister, {
     onSuccess: (data) => {
       console.log(data);
