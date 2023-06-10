@@ -1,9 +1,14 @@
+// ** Next Imports
+import { useRouter } from "next/navigation";
+
 // ** MUI Imports
 import {
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import WalletIcon from "@mui/icons-material/Wallet";
@@ -18,6 +23,11 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 // =================================================================
 
 const ListButtons = () => {
+  const router = useRouter();
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <List sx={styles.container}>
       {[
@@ -25,44 +35,62 @@ const ListButtons = () => {
           text: "Profile",
           icon: <AccountCircleIcon />,
           navicon: <NavigateNextIcon />,
+          path: "/",
         },
         {
           text: "Wallet Management",
           icon: <WalletIcon />,
           navicon: <NavigateNextIcon />,
+          path: "/",
         },
         {
           text: "Transaction Record",
           icon: <ReceiptIcon />,
           navicon: <NavigateNextIcon />,
+          path: "/profile/transaction-record",
         },
         {
           text: "Betting Record",
           icon: <CasinoIcon />,
           navicon: <NavigateNextIcon />,
+          path: "/",
         },
         {
           text: "Locked Details",
           icon: <LockPersonIcon />,
           navicon: <NavigateNextIcon />,
+          path: "/",
         },
         {
           text: "Invite Friends",
           icon: <GroupAddIcon />,
           navicon: <NavigateNextIcon />,
+          path: "/",
         },
         {
           text: "Security Center",
           icon: <SecurityIcon />,
           navicon: <NavigateNextIcon />,
+          path: "/",
         },
         {
           text: "Message Center",
           icon: <SmsIcon />,
           navicon: <NavigateNextIcon />,
+          path: "/",
         },
       ].map((item, index) => (
-        <ListItemButton key={index} sx={styles.button}>
+        <ListItemButton
+          key={index}
+          sx={styles.button}
+          onClick={() => {
+            if (isMobile) {
+              router.push(`${item.path}`);
+            } else {
+              alert(`TEST WEB VIEW`);
+            }
+          }}
+        >
           <ListItemIcon sx={{ minWidth: 30, ...styles.white }}>
             {item.icon}
           </ListItemIcon>

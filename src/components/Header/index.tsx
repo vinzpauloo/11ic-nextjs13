@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 
 // ** Next Imports
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 // ** MUI Imports
 import {
@@ -42,6 +42,10 @@ import Logout from "../Account/Logout";
 const Header = () => {
   // * Router
   const router = useRouter();
+  const pathName = usePathname();
+
+  const basePaths = ["/profile/", "/addmoreifneeded"];
+  const noHeader = basePaths.some((basePath) => pathName?.startsWith(basePath));
 
   // * Utils
   const TranslateString = useTranslateString();
@@ -89,7 +93,7 @@ const Header = () => {
     setLogoutModalOpen(true);
   };
 
-  return (
+  return !noHeader ? (
     <Box sx={{ ...styles.container, backgroundColor: headerBg }}>
       <Box sx={styles.firstWrapper}>
         <Box sx={styles.fillerContainer} />
@@ -142,6 +146,8 @@ const Header = () => {
       </Box>
       <TopTabNavigation />
     </Box>
+  ) : (
+    <></>
   );
 };
 
