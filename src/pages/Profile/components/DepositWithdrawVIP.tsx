@@ -33,9 +33,10 @@ const DepositWithdrawVIP = ({ icon, title }: BaseProps) => {
       }}
       onClick={() => handleBoxClick(title as string)}
     >
-      {React.cloneElement(icon, {
-        sx: { ...icon.props.sx, color: isActive ? "#F3B867" : "#FFF" },
-      })}
+      {icon &&
+        React.cloneElement(icon, {
+          sx: { ...icon.props.sx, color: isActive ? "#F3B867" : "#FFF" },
+        })}
       <Typography sx={{ color: isActive ? "#F3B867" : "#FFF" }}>
         {title}
       </Typography>
