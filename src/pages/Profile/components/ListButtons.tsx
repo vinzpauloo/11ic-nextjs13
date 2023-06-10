@@ -20,6 +20,9 @@ import SecurityIcon from "@mui/icons-material/Security";
 import SmsIcon from "@mui/icons-material/Sms";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
+// ** Zustand Store
+import { useProfileStore } from "@/zustand/profile-store";
+
 // =================================================================
 
 const ListButtons = () => {
@@ -27,6 +30,8 @@ const ListButtons = () => {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const { setProfileHeader } = useProfileStore();
 
   return (
     <List sx={styles.container}>
@@ -86,6 +91,7 @@ const ListButtons = () => {
           onClick={() => {
             if (isMobile) {
               router.push(`${item.path}`);
+              setProfileHeader(`${item.text}`);
             } else {
               alert(`TEST WEB VIEW`);
             }
