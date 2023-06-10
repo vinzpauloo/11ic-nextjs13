@@ -33,7 +33,7 @@ const MobileBottomNavigation = () => {
 
   // ** Functions **
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
-    const restrictedValues = [1, 2, 3, 4];
+    const restrictedValues = [1, 2, 3];
     // Check for restricted tabs for unauthenticated users
     if (!isAuthenticated && restrictedValues.includes(newValue)) {
       handleOpen("login");
@@ -69,11 +69,12 @@ const MobileBottomNavigation = () => {
         }
         break;
       case 4:
-        if (isAuthenticated) {
-          router.push("/profile");
-        } else {
-          router.push("/");
-        }
+        // if (isAuthenticated) {
+        //   router.push("/profile");
+        // } else {
+        //   router.push("/");
+        // }
+        router.push("/profile");
         break;
       default:
         break;
