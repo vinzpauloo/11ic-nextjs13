@@ -1,4 +1,4 @@
-"use server"
+// "use server"
 import axios from "axios";
 import request from "@/lib/request";
 
@@ -19,31 +19,31 @@ interface RegisterData {
     played_id?: string
 }
 
-// export const CreateAccount = () => {
+export const CreateAccount = () => {
 
-//     const postRegister = async (data: BaseProps<RegisterData, unknown>) => {
-//         return request({
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             url: '/Player/Register',
-//             method: 'POST',
-//             data: data
-//         })
-//     }
+    const postRegister = async (data: BaseProps<RegisterData, unknown>) => {
+        return request({
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            url: '/Player/Register',
+            method: 'POST',
+            data: data
+        })
+    }
 
 
 
-//     return { postRegister }
-// }
-
-export async function postRegister(data: BaseProps<RegisterData, unknown>) {
-    return request({
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        url: '/Player/Register',
-        method: 'POST',
-        data: data
-    })
+    return { postRegister }
 }
+
+// export async function postRegister(data: BaseProps<RegisterData, unknown>) {
+//     return request({
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         url: '/Player/Register',
+//         method: 'POST',
+//         data: data
+//     })
+// }
