@@ -3,11 +3,13 @@ import React from 'react'
 // ** MUI Components
 import { Box } from "@mui/material";
 
-interface Props extends React.PropsWithChildren {}
+interface Props {
+  children : React.ComponentType | React.ReactNode
+}
 
 const ContentWrap = ({children}: Props) => {
   return (
-    <Box sx={styles.container}>{children}</Box>
+    <Box sx={styles.container}>{children as any}</Box>
   )
 }
 

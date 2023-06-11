@@ -8,22 +8,19 @@ import { useRouter } from 'next/navigation';
 // ** MUI Imports
 import { Box } from "@mui/material";
 
-
-
-
 type Props = {
     heading : string | React.ReactNode
-    render : ( routeTo : ( str : string ) => void ) => string | React.ReactNode | any
+    render : ( routeTo : ( str : string ) => React.ComponentType ) => string | React.ReactNode | any
+    views : { [key: string] :  React.ComponentType}
 }
 
 const ListMenuButtons = (props: Props) => {
-    const { heading, render } = props
+    const { heading, render, views } = props
 
     const router = useRouter();
 
-    const routeTo = (route : string) => {
-        alert(`Go to ${route}`)
-        //router.push(route)
+    const routeTo = (componentInString : string) => {
+        return views[componentInString]
     }
 
     return (
