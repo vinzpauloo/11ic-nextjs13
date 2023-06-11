@@ -9,6 +9,8 @@ import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 // ** Zustand Store Imports
 import { useProfileStore } from "@/zustand/profile-store";
+
+// ** Custom Component Imports
 import DigitalWallet from "../DigitalWallet";
 
 // ** Types

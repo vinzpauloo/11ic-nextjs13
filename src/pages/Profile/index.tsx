@@ -8,7 +8,6 @@ import { Box, Container } from "@mui/material";
 
 // ** Custom Component Imports
 import ProfileNavigation from "./components/ProfileNavigation";
-import DigitalWallet from "./DigitalWallet";
 import { useProfileStore } from "@/zustand/profile-store";
 
 // =================================================================
