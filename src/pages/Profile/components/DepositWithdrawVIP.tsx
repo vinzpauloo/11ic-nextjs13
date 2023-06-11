@@ -1,8 +1,11 @@
 // ** React Imports
 import React, { JSXElementConstructor, ReactElement } from "react";
 
+// ** Next Imports
+import { useRouter } from "next/navigation";
+
 // ** MUI Imports
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 // ** Zustand Store Imports
 import { useProfileStore } from "@/zustand/profile-store";
@@ -17,11 +20,18 @@ interface BaseProps {
 // =================================================================
 
 const DepositWithdrawVIP = ({ icon, title }: BaseProps) => {
+  // ** Router **
+  const router = useRouter();
+
   // ** Store **
-  const { activeButton, setDisplay } = useProfileStore();
+  const { activeButton, setDisplay, setProfileHeader } = useProfileStore();
   const { handleBoxClick } = useProfileStore((state) => ({
     handleBoxClick: state.handleBoxClick,
   }));
+
+  // ** MUI **
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   // ** Variables **
   const isActive = activeButton === title;
@@ -34,7 +44,12 @@ const DepositWithdrawVIP = ({ icon, title }: BaseProps) => {
       }}
       onClick={() => {
         handleBoxClick(title as string);
-        setDisplay(<DigitalWallet />);
+        if (isMobile) {
+          setProfileHeader("Digital Wallet");
+          router.push("/profile/deposit");
+        } else {
+          setDisplay(<DigitalWallet />);
+        }
       }}
     >
       {icon &&
