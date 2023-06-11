@@ -2,17 +2,12 @@
 
 // ** React Imports
 import React from "react";
-import Ticker from "react-ticker";
+
+// ** Next Imports
+import { usePathname } from "next/navigation";
 
 // ** MUI Imports
-import {
-  Box,
-  BottomNavigation,
-  BottomNavigationAction,
-  Typography,
-  Paper,
-  Divider,
-} from "@mui/material";
+import { Box, Divider } from "@mui/material";
 
 // ** Custom Components Imports
 import MobileBottomNavigation from "./components/MobileBottomNavigation";
@@ -23,7 +18,12 @@ import Licenses from "./components/Licenses";
 import OurApp from "./components/OurApp";
 
 const Footer = () => {
-  return (
+  const pathName = usePathname();
+
+  const basePaths = ["/profile/", "/addmoreifneeded"];
+  const noFooter = basePaths.some((basePath) => pathName?.startsWith(basePath));
+
+  return !noFooter ? (
     <>
       <Box sx={styles.container}>
         <Information />
@@ -39,6 +39,8 @@ const Footer = () => {
       {/* Mobile: Bottom Navigation */}
       <MobileBottomNavigation />
     </>
+  ) : (
+    <></>
   );
 };
 

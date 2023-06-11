@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 
 // ** Next Imports
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 // ** MUI Imports
 import {
@@ -35,20 +35,26 @@ import { useSettings } from "@/@core/hooks/useSettings";
 
 // ** Utility Imports
 import { useTranslateString } from "@/utils/TranslateString";
+import Logout from "../Account/Logout";
 
 // ========================================================================
 
 const Header = () => {
   // * Router
   const router = useRouter();
+  const pathName = usePathname();
+
+  const basePaths = ["/profile/", "/addmoreifneeded"];
+  const noHeader = basePaths.some((basePath) => pathName?.startsWith(basePath));
 
   // * Utils
   const TranslateString = useTranslateString();
 
   // * Hooks
-  const { isAuthenticated } = useCheckAuthentication();
+  const { isAuthenticated, handleModalClose } = useCheckAuthentication();
 
   // * Store
+  const { isLogoutModalOpen, setLogoutModalOpen } = useAccountStore();
   const { settings, saveSettings } = useSettings();
   const {
     buttonClicked,
@@ -84,9 +90,10 @@ const Header = () => {
       modalRef.current.clearForm();
     }
     setOpen(false);
+    setLogoutModalOpen(true);
   };
 
-  return (
+  return !noHeader ? (
     <Box sx={{ ...styles.container, backgroundColor: headerBg }}>
       <Box sx={styles.firstWrapper}>
         <Box sx={styles.fillerContainer} />
@@ -135,9 +142,12 @@ const Header = () => {
           <LanguageDropdown settings={settings} saveSettings={saveSettings} />
         </Box>
         <LoginSignUpModal ref={modalRef} open={open} onClose={handleClose} />
+        <Logout open={isLogoutModalOpen} onClose={() => handleModalClose()} />
       </Box>
       <TopTabNavigation />
     </Box>
+  ) : (
+    <></>
   );
 };
 

@@ -1,5 +1,9 @@
+// "use client";
 // ** React Imports
 import React, { useImperativeHandle, forwardRef } from "react";
+
+// ** Next Imports
+import { signIn } from "next-auth/react";
 
 // ** MUI Imports
 import {
@@ -9,33 +13,35 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
+  Snackbar,
   Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import { AlertColor } from "@mui/material/Alert";
 
 // ** Third Party Imports
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  useForm,
-  Controller,
-  UseFormHandleSubmit,
-  Control,
-  FieldErrors,
-  FormState,
-} from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { useVisitorData } from "@fingerprintjs/fingerprintjs-pro-react";
+import { useMutation } from "@tanstack/react-query";
 
 // ** Custom Component Imports
 import InputField from "@/shared-components/InputField";
 import Registration from "@/components/Account/Registration";
 import IconifyIcon from "@/shared-components/Icon";
 import Login from "@/components/Account/Login";
+import Title from "./components/Title";
+import ForgotPassword from "./ForgotPassword";
+import SnackbarAlert from "./components/SnackbarAlert";
 
 // ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";
-import Title from "./components/Title";
-import ForgotPassword from "./ForgotPassword";
+
+// ** API Services Imports
+import { CreateAccount } from "@/services/api/CreateAccount"; // Client side API, uncomment in Services
+// import { postRegister } from "@/services/api/CreateAccount"; // Server side API
 
 // ** Types
 interface ModalProps {
@@ -45,15 +51,18 @@ interface ModalProps {
 
 interface FormValues {
   [key: string]: any;
-  username: string;
+  player_id: string;
   password: string;
   password_confirmation: string;
   mobile: string;
   invitation_code?: string;
+  ipaddress?: string;
+  fp?: string;
+  device?: number;
 }
 
 const schema = yup.object().shape({
-  username: yup
+  player_id: yup
     .string()
     .min(7, "Username must be at least 7 characters")
     .required("Username is required"),
@@ -96,29 +105,96 @@ const LoginSignUpModal = ({ open, onClose }: ModalProps, ref: any) => {
     },
   }));
 
+  // ** States **
+  const [responseData, setResponseData] = React.useState<{ message: string }>();
+  const [loginCredentials, setLoginCredentials] = React.useState<{}>({});
+
+  // ** API Services **
+  const { postRegister } = CreateAccount(); // Client side API, uncomment in Services
+  const mutation = useMutation(postRegister, {
+    onSuccess: (data) => {
+      console.log(data);
+      setResponseData(data);
+    },
+  });
+
   // ** Zustand Store **
-  const { buttonClicked } = useAccountStore();
+  const {
+    buttonClicked,
+    setOpen,
+    setSnackMessage,
+    setSnackSeverity,
+    setOpenSnack,
+  } = useAccountStore();
+
+  // ** Fingerprint JS **
+  const {
+    isLoading,
+    error,
+    data: fpjsData,
+    getData: getFpjsData,
+  } = useVisitorData({ extendedResult: true }, { immediate: true });
+  // console.log(`RegisterFPJS`, fpjsData);
 
   // ** MUI Theme **
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   // ** Functions **
+  // ** Register Form Function **
   const handleFormSubmit = async (data: FormValues) => {
     console.log(`SUCCESS SUBMIT FORM`, data);
-    const formData = new FormData();
 
-    for (const key in data) {
-      formData.append(key, data[key]);
-    }
+    data.ipaddress = fpjsData?.ip ?? "No Ipaddress";
+    data.fp = fpjsData?.visitorId ?? "No FP";
+    data.device = fpjsData?.ipLocation?.accuracyRadius ?? 3;
+    data.origin_url = fpjsData?.ipLocation?.city?.name ?? "No Origin";
 
     const form: any = {
-      data: formData,
+      data: data,
     };
 
     try {
-    } catch (e: any) {}
+      await mutation.mutateAsync(form.data);
+      setLoginCredentials(form.data);
+    } catch (e: any) {
+      console.log(`Error Register`, e);
+    }
   };
+
+  // ** Snackbar Function **
+  const handleClick = React.useCallback(
+    (message: string, severity: AlertColor) => {
+      setSnackMessage(message);
+      setSnackSeverity(severity);
+      setOpenSnack(true);
+    },
+    [setSnackMessage, setSnackSeverity, setOpenSnack]
+  );
+
+  // ** Check for changes in responseData, currently backend always returns a SUCCESS so we handle errors in our end.
+  React.useEffect(() => {
+    if (responseData?.message) {
+      if (responseData?.message === "SUCCESS") {
+        handleClick("Registration Successful!", "success");
+        setTimeout(() => {
+          signIn("credentials", {
+            ...loginCredentials,
+          });
+          setOpen(false);
+          reset({
+            player_id: "",
+            password: "",
+            password_confirmation: "",
+            mobile: "",
+            invitation_code: "",
+          });
+        }, 1000);
+      } else {
+        handleClick(`Registration Failed! ${responseData?.message}`, "error");
+      }
+    }
+  }, [responseData, setOpen, reset, handleClick, loginCredentials]);
 
   return (
     <Dialog
@@ -158,6 +234,7 @@ const LoginSignUpModal = ({ open, onClose }: ModalProps, ref: any) => {
           ) : (
             false
           )}
+          <SnackbarAlert />
         </Box>
       </DialogContent>
     </Dialog>

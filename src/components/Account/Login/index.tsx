@@ -2,7 +2,7 @@
 import React from "react";
 
 // ** Next Imports
-import { signIn, signOut, useSession } from "next-auth/react";
+import { SignInResponse, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 // ** MUI Imports
@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
+import { AlertColor } from "@mui/material/Alert";
 
 // ** Third Party Imports
 import * as yup from "yup";
@@ -28,9 +29,11 @@ import {
   FormState,
 } from "react-hook-form";
 import CryptoJS from "crypto-js";
+import { useVisitorData } from "@fingerprintjs/fingerprintjs-pro-react";
 
 // ** Custom Component Imports
 import InputField from "@/shared-components/InputField";
+import SnackbarAlert from "../components/SnackbarAlert";
 
 // ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";
@@ -69,12 +72,22 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  // ** Next Auth
-  const session = useSession();
+  const router = useRouter();
 
   // ** Store
-  const { remember, setRemember, setButtonClicked } = useAccountStore();
+  const {
+    remember,
+    setRemember,
+    setButtonClicked,
+    fingerprintJsData,
+    setFingerprintJsData,
+    setOpen,
+    setSnackMessage,
+    setSnackSeverity,
+    setOpenSnack,
+  } = useAccountStore();
 
+  // ** Password Remember Me & Encryption
   React.useEffect(() => {
     // Retrieve stored user data
     const storedData = localStorage.getItem("Ci11");
@@ -89,13 +102,19 @@ const Login = () => {
     }
   }, [reset, setRemember]);
 
+  // ** Fingerprint JS
+  const {
+    isLoading,
+    error,
+    data: fpjsData,
+    getData: getFpjsData,
+  } = useVisitorData({ extendedResult: true }, { immediate: true });
+
   // ** Functions
   const handleFormSubmit = async (data: FormValues) => {
-    console.log(`SUCCESS SUBMIT FORM`, data);
-
-    data.ipaddress = "12.23.24.23";
-    data.fp = "233";
-    data.device = 4;
+    data.ipaddress = fpjsData ? fpjsData.ip : "No Ipaddress";
+    data.fp = fpjsData ? fpjsData.visitorId : "No FP";
+    data.device = fpjsData ? fpjsData.device : "No device";
 
     if (remember) {
       // Encrypt and save user credentials to localStorage
@@ -114,17 +133,33 @@ const Login = () => {
     }
 
     try {
-      await signIn("credentials", { ...data });
+      const response: SignInResponse | undefined = await signIn("credentials", {
+        ...data,
+        callbackUrl: "/",
+        redirect: false,
+      });
+      if (response?.error === "CredentialsSignin") {
+        handleClick(`Login Failed! Invalid Credentials`, "error");
+      } else {
+        handleClick(`Login Successful!`, "success");
+        setTimeout(() => {
+          setOpen(false);
+        }, 500);
+      }
     } catch (e: any) {
       console.log(`ERROR`, e);
     }
   };
 
-  const handleLogout = () => {
-    signOut({ callbackUrl: "/" });
-  };
-
-  console.log(`CHECK SESSION@@@@`, session);
+  // ** Snackbar Function **
+  const handleClick = React.useCallback(
+    (message: string, severity: AlertColor) => {
+      setSnackMessage(message);
+      setSnackSeverity(severity);
+      setOpenSnack(true);
+    },
+    [setSnackMessage, setSnackSeverity, setOpenSnack]
+  );
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -212,6 +247,7 @@ const Login = () => {
           Sign Up
         </Button>
       </Box>
+      <SnackbarAlert />
     </form>
   );
 };

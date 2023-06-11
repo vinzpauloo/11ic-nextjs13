@@ -120,12 +120,11 @@ const TopTabNavigation = () => {
     }
   };
 
+  // ** Decrypt Token For Session
   if (session?.data?.acdivo.advP) {
-    console.log(`ENCRYPTED`, session.data.acdivo.advP);
+    // console.log(`ENCRYPTED`, session.data.acdivo.advP);
     const token = decrypt(session.data.acdivo.advP);
-    console.log(`TOKEN`, token);
-  } else {
-    console.log("No encrypted data found");
+    // console.log(`TOKEN`, token);
   }
 
   return (

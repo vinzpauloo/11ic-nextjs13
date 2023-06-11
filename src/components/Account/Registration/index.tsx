@@ -25,7 +25,7 @@ import { useAccountStore } from "@/zustand/account-store";
 // ** Types
 interface FormValues {
   [key: string]: any;
-  username: string;
+  player_id: string;
   password: string;
   password_confirmation: string;
   mobile: string;
@@ -56,14 +56,14 @@ const Registration = ({
       <InputField
         marginTop=""
         width="100%"
-        controllerName="username"
+        controllerName="player_id"
         control={control}
         placeholder="Username"
         variant="outlined"
         fullWidth={true}
-        error={!!errors.username}
-        helperText={errors.username?.message}
-        name="username"
+        error={!!errors.player_id}
+        helperText={errors.player_id?.message}
+        name="player_id"
         muiIcon={
           <PersonIcon
             fontSize="large"

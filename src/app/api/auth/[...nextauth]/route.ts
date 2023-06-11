@@ -59,7 +59,8 @@ const authOptions: NextAuthOptions = {
         strategy: "jwt",
     },
     debug: false, // set to true whilst in development
-    secret: process.env.NEXTAUTH_SECRET as string,
+    // secret: process.env.NEXTAUTH_SECRET as string, // local
+    secret: process.env.NEXT_PUBLIC_SECRET, // production
     callbacks: {
         async jwt({ token, user }) {
             return { ...token, ...user }
