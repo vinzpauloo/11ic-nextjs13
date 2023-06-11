@@ -36,7 +36,8 @@ const styles = {
   container: {
     paddingBlock : ['2rem'],
     paddingInline: ['1rem', '1rem', 0 ],
-    maxWidth:'1136px',
+    // maxWidth:'1136px', ORIGINAL
+    maxWidth:'1300px',
     marginInline : 'auto',
   },
   innerContainer: {
