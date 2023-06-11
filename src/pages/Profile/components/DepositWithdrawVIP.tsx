@@ -6,6 +6,7 @@ import { Box, Typography } from "@mui/material";
 
 // ** Zustand Store Imports
 import { useProfileStore } from "@/zustand/profile-store";
+import DigitalWallet from "../DigitalWallet";
 
 // ** Types
 interface BaseProps {
@@ -17,7 +18,7 @@ interface BaseProps {
 
 const DepositWithdrawVIP = ({ icon, title }: BaseProps) => {
   // ** Store **
-  const { activeButton } = useProfileStore();
+  const { activeButton, setDisplay } = useProfileStore();
   const { handleBoxClick } = useProfileStore((state) => ({
     handleBoxClick: state.handleBoxClick,
   }));
@@ -31,7 +32,10 @@ const DepositWithdrawVIP = ({ icon, title }: BaseProps) => {
         ...styles.container,
         border: isActive ? "1px solid #F3B867" : "",
       }}
-      onClick={() => handleBoxClick(title as string)}
+      onClick={() => {
+        handleBoxClick(title as string);
+        setDisplay(<DigitalWallet />);
+      }}
     >
       {icon &&
         React.cloneElement(icon, {

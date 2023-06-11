@@ -22,6 +22,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 // ** Zustand Store
 import { useProfileStore } from "@/zustand/profile-store";
+import DigitalWallet from "../DigitalWallet";
 
 // =================================================================
 
@@ -34,7 +35,7 @@ const ListButtons = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   // ** Store **
-  const { setProfileHeader } = useProfileStore();
+  const { setProfileHeader, setDisplay } = useProfileStore();
 
   return (
     <List sx={styles.container}>
@@ -49,7 +50,8 @@ const ListButtons = () => {
           text: "Wallet Management",
           icon: <WalletIcon />,
           navicon: <NavigateNextIcon />,
-          path: "/",
+          path: "/profile/wallet-management",
+          web: <DigitalWallet />,
         },
         {
           text: "Transaction Record",
@@ -96,7 +98,7 @@ const ListButtons = () => {
               router.push(`${item.path}`);
               setProfileHeader(`${item.text}`);
             } else {
-              alert(`TEST WEB VIEW`);
+              setDisplay(item.web);
             }
           }}
         >
