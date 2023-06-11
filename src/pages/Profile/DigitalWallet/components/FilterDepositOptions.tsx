@@ -9,14 +9,18 @@ import { Box, SxProps } from "@mui/material";
 // ** Custom Components
 import MenuButton from "@/pages/Profile/components/MenuButton";
 
-const imgpath = '/images/profile/icons'
+const imgpath = '/images/profile/payments'
 
 type Props = {}
 
-const FilterPaymentOptions = (props: Props) => {
+const FilterDepositOptions = (props: Props) => {
 
     const paymentButtons = [
-        {id : 1, src : `${imgpath}/expresspay.png`, alt : 'express'},
+        {id : 1, src : `${imgpath}/unified.png`, alt : 'unified'},
+        {id : 2, src : `${imgpath}/paytm.png`, alt : 'paytm'},
+        {id : 3, src : `${imgpath}/phonepe.png`, alt : 'phone-pe'},
+        {id : 4, src : `${imgpath}/googlepay.png`, alt : 'google-pay'},
+        {id : 5, src : `${imgpath}/amazonpay.png`, alt : 'amazon-pay'},
     ]
 
     return (
@@ -24,8 +28,7 @@ const FilterPaymentOptions = (props: Props) => {
             {
                 paymentButtons.map( btn =>  
                 <MenuButton key={btn.id} sx={styles.menuButton}>
-                    <Image src={`${btn.src}`} alt={btn.alt}  width={20} height={20} />
-                    <Box>Express</Box>
+                    <Image src={`${btn.src}`} alt={btn.alt}  width={100} height={42} />
                 </MenuButton>)
             }
             
@@ -33,7 +36,7 @@ const FilterPaymentOptions = (props: Props) => {
     )
 }
 
-export default FilterPaymentOptions
+export default FilterDepositOptions
 
 const styles : {[key : string] : SxProps} = {
     container : {
@@ -41,13 +44,11 @@ const styles : {[key : string] : SxProps} = {
         gap: '1rem'
     },
     menuButton : { 
-        minWidth: 'initial',
-        width : '137px',
-        height: 'auto',
+        minWidth : 'initial',
+        height: 'initial',
         padding:0,
         backgroundColor : 'rgb(20,20,20)',
         paddingInline : '.8em',
-        paddingBlock : '1em',
-        justifyContent: 'center'
+        paddingBlock : '.4em',
     }
 }

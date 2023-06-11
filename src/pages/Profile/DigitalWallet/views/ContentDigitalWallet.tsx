@@ -6,7 +6,7 @@ import React from 'react'
 import { Box } from "@mui/material";
 
 // ** Custom Components
-import FilterPaymentOptions from '../components/FilterPaymentOptions'
+import FilterDepositOptions from '../components/FilterDepositOptions'
 import AccountNumberInput from '../components/AccountNumberInput'
 import DepositAmountInput from '../components/DepositAmountInput'
 import ProofOfTransaction from '../components/ProofOfTransaction'
@@ -20,7 +20,7 @@ const ContentDigitalWallet = (props: Props) => {
     <Box sx={styles.container}>
       
       <FormController 
-        render={ () => <FilterPaymentOptions />  }
+        render={ () => <FilterDepositOptions />  }
       />
       <FormController 
         label='Account Number'
