@@ -1,7 +1,7 @@
 import React from "react";
 
 // ** MUI Components
-import { Box,Button} from "@mui/material";
+import { Box } from "@mui/material";
 
 // ** Custom Components
 import ListMenuButtons from "@/pages/Profile/components/ListMenuButtons";
@@ -66,6 +66,5 @@ const styles = {
     padding: '2rem',
     display:'flex',
     gap: '2rem',
-    height:'100%',
   }
 }

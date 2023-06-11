@@ -1,16 +1,18 @@
 import React from 'react'
 
 // ** MUI Imports
-import { Button, ButtonProps } from "@mui/material";
+import { Button, ButtonProps, SxProps } from "@mui/material";
 
 interface Props extends ButtonProps {
   children : React.ReactNode | string
 }
 
 const MenuButton = (props: Props) => {
-  const { children, onClick } = props
+  const { children, sx } = props
+  const btnSx : SxProps<any> = { ...styles?.button, ...sx } // to merge default sx with passed new sx
+
   return (
-    <Button onClick={onClick} sx={styles.button} fullWidth variant='contained'>
+    <Button {...props} sx={btnSx} fullWidth variant='contained'>
       {children}
     </Button>
   )
@@ -18,20 +20,22 @@ const MenuButton = (props: Props) => {
 
 export default MenuButton
 
-const styles = {
+const styles : {[key : string] : SxProps} = {
   button : {
     minWidth:'170px',
     borderRadius : '8px',
     gap: '.7rem',
     justifyContent : 'flex-start',
-    backgroundColor : 'rgba(31,33,27, .8)',
+    backgroundColor : 'rgba(31,33,27)',
     border: '1px solid #424852',
     padding : '1em 1em',
     textAlign : 'left',
     textTransform : 'none !important',
+    boxShadow: 'none',
     '&:hover' : {
       backgroundColor : 'rgba(231,143, 7, .05)',
       border: '1px solid #F3B867',
+      color : '#F3B867'
     }
   }
 }
