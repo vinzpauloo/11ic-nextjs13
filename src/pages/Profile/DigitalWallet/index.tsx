@@ -10,15 +10,9 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Dashboard from "./components/Dashboard";
 
 const DigitalWallet = () => {
-  return (
-    <Container maxWidth={false} disableGutters sx={styles.container}>
-      <Box sx={styles.innerContainer}>
-        
-        <Dashboard />
+  return <Dashboard />;
 
-      </Box>
-    </Container>
-  );
+  
 };
 
 const styles = {

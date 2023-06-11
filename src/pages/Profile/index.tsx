@@ -47,13 +47,6 @@ const styles = {
       lg: 5,
       xl: 25,
     },
-    height: {
-      xs: "760px",
-      sm: "760px",
-      md: "450px",
-      lg: "450px",
-      xl: "450px",
-    },
     display: "flex",
     flexDirection: {
       xs: "column",
