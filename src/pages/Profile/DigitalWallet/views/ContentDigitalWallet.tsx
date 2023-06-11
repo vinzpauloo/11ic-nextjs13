@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 
 // ** MUI Components
@@ -9,7 +11,7 @@ import AccountNumberInput from '../components/AccountNumberInput'
 import DepositAmountInput from '../components/DepositAmountInput'
 import ProofOfTransaction from '../components/ProofOfTransaction'
 import SubmitButton from '@/pages/Profile/components/SubmitButton';
-import FormController from '../components/FormController';
+// import FormController from '../components/FormController';
 
 type Props = {}
 
@@ -17,7 +19,7 @@ const ContentDigitalWallet = (props: Props) => {
   return (
     <Box sx={styles.container}>
       
-      <FormController 
+      {/* <FormController 
         render={ () => <FilterPaymentOptions />  }
       />
       <FormController 
@@ -33,7 +35,7 @@ const ContentDigitalWallet = (props: Props) => {
       <FormController 
         label='Proof of Transaction'
         render={ () => <ProofOfTransaction />  }
-      />
+      /> */}
     
       
 

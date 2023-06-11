@@ -1,21 +1,19 @@
+
 import React from 'react'
 
-type Props = {
+interface IProps  {
     label? : string
     render : () => string | React.ReactNode
 }
 
-const FormController = (props: Props) => {
-    const { label, render } = props
+const FormController = ({label,render}: IProps) => {
     return (
-    <div>
-        { label && <label style={styles.label}>{label}</label> }
-        { render() }
-    </div>
+        <div>
+            { label && <label style={styles.label}>{label}</label> }
+            { render && render() }
+        </div>
     )
 }
-
-export default FormController
 
 const styles = {
     label : {
@@ -25,3 +23,6 @@ const styles = {
         fontSize: '13px'
     }
 }
+
+export default FormController
+

@@ -27,7 +27,7 @@ const ListMenuButtons = (props: Props) => {
     <Box sx={styles.container}>
         <h2 style={styles.heading}>{heading}</h2>
         <Box sx={styles.leftButtonWrapper}>
-            {render(routeTo)}
+            { render &&  render(routeTo)}
         </Box>
     </Box>
     )
