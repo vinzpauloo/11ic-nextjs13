@@ -24,7 +24,7 @@ const Dashboard = () => {
     {id : 1, text : 'Digital Wallet', link : 'ContentDigitalWallet', icon : '/images/profile/icons/deposit.png'},
     {id : 2, text : 'Bank Transfer', link : 'ContentBankTransfer', icon : '/images/profile/icons/bank-transfer.png'},
     {id : 3, text : 'Online Pay', link : 'ContentOnlinePay', icon : '/images/profile/icons/online-pay.png'},
-    {id : 4, text : 'USDT', link : 'ContentBankTransfer', icon : '/images/profile/icons/usdt.png'},
+    {id : 4, text : 'USDT', link : 'ContentUSDT', icon : '/images/profile/icons/usdt.png'},
   ]
   
   // ** Views Map
