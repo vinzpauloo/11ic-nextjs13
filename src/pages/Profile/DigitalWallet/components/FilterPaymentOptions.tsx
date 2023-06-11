@@ -28,7 +28,7 @@ const FilterPaymentOptions = (props: Props) => {
             {
                 paymentButtons.map( btn =>  
                 <MenuButton key={btn.id} sx={styles.menuButton}>
-                    <Image src={`${btn.src}`} alt={btn.alt} />
+                    <Image src={`${btn.src}`} alt={btn.alt}  width={100} height={42} />
                 </MenuButton>)
             }
             

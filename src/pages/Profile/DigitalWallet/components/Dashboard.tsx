@@ -47,7 +47,7 @@ const Dashboard = () => {
           render={ ( handleClick )=> (
               buttonsList.map( buttonitem => 
               <MenuButton key={buttonitem.id} onClick={ () => { setCurrentComponent(handleClick(buttonitem.link)) } }>
-                <Image src={buttonitem.icon} alt='' />
+                <Image src={buttonitem.icon} alt='' width={20} height={20} />
                 {buttonitem.text}
               </MenuButton>) 
           )}

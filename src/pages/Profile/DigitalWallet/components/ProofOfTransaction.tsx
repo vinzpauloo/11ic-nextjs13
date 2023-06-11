@@ -12,7 +12,7 @@ const ProofOfTransaction = (props: Props) => {
   return (
     <Box sx={styles.container}>
       <Box sx={styles.boxUpload}>
-        <Image src='/images/profile/dropzone.png' alt='dropzone' />
+        <Image src='/images/profile/dropzone.png' alt='dropzone' width={20} height={20} />
       </Box>
       <Typography 
         mt={2}
