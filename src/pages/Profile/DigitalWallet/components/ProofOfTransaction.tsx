@@ -1,5 +1,8 @@
 import React from 'react'
 
+// ** Next Imports
+import Image from "next/image";
+
 // ** MUI Components
 import { Box,Typography } from "@mui/material";
 
@@ -9,7 +12,7 @@ const ProofOfTransaction = (props: Props) => {
   return (
     <Box sx={styles.container}>
       <Box sx={styles.boxUpload}>
-        <img src='/images/profile/dropzone.png' />
+        <Image src='/images/profile/dropzone.png' alt='dropzone' />
       </Box>
       <Typography 
         mt={2}

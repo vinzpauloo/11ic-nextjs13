@@ -1,6 +1,9 @@
 import React from "react";
 
-// ** MUI Components
+// ** Next Imports
+import Image from "next/image";
+
+// ** MUI Imports
 import { Box } from "@mui/material";
 
 // ** Custom Components
@@ -44,7 +47,7 @@ const Dashboard = () => {
           render={ ( handleClick )=> (
               buttonsList.map( buttonitem => 
               <MenuButton key={buttonitem.id} onClick={ () => { setCurrentComponent(handleClick(buttonitem.link)) } }>
-                <img src={buttonitem.icon} />
+                <Image src={buttonitem.icon} alt='' />
                 {buttonitem.text}
               </MenuButton>) 
           )}

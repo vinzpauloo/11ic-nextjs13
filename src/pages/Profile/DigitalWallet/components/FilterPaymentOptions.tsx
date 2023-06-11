@@ -1,5 +1,8 @@
 import React from 'react'
 
+// ** Next Imports
+import Image from "next/image";
+
 // ** MUI imports
 import { Box, SxProps } from "@mui/material";
 
@@ -24,8 +27,8 @@ const FilterPaymentOptions = (props: Props) => {
         <Box sx={styles.container}>
             {
                 paymentButtons.map( btn =>  
-                <MenuButton sx={styles.menuButton}>
-                    <img src={`${btn.src}`} alt={btn.alt} />
+                <MenuButton key={btn.id} sx={styles.menuButton}>
+                    <Image src={`${btn.src}`} alt={btn.alt} />
                 </MenuButton>)
             }
             

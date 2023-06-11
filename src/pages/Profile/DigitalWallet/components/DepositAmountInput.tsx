@@ -34,7 +34,7 @@ const DepositAmountInput = (props: Props) => {
     <Box sx={styles.container}>
       <Box sx={styles.depositContainer}>
         {
-          depositAmounts.map( amt => <MenuButton sx={styles.btn}>{amt}</MenuButton> )
+          depositAmounts.map( amt => <MenuButton key={amt} sx={styles.btn}>{amt}</MenuButton> )
         }
       </Box>
       
