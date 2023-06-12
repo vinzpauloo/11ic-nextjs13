@@ -24,6 +24,10 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useProfileStore } from "@/zustand/profile-store";
 import DigitalWallet from "../DigitalWallet";
 
+// ** Hooks
+import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
+import { useAccountStore } from "@/zustand/account-store";
+
 // =================================================================
 
 const ListButtons = () => {
@@ -36,6 +40,12 @@ const ListButtons = () => {
 
   // ** Store **
   const { setProfileHeader, setDisplay } = useProfileStore();
+  const { handleOpen } = useAccountStore((state) => ({
+    handleOpen: state.handleOpen,
+  }));
+
+  // ** Hooks **
+  const { isAuthenticated } = useCheckAuthentication();
 
   return (
     <List sx={styles.container}>
@@ -94,11 +104,13 @@ const ListButtons = () => {
           key={index}
           sx={styles.button}
           onClick={() => {
-            if (isMobile) {
-              router.push(`${item.path}`);
+            if (isMobile && isAuthenticated) {
               setProfileHeader(`${item.text}`);
-            } else {
+              router.push(`${item.path}`);
+            } else if (isAuthenticated) {
               setDisplay(item.web);
+            } else {
+              handleOpen("login");
             }
           }}
         >

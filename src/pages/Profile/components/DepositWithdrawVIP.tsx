@@ -12,6 +12,8 @@ import { useProfileStore } from "@/zustand/profile-store";
 
 // ** Custom Component Imports
 import DigitalWallet from "../DigitalWallet";
+import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
+import { useAccountStore } from "@/zustand/account-store";
 
 // ** Types
 interface BaseProps {
@@ -30,6 +32,9 @@ const DepositWithdrawVIP = ({ icon, title }: BaseProps) => {
   const { handleBoxClick } = useProfileStore((state) => ({
     handleBoxClick: state.handleBoxClick,
   }));
+  const { handleOpen } = useAccountStore((state) => ({
+    handleOpen: state.handleOpen,
+  }));
 
   // ** MUI **
   const theme = useTheme();
@@ -37,6 +42,9 @@ const DepositWithdrawVIP = ({ icon, title }: BaseProps) => {
 
   // ** Variables **
   const isActive = activeButton === title;
+
+  // ** Hooks **
+  const { isAuthenticated } = useCheckAuthentication();
 
   return (
     <Box
@@ -46,11 +54,13 @@ const DepositWithdrawVIP = ({ icon, title }: BaseProps) => {
       }}
       onClick={() => {
         handleBoxClick(title as string);
-        if (isMobile) {
+        if (isMobile && isAuthenticated) {
           setProfileHeader("Digital Wallet");
           router.push("/profile/deposit");
-        } else {
+        } else if (isAuthenticated) {
           setDisplay(<DigitalWallet />);
+        } else {
+          handleOpen("login");
         }
       }}
     >
