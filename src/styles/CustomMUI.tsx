@@ -6,7 +6,6 @@ export const CustomMUI = () => {
   // =================================================================
   const CustomSelect = styled(Select)({
     color: "#FFF",
-    height: "48px",
     fontWeight: 900,
     borderRadius: "8px",
     fontFamily: "Roboto",

@@ -24,6 +24,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 // ** Custom Component Imports
 import DigitalWallet from "../DigitalWallet";
 import TransactionRecord from "../TransactionRecord";
+import BettingRecord from "../BettingRecord";
 
 // ** Zustand Store
 import { useProfileStore } from "@/zustand/profile-store";
@@ -75,7 +76,8 @@ const ListButtons = () => {
           text: "Betting Record",
           icon: <CasinoIcon />,
           navicon: <NavigateNextIcon />,
-          path: "/",
+          path: "/profile/betting-record",
+          web: <BettingRecord />,
         },
         {
           text: "Locked Details",

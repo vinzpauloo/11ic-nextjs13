@@ -7,7 +7,9 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 
 // ** Zustand Store Imports
-import { useTransactionRecordStore } from "@/zustand/transaction-record-store";
+import { useBettingRecordStore } from "@/zustand/betting-record-store";
+
+// ** Custom Component Imports
 import DataGridTabs from "./DataGridTabs";
 
 // ** Style Imports
@@ -18,8 +20,8 @@ const DataGridHeader = () => {
   // ** Styles **
   const { CustomMenuItem, CustomSelect } = CustomMUI();
   // ** Store **
-  const { days } = useTransactionRecordStore();
-  const { handleChange } = useTransactionRecordStore((state) => ({
+  const { days } = useBettingRecordStore();
+  const { handleChange } = useBettingRecordStore((state) => ({
     handleChange: state.handleChange,
   }));
 
@@ -45,7 +47,7 @@ const DataGridHeader = () => {
         sx={{
           width: { xs: "100%", sm: "auto" },
           my: { xs: 2, sm: 0 },
-          height: "48px",
+          height: "38px",
         }}
       >
         <CustomMenuItem value={3}>3 Days</CustomMenuItem>
