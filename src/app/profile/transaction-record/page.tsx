@@ -2,12 +2,12 @@
 import React from "react";
 
 // ** Custom Component Imports
-import TransactionRecordContent from "@/pages/Profile/TransactionRecord";
+import TransactionRecordMobile from "@/pages/Profile/TransactionRecord/mobile";
 
 // =================================================================
 
 const TransactionRecord = () => {
-  return <TransactionRecordContent />;
+  return <TransactionRecordMobile />;
 };
 
 export default TransactionRecord;

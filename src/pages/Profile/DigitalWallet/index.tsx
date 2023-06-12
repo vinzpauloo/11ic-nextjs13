@@ -11,8 +11,6 @@ import Dashboard from "./components/Dashboard";
 
 const DigitalWallet = () => {
   return <Dashboard />;
-
-  
 };
 
 const styles = {
@@ -27,7 +25,5 @@ const styles = {
     gap: 5,
   },
 };
-
-
 
 export default ProtectedRoute(DigitalWallet);

@@ -20,13 +20,16 @@ import SecurityIcon from "@mui/icons-material/Security";
 import SmsIcon from "@mui/icons-material/Sms";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
+// ** Custom Component Imports
+import DigitalWallet from "../DigitalWallet";
+import TransactionRecord from "../TransactionRecord";
+
 // ** Zustand Store
 import { useProfileStore } from "@/zustand/profile-store";
-import DigitalWallet from "../DigitalWallet";
+import { useAccountStore } from "@/zustand/account-store";
 
 // ** Hooks
 import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
-import { useAccountStore } from "@/zustand/account-store";
 
 // =================================================================
 
@@ -68,6 +71,7 @@ const ListButtons = () => {
           icon: <ReceiptIcon />,
           navicon: <NavigateNextIcon />,
           path: "/profile/transaction-record",
+          web: <TransactionRecord />,
         },
         {
           text: "Betting Record",
