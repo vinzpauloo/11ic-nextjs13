@@ -88,7 +88,7 @@ video {
   vertical-align: baseline;
   overscroll-behavior-y: none;
   overscroll-x: hidden;
-  font-family: Roboto;
+  font-family: "Roboto","Helvetica","Arial",sans-serif
 }
 /* This will affect the whole document */
 * {

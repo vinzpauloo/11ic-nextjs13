@@ -50,5 +50,6 @@ const styles : {[key : string] : SxProps} = {
         backgroundColor : 'rgb(20,20,20)',
         paddingInline : '.8em',
         paddingBlock : '.4em',
+        justifyContent: 'center'
     }
 }
