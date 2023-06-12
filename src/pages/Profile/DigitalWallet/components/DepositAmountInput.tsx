@@ -1,7 +1,7 @@
 import React from 'react'
 
 // ** MUI imports
-import { Box, SxProps } from "@mui/material";
+import { Box, FormControl, TextField, SxProps } from "@mui/material";
 import MenuButton from '../../components/MenuButton';
 
 // ** Third Party Imports -- NOT FINAL
@@ -12,7 +12,9 @@ import { useForm } from "react-hook-form";
 // ** Custom Component Imports
 import InputField from '@/shared-components/InputField'
 
-type Props = {}
+type Props = {
+  currency? : React.ReactNode
+}
 
 const depositAmounts = ['100,000', '500,000', '1,000,000', '2,000,000', '50,000,000', '100,000,000']
 
@@ -37,15 +39,17 @@ const DepositAmountInput = (props: Props) => {
           depositAmounts.map( amt => <MenuButton key={amt} sx={styles.btn}>{amt}</MenuButton> )
         }
       </Box>
+
+      <FormControl sx={styles.control} variant='outlined'>
+        {
+          props.currency && props.currency
+        }
+        <TextField
+          sx={styles.field}
+          placeholder="Deposit Limit 500.00 - 50,000.00"
+        ></TextField>
+      </FormControl>
       
-      <InputField
-        controllerName="accountnumber"
-        control={control}
-        placeholder="Deposit Limit 500.00 - 50,000.00"
-        variant="outlined"
-        fullWidth={true}
-        name="accountnumber"
-      />
     </Box>
   )
 }
@@ -66,5 +70,23 @@ const styles :{[key : string] : SxProps} = {
     minWidth : 'initial',
     fontWeight:'bold',
     justifyContent :'center'
-  }
+  },
+  control : {
+    borderRadius : '8px',
+    background: "rgba(255, 255, 255, 0.05)",
+    backdropFilter: "blur(25px)",
+  },
+  field : {
+    border: 'none',
+    outline : 'none',
+    borderRadius : '8px',
+    '& fieldset' : {
+      border: 'none',
+      outline : 'none'
+    },
+    '& input' : {
+      color: "rgba(255, 255, 255, 0.6)",
+      fontWeight: 400,
+    }
+  },
 }

@@ -13,6 +13,7 @@ import ProofOfTransaction from '../components/ProofOfTransaction'
 import SubmitButton from '@/pages/Profile/components/SubmitButton';
 import FormController from '../components/FormController';
 
+import Currency from '@/shared-components/Currency';
 
 type Props = {}
 
@@ -29,7 +30,9 @@ const ContentUSDT = (props: Props) => {
 
       <FormController 
         label='Deposit Amount'
-        render={ () => <DepositAmountInput />  }
+        render={ () => <DepositAmountInput 
+                          currency={ <Currency value={100000} /> }
+                        />  }
       />
 
       <FormController 
