@@ -3,6 +3,7 @@ import React, { JSXElementConstructor, ReactElement } from "react";
 
 // ** Next Imports
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 // ** MUI Imports
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
@@ -12,7 +13,8 @@ import { useProfileStore } from "@/zustand/profile-store";
 
 // ** Custom Component Imports
 import DigitalWallet from "../DigitalWallet";
-import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
+
+// ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";
 
 // ** Types
@@ -26,6 +28,9 @@ interface BaseProps {
 const DepositWithdrawVIP = ({ icon, title }: BaseProps) => {
   // ** Router **
   const router = useRouter();
+
+  // ** Next Auth **
+  const session = useSession();
 
   // ** Store **
   const { activeButton, setDisplay, setProfileHeader } = useProfileStore();
@@ -43,9 +48,6 @@ const DepositWithdrawVIP = ({ icon, title }: BaseProps) => {
   // ** Variables **
   const isActive = activeButton === title;
 
-  // ** Hooks **
-  const { isAuthenticated } = useCheckAuthentication();
-
   return (
     <Box
       sx={{
@@ -54,10 +56,10 @@ const DepositWithdrawVIP = ({ icon, title }: BaseProps) => {
       }}
       onClick={() => {
         handleBoxClick(title as string);
-        if (isMobile && isAuthenticated) {
+        if (isMobile && session?.status === "authenticated") {
           setProfileHeader("Digital Wallet");
           router.push("/profile/deposit");
-        } else if (isAuthenticated) {
+        } else if (session?.status === "authenticated") {
           setDisplay(<DigitalWallet />);
         } else {
           handleOpen("login");

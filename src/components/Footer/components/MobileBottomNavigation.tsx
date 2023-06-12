@@ -127,8 +127,8 @@ const styles = {
     right: 0,
     zIndex: 9000,
     display: {
-      xs: "block",
-      sm: "none",
+      sm: "block",
+      md: "none",
     },
   },
   navigationWrapper: {

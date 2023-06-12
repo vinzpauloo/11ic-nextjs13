@@ -1,5 +1,6 @@
 // ** Next Imports
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 // ** MUI Imports
 import {
@@ -28,14 +29,14 @@ import TransactionRecord from "../TransactionRecord";
 import { useProfileStore } from "@/zustand/profile-store";
 import { useAccountStore } from "@/zustand/account-store";
 
-// ** Hooks
-import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
-
 // =================================================================
 
 const ListButtons = () => {
   // ** Next Router **
   const router = useRouter();
+
+  // ** Next Auth **
+  const session = useSession();
 
   // ** MUI **
   const theme = useTheme();
@@ -46,9 +47,6 @@ const ListButtons = () => {
   const { handleOpen } = useAccountStore((state) => ({
     handleOpen: state.handleOpen,
   }));
-
-  // ** Hooks **
-  const { isAuthenticated } = useCheckAuthentication();
 
   return (
     <List sx={styles.container}>
@@ -108,10 +106,10 @@ const ListButtons = () => {
           key={index}
           sx={styles.button}
           onClick={() => {
-            if (isMobile && isAuthenticated) {
+            if (isMobile && session?.status === "authenticated") {
               setProfileHeader(`${item.text}`);
               router.push(`${item.path}`);
-            } else if (isAuthenticated) {
+            } else if (session?.status === "authenticated") {
               setDisplay(item.web);
             } else {
               handleOpen("login");
