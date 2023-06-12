@@ -23,7 +23,7 @@ import { useTransactionRecordStore } from "@/zustand/transaction-record-store";
 // =================================================================
 const TransactionRecordDataGrid = () => {
   // ** Styles **
-  const { StyledDataGrid, CustomPaginationStyle } = CustomMUI();
+  const { StyledDataGrid } = CustomMUI();
   // ** Store **
   const { tabSelected, pageSize, depositPage, withdrawPage, promoPage } =
     useTransactionRecordStore();
@@ -33,24 +33,29 @@ const TransactionRecordDataGrid = () => {
   const withdrawData = MockWithdrawData();
   const promoData = MockPromoData();
 
+  // ** State **
+  const [depositStateData] = useState(() => depositData);
+  const [withdrawStateData] = useState(() => withdrawData);
+  const [promoStateData] = useState(() => promoData);
+
   // Choose the appropriate data based on the selected tab
   let data;
   let page;
   switch (tabSelected) {
     case "deposit":
-      data = depositData;
+      data = depositStateData;
       page = depositPage;
       break;
     case "withdraw":
-      data = withdrawData;
+      data = withdrawStateData;
       page = withdrawPage;
       break;
     case "promo":
-      data = promoData;
+      data = promoStateData;
       page = promoPage;
       break;
     default:
-      data = depositData;
+      data = depositStateData;
       page = depositPage;
       break;
   }

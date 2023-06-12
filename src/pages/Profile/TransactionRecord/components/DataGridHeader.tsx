@@ -42,6 +42,7 @@ const DataGridHeader = () => {
         MenuProps={{
           PaperProps: { style: { paddingTop: 0, paddingBottom: 0 } },
         }}
+        sx={{ width: { xs: "100%", sm: "auto" }, my: { xs: 2, sm: 0 } }}
       >
         <CustomMenuItem value={3}>3 Days</CustomMenuItem>
         <CustomMenuItem value={7}>7 Days</CustomMenuItem>
@@ -54,10 +55,22 @@ const DataGridHeader = () => {
 
 const styles = {
   container: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    pb: 5,
+    display: {
+      xs: "initial",
+      sm: "flex",
+    },
+    alignItems: {
+      xs: "initial",
+      sm: "center",
+    },
+    justifyContent: {
+      xs: "initial",
+      sm: "space-between",
+    },
+    pb: {
+      xs: 0,
+      sm: 5,
+    },
   },
   select: {
     display: "flex",
