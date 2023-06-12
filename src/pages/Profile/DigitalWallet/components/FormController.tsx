@@ -2,14 +2,22 @@
 import React from 'react'
 
 interface IProps  {
-    label? : string
+    label? : string | React.ReactNode
     render : () => string | React.ReactNode
 }
 
 const FormController = ({label,render}: IProps) => {
+
+
+
     return (
         <div>
-            { label && <label style={styles.label}>{label}</label> }
+            { label && 
+                ( typeof label == 'string' ) 
+                ? 
+                <label style={styles.label}>{label}</label> 
+                : label  
+            }
             { render && render() }
         </div>
     )

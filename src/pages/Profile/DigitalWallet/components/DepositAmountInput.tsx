@@ -47,6 +47,7 @@ const DepositAmountInput = (props: Props) => {
         <TextField
           sx={styles.field}
           placeholder="Deposit Limit 500.00 - 50,000.00"
+          type='number'
         ></TextField>
       </FormControl>
       

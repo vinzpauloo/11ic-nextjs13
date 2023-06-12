@@ -14,6 +14,7 @@ import SubmitButton from '@/pages/Profile/components/SubmitButton';
 import FormController from '../components/FormController';
 
 import Currency from '@/shared-components/Currency';
+import ConversionCurrency from '@/shared-components/ConversionCurrency';
 
 type Props = {}
 
@@ -29,7 +30,10 @@ const ContentUSDT = (props: Props) => {
       />
 
       <FormController 
-        label='Deposit Amount'
+        label={ <div style={styles.label}>
+                  <span>Deposit Amount - </span>
+                  <ConversionCurrency />
+                </div> }
         render={ () => <DepositAmountInput 
                           currency={ <Currency value={100000} /> }
                         />  }
@@ -55,5 +59,12 @@ const styles = {
     display:'flex',
     gap: '2rem',
     flexDirection : 'column',
-  }
+  },
+  label : {
+    color : '#fff',
+    marginBottom: '.9rem',
+    display:'inline-block',
+    fontSize: '13px'
+  },
+  
 }
