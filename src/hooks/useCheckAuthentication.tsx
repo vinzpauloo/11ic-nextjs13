@@ -7,13 +7,13 @@ import { useAccountStore } from "@/zustand/account-store";
 // =================================================================
 export const useCheckAuthentication = () => {
   // ** Session **
-  const { data: session, status } = useSession();
+  const session = useSession();
 
   // ** Zustand Store **
-  const { isLogoutModalOpen, setLogoutModalOpen } = useAccountStore();
+  const { setLogoutModalOpen } = useAccountStore();
 
   // ** Hooks **
-  const isAuthenticated = status === "authenticated" && !!session;
+  const isAuthenticated = session?.status === "authenticated" && !!session;
 
   const handleLogout = () => {
     setLogoutModalOpen(true); // open the modal when handleLogout is called

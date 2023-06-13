@@ -1,52 +1,29 @@
 // ** React Imports
 import { ComponentType, useEffect } from "react";
 
-// ** MUI Imports
-import { Backdrop, CircularProgress, Stack, Typography } from "@mui/material";
-
 // ** Next Imports
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-// export default function ProtectedRoute(Component: ComponentType) {
-//   const ProtectedComponent = () => {
-//     const session = useSession();
-//     const router = useRouter();
+// ** MUI Imports
+import { Backdrop, CircularProgress, Stack, Typography } from "@mui/material";
 
-//     console.log(`SESSION pRoute`, session);
-
-//     useEffect(() => {
-//       if (session?.status === "unauthenticated") {
-//         router.push("/");
-//       }
-//     }, [session?.status, router]);
-
-//     return <Component />;
-//   };
-
-//   ProtectedComponent.displayName = `ProtectedRoute(${
-//     Component.displayName || Component.name || "Component"
-//   })`;
-
-//   return ProtectedComponent;
-// }
-
-// ** Temporary for now, testing if adding a Loading is better....
 export default function ProtectedRoute(Component: ComponentType) {
   const ProtectedComponent = () => {
-    const { data: session, status } = useSession();
+    const session = useSession();
     const router = useRouter();
 
+    console.log(`SESSION pRoute`, session);
+
     useEffect(() => {
-      if (status === "authenticated") {
+      if (session?.status === "authenticated") {
         // If session exists and the user is authenticated, do nothing
-      } else if (status === "unauthenticated") {
-        // If session exists and user is unauthenticated, redirect to "/"
+      } else if (session?.status === "unauthenticated") {
         router.push("/");
       }
-    }, [status, router]);
+    }, [session?.status, router]);
 
-    if (status === "loading") {
+    if (session?.status === "loading") {
       return (
         <Backdrop
           sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -60,7 +37,7 @@ export default function ProtectedRoute(Component: ComponentType) {
           </Stack>
         </Backdrop>
       );
-    } else if (status === "authenticated") {
+    } else if (session?.status === "authenticated") {
       return <Component />;
     } else {
       return null;
