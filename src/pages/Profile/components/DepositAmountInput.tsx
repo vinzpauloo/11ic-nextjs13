@@ -1,8 +1,8 @@
 import React from 'react'
 
 // ** MUI imports
-import { Box, FormControl, TextField, SxProps } from "@mui/material";
-import MenuButton from '../../components/MenuButton';
+import { Box, FormControl, SxProps } from "@mui/material";
+
 
 // ** Third Party Imports -- NOT FINAL
 import * as yup from "yup";
@@ -10,15 +10,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
 // ** Custom Component Imports
-import InputField from '@/shared-components/InputField'
+import MenuButton from './MenuButton';
+import FormTextField from './FormTextField';
 
 type Props = {
   currency? : React.ReactNode
+  depositAmounts? : string[] | [] 
+  placeholderValue? : string
 }
 
-const depositAmounts = ['100,000', '500,000', '1,000,000', '2,000,000', '50,000,000', '100,000,000']
+
 
 const DepositAmountInput = (props: Props) => {
+
+  const { depositAmounts, placeholderValue='Deposit Limit 500.00 - 50,000.00' } = props
 
   // ** React Hook Form
   const {
@@ -36,7 +41,7 @@ const DepositAmountInput = (props: Props) => {
     <Box sx={styles.container}>
       <Box sx={styles.depositContainer}>
         {
-          depositAmounts.map( amt => <MenuButton key={amt} sx={styles.btn}>{amt}</MenuButton> )
+          depositAmounts && depositAmounts.map( amt => <MenuButton key={amt} sx={styles.btn}>{amt}</MenuButton> )
         }
       </Box>
 
@@ -44,11 +49,11 @@ const DepositAmountInput = (props: Props) => {
         {
           props.currency && props.currency
         }
-        <TextField
-          sx={styles.field}
-          placeholder="Deposit Limit 500.00 - 50,000.00"
-          type='number'
-        ></TextField>
+        <FormTextField
+          noBorder
+          placeholder={placeholderValue}
+          type='tel'
+        ></FormTextField>
       </FormControl>
       
     </Box>

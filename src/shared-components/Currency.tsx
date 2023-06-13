@@ -8,10 +8,11 @@ import { Box, SxProps } from "@mui/material";
 
 type Props = {
     value : number
+    prefix? : string
     //dynamic currency // US INR PHP?
 }
 
-const Currency = ({value}: Props) => {
+const Currency = ({value,prefix}: Props) => {
 
     const formattedNumber = value.toLocaleString('en-US', {
         style: 'decimal',
@@ -21,7 +22,7 @@ const Currency = ({value}: Props) => {
     return (
     <Box sx={styles.container}>
         <Image src='/images/currencies/inr.png' alt='' width={15} height={15} />
-        <span>{ value && formattedNumber }</span>
+        <Box sx={styles.span}>{ prefix && prefix } { value && formattedNumber }</Box>
     </Box>
     )
 }
@@ -38,4 +39,7 @@ const styles : {[key : string] : SxProps} = {
         alignContent : 'center',
         alignItems : 'center',
     },
+    span : {
+        fontSize: '15px'
+    }
 }

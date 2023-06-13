@@ -4,18 +4,18 @@ import React from 'react'
 import { Box } from "@mui/material";
 
 // ** Custom C
-import CreditCardBank from '../components/CreditCard/CreditCardBank';
+import CreditCardBank from '@/pages/Profile/components/CreditCard/CreditCardBank';
 import UTRReferenceNumberInput from '../components/UTRReferenceNumberInput';
-import DepositAmountInput from '../components/DepositAmountInput'
+import DepositAmountInput from '@/pages/Profile/components/DepositAmountInput'
 import ProofOfTransaction from '../components/ProofOfTransaction'
 import SubmitButton from '@/pages/Profile/components/SubmitButton';
-import FormController from '../components/FormController';
+import FormController from '@/pages/Profile/components/FormController';
 
 type Props = {}
 
+const depositAmounts = ['100,000', '500,000', '1,000,000', '2,000,000', '50,000,000', '100,000,000']
+
 const ContentBankTransfer = (props: Props) => {
-
-
   return (
     <Box sx={styles.container}>
       
@@ -25,7 +25,7 @@ const ContentBankTransfer = (props: Props) => {
       
       <FormController 
         label='Deposit Amount'
-        render={ () => <DepositAmountInput />  }
+        render={ () => <DepositAmountInput depositAmounts={depositAmounts} />  }
       />
 
       <FormController 

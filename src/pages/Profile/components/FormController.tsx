@@ -1,6 +1,9 @@
 
 import React from 'react'
 
+// ** MUI imports
+import { Box } from "@mui/material";
+
 interface IProps  {
     label? : string | React.ReactNode
     render : () => string | React.ReactNode
@@ -8,10 +11,8 @@ interface IProps  {
 
 const FormController = ({label,render}: IProps) => {
 
-
-
     return (
-        <div>
+        <Box sx={styles.container}>
             { label && 
                 ( typeof label == 'string' ) 
                 ? 
@@ -19,11 +20,15 @@ const FormController = ({label,render}: IProps) => {
                 : label  
             }
             { render && render() }
-        </div>
+        </Box>
     )
 }
 
 const styles = {
+    container : {
+        display:'flex',
+        flexDirection: 'column'
+    },
     label : {
         color : '#fff',
         marginBottom: '.9rem',

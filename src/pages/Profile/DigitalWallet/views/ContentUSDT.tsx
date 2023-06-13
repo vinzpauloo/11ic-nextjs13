@@ -8,17 +8,20 @@ import { Box } from "@mui/material";
 // ** Custom Components
 import FilterTokenOptions from '../components/FilterTokenOptions'
 import TokenAddress from '../components/TokenAddress/TokenAddress';
-import DepositAmountInput from '../components/DepositAmountInput'
+import DepositAmountInput from '@/pages/Profile/components/DepositAmountInput'
 import ProofOfTransaction from '../components/ProofOfTransaction'
 import SubmitButton from '@/pages/Profile/components/SubmitButton';
-import FormController from '../components/FormController';
+import FormController from '../../components/FormController';
 
 import Currency from '@/shared-components/Currency';
 import ConversionCurrency from '@/shared-components/ConversionCurrency';
 
 type Props = {}
 
+const depositAmounts = ['100,000', '500,000', '1,000,000', '2,000,000', '50,000,000', '100,000,000']
+
 const ContentUSDT = (props: Props) => {
+
   return (
     <Box sx={styles.container}>
       
@@ -35,7 +38,9 @@ const ContentUSDT = (props: Props) => {
                   <ConversionCurrency />
                 </div> }
         render={ () => <DepositAmountInput 
-                          currency={ <Currency value={100000} /> }
+                          depositAmounts={depositAmounts}
+                          currency={ <Currency value={100000} 
+                          /> }
                         />  }
       />
 
