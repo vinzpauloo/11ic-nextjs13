@@ -1,9 +1,6 @@
 // ** React Imports
 import React from "react";
 
-// ** Next Imports
-import { useSession } from "next-auth/react";
-
 // ** MUI Imports
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
@@ -17,11 +14,13 @@ import ListButtons from "./ListButtons";
 import LogoutButton from "./LogoutButton";
 import LinksMain from "./LinksMain";
 
+import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
+
 // =================================================================
 
 const ProfileNavigation = () => {
-  // ** Next Auth **
-  const session = useSession();
+  // ** Hooks Imports
+  const { isAuthenticated } = useCheckAuthentication();
 
   return (
     <Box sx={styles.container}>
@@ -44,15 +43,10 @@ const ProfileNavigation = () => {
           gap={1}
         >
           <LinksMain />
-          
         </Stack>
       </Box>
       <ListButtons />
-      {session && session?.status === "authenticated" ? (
-        <LogoutButton />
-      ) : (
-        false
-      )}
+      {isAuthenticated ? <LogoutButton /> : false}
     </Box>
   );
 };

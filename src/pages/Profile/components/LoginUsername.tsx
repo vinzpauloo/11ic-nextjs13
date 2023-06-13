@@ -1,9 +1,6 @@
 // ** React Imports
 import React from "react";
 
-// ** Next Imports
-import { useSession } from "next-auth/react";
-
 // ** MUI Imports
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -11,11 +8,14 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 // ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";
 
+// ** Hooks Imports
+import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
+
 // =================================================================
 
 const LoginUsername = () => {
-  // ** Next Auth **
-  const session = useSession();
+  // ** Hooks **
+  const { isAuthenticated } = useCheckAuthentication();
 
   // ** Store **
   const { handleOpen } = useAccountStore((state) => ({
@@ -26,15 +26,13 @@ const LoginUsername = () => {
     <Box
       sx={styles.container}
       onClick={() => {
-        session && session?.status === "unauthenticated"
-          ? handleOpen("login")
-          : false;
+        isAuthenticated ? handleOpen("login") : false;
       }}
     >
       <Stack direction="row" alignItems="center">
         <Avatar alt="User Avatar" src="" sx={styles.avatarStyle} />
         <Stack gap={1}>
-          {session && session?.status === "authenticated" ? (
+          {isAuthenticated ? (
             <>
               <Typography sx={styles.white}>Username</Typography>
               <Typography sx={styles.white} variant="caption">

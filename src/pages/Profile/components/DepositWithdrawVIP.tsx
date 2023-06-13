@@ -3,16 +3,12 @@ import React, { JSXElementConstructor, ReactElement } from "react";
 
 // ** Next Imports
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 // ** MUI Imports
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 // ** Zustand Store Imports
 import { useProfileStore } from "@/zustand/profile-store";
-
-// ** Custom Component Imports
-import DigitalWallet from "../DigitalWallet";
 
 // ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";
@@ -21,17 +17,20 @@ import { useAccountStore } from "@/zustand/account-store";
 interface BaseProps {
   icon: ReactElement<any, string | JSXElementConstructor<any>>;
   title?: string;
-  customOnClick? : () => void
+  customOnClick?: () => void;
+  onMouseEnter?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }
 
 // =================================================================
 
-const DepositWithdrawVIP = ({ icon, title, customOnClick }: BaseProps) => {
+const DepositWithdrawVIP = ({
+  icon,
+  title,
+  customOnClick,
+  onMouseEnter,
+}: BaseProps) => {
   // ** Router **
   const router = useRouter();
-
-  // ** Next Auth **
-  const session = useSession();
 
   // ** Store **
   const { activeButton, setDisplay, setProfileHeader } = useProfileStore();
@@ -57,8 +56,9 @@ const DepositWithdrawVIP = ({ icon, title, customOnClick }: BaseProps) => {
       }}
       onClick={() => {
         handleBoxClick(title as string);
-        customOnClick && customOnClick()
+        customOnClick && customOnClick();
       }}
+      onMouseEnter={onMouseEnter}
     >
       {icon &&
         React.cloneElement(icon, {

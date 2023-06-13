@@ -1,6 +1,5 @@
 // ** Next Imports
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 // ** MUI Imports
 import {
@@ -30,14 +29,17 @@ import BettingRecord from "../BettingRecord";
 import { useProfileStore } from "@/zustand/profile-store";
 import { useAccountStore } from "@/zustand/account-store";
 
+// ** Hooks Imports
+import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
+
 // =================================================================
 
 const ListButtons = () => {
   // ** Next Router **
   const router = useRouter();
 
-  // ** Next Auth **
-  const session = useSession();
+  // ** Hooks **
+  const { isAuthenticated } = useCheckAuthentication();
 
   // ** MUI **
   const theme = useTheme();
@@ -107,11 +109,16 @@ const ListButtons = () => {
         <ListItemButton
           key={index}
           sx={styles.button}
+          onMouseEnter={() => {
+            if (isAuthenticated) {
+              router.prefetch(`${item.path}`);
+            }
+          }}
           onClick={() => {
-            if (isMobile && session?.status === "authenticated") {
-              setProfileHeader(`${item.text}`);
+            if (isMobile && isAuthenticated) {
               router.push(`${item.path}`);
-            } else if (session?.status === "authenticated") {
+              setProfileHeader(`${item.text}`);
+            } else if (isAuthenticated) {
               setDisplay(item.web);
             } else {
               handleOpen("login");

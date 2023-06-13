@@ -1,12 +1,8 @@
 // ** Next Imports
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 // ** MUI Imports
-import {
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import StarRateIcon from "@mui/icons-material/StarRate";
@@ -22,15 +18,17 @@ import TransactionRecord from "../TransactionRecord";
 import { useProfileStore } from "@/zustand/profile-store";
 import { useAccountStore } from "@/zustand/account-store";
 
+// ** Hooks Imports
+import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
+
 // =================================================================
 
 const LinksMain = () => {
-
   // ** Next Router **
   const router = useRouter();
 
-  // ** Next Auth **
-  const session = useSession();
+  // ** Hooks **
+  const { isAuthenticated } = useCheckAuthentication();
 
   // ** MUI **
   const theme = useTheme();
@@ -43,13 +41,13 @@ const LinksMain = () => {
   }));
 
   return (
-    <>{
-    [
+    <>
+      {[
         {
           title: "Deposit",
           icon: <AccountBalanceWalletIcon sx={styles.iconStyle} />,
           path: "/profile/wallet-management",
-          web: <DigitalWallet />
+          web: <DigitalWallet />,
         },
         {
           title: "Withdraw",
@@ -63,45 +61,49 @@ const LinksMain = () => {
           path: "/profile/transaction-record",
           web: <TransactionRecord />,
         },
-    ].map((item, index) => (
-        
+      ].map((item, index) => (
         <DepositWithdrawVIP
-            key={index}
-            icon={item.icon}
-            title={item.title}
-            customOnClick={() => {
-                if (isMobile && session?.status === "authenticated") {
-                  setProfileHeader(`${item.title}`);
-                  router.push(`${item.path}`);
-                } else if (session?.status === "authenticated") {
-                  setDisplay(item.web);
-                } else {
-                  handleOpen("login");
-                }
-              }}
+          key={index}
+          icon={item.icon}
+          title={item.title}
+          customOnClick={() => {
+            if (isMobile && isAuthenticated) {
+              router.push(`${item.path}`);
+              setProfileHeader(`${item.title}`);
+            } else if (isAuthenticated) {
+              setDisplay(item.web);
+            } else {
+              handleOpen("login");
+            }
+          }}
+          onMouseEnter={() => {
+            if (isAuthenticated) {
+              router.prefetch(`${item.path}`);
+            }
+          }}
         />
-      ))
-    }</>
+      ))}
+    </>
   );
 };
 
 export default LinksMain;
 
 const styles = {
-    container: {
-      backgroundColor: "#3A3D39",
-      color: "#FFF",
-      borderRadius: "8px",
-    },
-    button: {
-      mb: 1,
-    },
-    white: {
-      color: "#FFF",
-    },
-    iconStyle : { 
-      height: 40, 
-      width: 40, 
-      color: "#FFF" }
-  };
-  
+  container: {
+    backgroundColor: "#3A3D39",
+    color: "#FFF",
+    borderRadius: "8px",
+  },
+  button: {
+    mb: 1,
+  },
+  white: {
+    color: "#FFF",
+  },
+  iconStyle: {
+    height: 40,
+    width: 40,
+    color: "#FFF",
+  },
+};

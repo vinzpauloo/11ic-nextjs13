@@ -11,7 +11,11 @@ import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import LocalActivityIcon from "@mui/icons-material/LocalActivity";
 import PersonIcon from "@mui/icons-material/Person";
+
+// ** Hooks Imports
 import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
+
+// ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";
 
 // ========================================================================
@@ -69,11 +73,6 @@ const MobileBottomNavigation = () => {
         }
         break;
       case 4:
-        // if (isAuthenticated) {
-        //   router.push("/profile");
-        // } else {
-        //   router.push("/");
-        // }
         router.push("/profile");
         break;
       default:
@@ -93,26 +92,31 @@ const MobileBottomNavigation = () => {
           label="Home"
           icon={<HomeIcon fontSize="large" />}
           sx={styles.navigationBtn}
+          onMouseEnter={() => router.prefetch("/")}
         />
         <BottomNavigationAction
           label="Sports"
           icon={<SportsSoccerIcon fontSize="large" />}
           sx={styles.navigationBtn}
+          onMouseEnter={() => router.prefetch("/")}
         />
         <BottomNavigationAction
           label="Deposit"
           icon={<AccountBalanceWalletIcon fontSize="large" />}
           sx={styles.navigationBtn}
+          onMouseEnter={() => router.prefetch("/profile/deposit")}
         />
         <BottomNavigationAction
           label="Promo"
           icon={<LocalActivityIcon fontSize="large" />}
           sx={styles.navigationBtn}
+          onMouseEnter={() => router.prefetch("/promotions")}
         />
         <BottomNavigationAction
           label="Profile"
           icon={<PersonIcon fontSize="large" />}
           sx={styles.navigationBtn}
+          onMouseEnter={() => router.prefetch("/profile")}
         />
       </BottomNavigation>
     </Paper>
