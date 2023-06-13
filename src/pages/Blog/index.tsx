@@ -5,6 +5,9 @@ import React from "react";
 // ** MUI Imports
 import { Box, Container, Typography } from "@mui/material";
 
+// ** Custom Component Imports
+import ProtectedRoute from "@/components/ProtectedRoute";
+
 const BlogContent = () => {
   return (
     <Container maxWidth={false} disableGutters sx={styles.container}>
@@ -28,4 +31,4 @@ const styles = {
   },
 };
 
-export default BlogContent;
+export default ProtectedRoute(BlogContent);
