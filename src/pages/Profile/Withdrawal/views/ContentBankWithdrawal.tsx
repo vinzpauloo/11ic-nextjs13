@@ -6,15 +6,17 @@ import { Box } from "@mui/material";
 // ** Custom component imports
 import FormController from '@/pages/Profile/components/FormController';
 import SubmitButton from '@/pages/Profile/components/SubmitButton';
-import CreditCardBank from '@/pages/Profile/components/CreditCard/CreditCardBank';
+import CreditCardLibrary from '@/pages/Profile/components/CreditCardLibrary/CreditCardLibrary';
 import DepositAmountInput from '@/pages/Profile/components/DepositAmountInput'
 import FormTextField from '@/pages/Profile/components/FormTextField';
 
 import Currency from '@/shared-components/Currency';
 
+
 type Props = {}
 
 const ContentBankWithdrawal = (props: Props) => {
+  
   
   return (
     <Box sx={styles.container}>
@@ -31,7 +33,10 @@ const ContentBankWithdrawal = (props: Props) => {
       />
 
       <FormController 
-        render={ () => <CreditCardBank />  }
+        render={ () => <CreditCardLibrary 
+                          creditCards={[{cvc : 11, expiry : 112, name : 'DDDEDE', number:'12121'}]}
+                          defaultCard={null}
+                        />}
       />
 
       <FormController 
