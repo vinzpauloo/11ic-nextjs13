@@ -21,11 +21,12 @@ import { useAccountStore } from "@/zustand/account-store";
 interface BaseProps {
   icon: ReactElement<any, string | JSXElementConstructor<any>>;
   title?: string;
+  customOnClick? : () => void
 }
 
 // =================================================================
 
-const DepositWithdrawVIP = ({ icon, title }: BaseProps) => {
+const DepositWithdrawVIP = ({ icon, title, customOnClick }: BaseProps) => {
   // ** Router **
   const router = useRouter();
 
@@ -56,14 +57,7 @@ const DepositWithdrawVIP = ({ icon, title }: BaseProps) => {
       }}
       onClick={() => {
         handleBoxClick(title as string);
-        if (isMobile && session?.status === "authenticated") {
-          setProfileHeader("Digital Wallet");
-          router.push("/profile/deposit");
-        } else if (session?.status === "authenticated") {
-          setDisplay(<DigitalWallet />);
-        } else {
-          handleOpen("login");
-        }
+        customOnClick && customOnClick()
       }}
     >
       {icon &&

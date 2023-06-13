@@ -15,6 +15,7 @@ import LoginUsername from "./LoginUsername";
 import DepositWithdrawVIP from "./DepositWithdrawVIP";
 import ListButtons from "./ListButtons";
 import LogoutButton from "./LogoutButton";
+import LinksMain from "./LinksMain";
 
 // =================================================================
 
@@ -42,24 +43,8 @@ const ProfileNavigation = () => {
           justifyContent="center"
           gap={1}
         >
-          <DepositWithdrawVIP
-            icon={
-              <AccountBalanceWalletIcon
-                sx={{ height: 40, width: 40, color: "#FFF" }}
-              />
-            }
-            title="Deposit"
-          />
-          <DepositWithdrawVIP
-            icon={<AddCardIcon sx={{ height: 40, width: 40, color: "#FFF" }} />}
-            title="Withdraw"
-          />
-          <DepositWithdrawVIP
-            icon={
-              <StarRateIcon sx={{ height: 40, width: 40, color: "#FFF" }} />
-            }
-            title="VIP"
-          />
+          <LinksMain />
+          
         </Stack>
       </Box>
       <ListButtons />
