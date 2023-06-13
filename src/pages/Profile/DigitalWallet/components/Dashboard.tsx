@@ -66,8 +66,18 @@ export default Dashboard;
 
 const styles = {
   container : {
-    padding: '2rem',
+    padding: {
+      xs : '1rem',
+      md : '2rem'
+    },
     display:'flex',
-    gap: '2rem',
+    flexDirection : {
+      xs : 'column',
+      md : 'row'
+    },
+    gap: {
+      xs : '.5rem',
+      md : '2rem',
+    },
   }
 }

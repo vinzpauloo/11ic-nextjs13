@@ -69,8 +69,23 @@ const styles :{[key : string] : SxProps} = {
     gap: '1rem'
   },
   depositContainer : {
-    display:'flex',
-    gap: '1rem'
+    display: {
+      xs : 'grid',
+      md : 'flex'
+    },
+    gridTemplateColumns : {
+      xs : '1fr 1fr 1fr'
+    },
+    gap: {
+      xs : '.2rem',
+      md : '1rem'
+    },
+    '& button' : {
+      fontSize : {
+        xs : '9px',
+        md : '14px'
+      }
+    }
   },
   btn : {
     minWidth : 'initial',

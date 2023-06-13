@@ -40,8 +40,15 @@ export default FilterDepositOptions
 
 const styles : {[key : string] : SxProps} = {
     container : {
-        display:'flex',
-        gap: '1rem'
+        display: {
+            xs : 'grid',
+            md : 'flex'
+        },
+        gridTemplateColumns : 'auto auto auto',
+        gap: {
+            xs : '.5rem',
+            md : '2rem',
+        },
     },
     menuButton : { 
         minWidth : 'initial',
@@ -50,6 +57,14 @@ const styles : {[key : string] : SxProps} = {
         backgroundColor : 'rgb(20,20,20)',
         paddingInline : '.8em',
         paddingBlock : '.4em',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        '& img' : {
+            '@media screen and (max-width: 500px)': {
+                height: 'auto',
+                maxWidth:'75px',
+                width: '100%',
+            },
+        },
+
     }
 }

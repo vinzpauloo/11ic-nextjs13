@@ -47,11 +47,21 @@ export default AccountNumberInput
 const styles = {
   container : {
     display:'grid',
-    gridTemplateColumns : ['10fr 2fr'],
-    gap: '.5rem'
+    gridTemplateColumns : ['6fr 2fr',,'10fr 2fr'],
+    gap: '.5rem',
+    '& input' : {
+      fontSize : {
+        xs : '12px',
+        md : '14px'
+      }
+    }
   },
   copyBtn : { 
     minWidth : 'initial',
-    textTransform : 'none !important'
+    textTransform : 'none !important',
+    fontSize : {
+      xs : '11px',
+      md : '14px'
+    }
   }
 }

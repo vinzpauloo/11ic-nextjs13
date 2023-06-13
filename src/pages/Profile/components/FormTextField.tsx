@@ -36,8 +36,12 @@ const styles :{[key : string] : SxProps} = {
         outline : 'none'
         },
         '& input' : {
-        color: "rgba(255, 255, 255, 0.6)",
-        fontWeight: 400,
+            color: "rgba(255, 255, 255, 0.6)",
+            fontWeight: 400,
+            fontSize : {
+                xs : '12px',
+                md : '14px'
+            }
         }
     },
     field : {

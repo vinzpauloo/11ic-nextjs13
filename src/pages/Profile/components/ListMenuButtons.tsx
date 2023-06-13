@@ -6,7 +6,7 @@ import React from 'react'
 import { useRouter } from 'next/navigation';
 
 // ** MUI Imports
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 type Props = {
     heading : string | React.ReactNode
@@ -25,7 +25,7 @@ const ListMenuButtons = (props: Props) => {
 
     return (
     <Box sx={styles.container}>
-        <h2 style={styles.heading}>{heading}</h2>
+        <Typography component='h2' sx={styles.heading}>{heading}</Typography>
         <Box sx={styles.leftButtonWrapper}>
             { render &&  render(routeTo)}
         </Box>
@@ -39,18 +39,36 @@ const styles = {
     container : {
         display:'flex',
         flexDirection: 'column',
-        gap: '2.5rem'
+        gap: {
+            xs : '1.5rem',
+            md : '2.5rem'
+        },
     },
     heading : {
         color : '#fff',
-        fontWeight: '700'
+        fontWeight: '700',
+        textAlign : {
+            xs : 'center',
+            md : 'left'
+        },
     },
     leftButtonWrapper : {
         display:'flex',
+        flexDirection : {
+            xs : 'row',
+            md : 'column'
+        },
+        gridTemplateColumns : '1fr 1fr',
         alignItems : 'flex-start',
         justifyContent : 'flex-start',
-        flexDirection : 'column',
         textAlign : 'left',
-        gap: '2rem'
+        gap: {
+            xs : '.5rem',
+            md : '2rem'
+        },
+        '@media screen and (max-width: 500px)': {
+            overflowX: 'scroll',
+            whiteSpace : 'no-wrap'
+        },
     }
 }

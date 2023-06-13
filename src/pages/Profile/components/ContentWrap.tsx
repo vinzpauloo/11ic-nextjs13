@@ -18,8 +18,14 @@ export default ContentWrap
 const styles = {
     container : {
         borderRadius : '8px',
-        backgroundColor : 'rgba(31,33,27, .8)',
-        padding : '1rem',
+        backgroundColor : {
+          xs : 'none',
+          md : 'rgba(31,33,27, .8)'
+        },
+        padding : {
+          xs : '0rem',
+          md : '1rem',
+        },
         width: '100%',
     }
 }
