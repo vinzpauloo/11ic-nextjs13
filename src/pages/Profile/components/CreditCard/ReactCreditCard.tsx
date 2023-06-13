@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 
 // ** 3rd Party Imports
@@ -13,16 +15,22 @@ const ReactCreditCard = (props: IProps) => {
 
     const { cvc, expiry, focused, name, number } = props
 
-    return (
-        <div>
-            <Cards
-                cvc={cvc}
-                expiry={expiry}
-                name={name}
-                number={number}
-            />
-        </div>
-    )
+    if ( number ) {
+
+        return (
+            <div>
+                <Cards
+                    cvc={cvc && cvc}
+                    expiry={expiry && expiry}
+                    name={name && name}
+                    number={number && number}
+                />
+            </div>
+        )
+    }
+
+    return <></>
+    
 }
 
 export default ReactCreditCard

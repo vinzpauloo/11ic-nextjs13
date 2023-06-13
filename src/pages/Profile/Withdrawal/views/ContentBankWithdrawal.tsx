@@ -34,8 +34,8 @@ const ContentBankWithdrawal = (props: Props) => {
 
       <FormController 
         render={ () => <CreditCardLibrary 
-                          creditCards={[{cvc : 11, expiry : 112, name : 'DDDEDE', number:'12121'}]}
-                          defaultCard={null}
+                          creditCards={[{cvc : 11, expiry : 112, name : 'Joe Smith', number:'432343235432'}]}
+                          defaultCard={1}
                         />}
       />
 

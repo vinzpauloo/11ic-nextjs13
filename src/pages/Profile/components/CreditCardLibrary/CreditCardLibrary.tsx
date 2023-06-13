@@ -13,26 +13,24 @@ import { ReactCreditCardProps } from 'react-credit-cards';
 
 interface ICCLibrary {
     creditCards : ReactCreditCardProps[]
-    defaultCard : number | null
+    defaultCard : number 
 }
 
 const CreditCardLibrary = ({creditCards, defaultCard}: ICCLibrary) => {
 
-    const [defaultCardNumber, setDefaultCardNumber ] = React.useState<number | null>(defaultCard ?? null)
+    // const [defaultCardNumber, setDefaultCardNumber ] = React.useState<number | null>(defaultCard ?? null)
 
     if ( creditCards ) {
-
-        console.log("WHAT IS THE DEFAULT CARD NUMBER", defaultCardNumber)
 
         return (
             <Box>
                 { creditCards.map( cc => (
                     <ReactCreditCard 
-                        key={cc.number}
-                        cvc={cc.cvc}   
-                        expiry={cc.expiry}   
-                        name={cc.name}   
-                        number={cc.number}   
+                        key={cc.number && cc.number}
+                        cvc={cc.cvc && cc.cvc}   
+                        expiry={cc.expiry && cc.expiry}   
+                        name={cc.name && cc.name}   
+                        number={cc.number && cc.number}   
                     />
                 )) }
             </Box>
