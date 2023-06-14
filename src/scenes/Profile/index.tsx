@@ -3,11 +3,22 @@
 // ** React Imports
 import React from "react";
 
+// ** Next Imports
+import dynamic from "next/dynamic";
+
 // ** MUI Imports
 import { Box, Container } from "@mui/material";
 
 // ** Custom Component Imports
-import ProfileNavigation from "./components/ProfileNavigation";
+import BackdropLoader from "@/shared-components/BackdropLoader";
+const ProfileNavigation = dynamic(
+  () => import("./components/ProfileNavigation"),
+  {
+    loading: () => <BackdropLoader description="Loading..." />,
+  }
+);
+
+// ** Zustand Store Imports
 import { useProfileStore } from "@/zustand/profile-store";
 
 // =================================================================
@@ -36,7 +47,6 @@ const styles = {
   container: {
     paddingBlock: ["2rem"],
     paddingInline: ["1rem", "1rem", 0],
-    // maxWidth:'1136px', ORIGINAL
     maxWidth: "1300px",
     marginInline: "auto",
   },

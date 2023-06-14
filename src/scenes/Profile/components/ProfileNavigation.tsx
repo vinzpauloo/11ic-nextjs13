@@ -1,25 +1,34 @@
 // ** React Imports
 import React from "react";
 
+// ** Next Imports
+import dynamic from "next/dynamic";
+
 // ** MUI Imports
 import { Avatar, Box, Stack, Typography } from "@mui/material";
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import StarRateIcon from "@mui/icons-material/StarRate";
-import AddCardIcon from "@mui/icons-material/AddCard";
 
 // ** Custom Component Imports
-import LoginUsername from "./LoginUsername";
-import DepositWithdrawVIP from "./DepositWithdrawVIP";
-import ListButtons from "./ListButtons";
-import LogoutButton from "./LogoutButton";
-import LinksMain from "./LinksMain";
+import BackdropLoader from "@/shared-components/BackdropLoader";
+const LoginUsername = dynamic(() => import("./LoginUsername"), {
+  loading: () => <BackdropLoader description="Loading..." />,
+});
+const ListButtons = dynamic(() => import("./ListButtons"), {
+  loading: () => <BackdropLoader description="Loading..." />,
+});
+const LogoutButton = dynamic(() => import("./LogoutButton"), {
+  loading: () => <BackdropLoader description="Loading..." />,
+});
+const LinksMain = dynamic(() => import("./LinksMain"), {
+  loading: () => <BackdropLoader description="Loading..." />,
+});
 
+// ** Hooks Imports
 import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
 
 // =================================================================
 
 const ProfileNavigation = () => {
-  // ** Hooks Imports
+  // ** Hooks **
   const { isAuthenticated } = useCheckAuthentication();
 
   return (
