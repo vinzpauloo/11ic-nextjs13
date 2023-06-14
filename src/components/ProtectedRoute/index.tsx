@@ -5,9 +5,10 @@ import { ComponentType, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-// ** MUI Imports
-import { Backdrop, CircularProgress, Stack, Typography } from "@mui/material";
+// ** Custom Component Imports
+import BackdropLoader from "@/shared-components/BackdropLoader";
 
+// =================================================================
 export default function ProtectedRoute(Component: ComponentType) {
   const ProtectedComponent = () => {
     const session = useSession();
@@ -22,19 +23,7 @@ export default function ProtectedRoute(Component: ComponentType) {
     }, [session?.status, router]);
 
     if (session?.status === "loading") {
-      return (
-        <Backdrop
-          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={true}
-        >
-          <Stack alignItems="center" justifyContent="center" gap={2}>
-            <CircularProgress color="inherit" />
-            <Typography fontFamily="Roboto" color="#FFF">
-              Checking your authentication...
-            </Typography>
-          </Stack>
-        </Backdrop>
-      );
+      return <BackdropLoader description="Checking authentication status..." />;
     } else if (session?.status === "authenticated") {
       return <Component />;
     } else {
