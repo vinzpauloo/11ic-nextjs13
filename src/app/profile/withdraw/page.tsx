@@ -1,7 +1,7 @@
 import React from "react";
 
 // ** Custom Component Imports
-import Withdrawal from "@/pages/Profile/Withdrawal";
+import Withdrawal from "@/scenes/Profile/Withdrawal";
 
 const Withdraw = () => {
   return <Withdrawal />;

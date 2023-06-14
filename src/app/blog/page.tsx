@@ -2,7 +2,7 @@
 import React from "react";
 
 // ** Custom Component Imports
-import BlogContent from "@/pages/Blog";
+import BlogContent from "@/scenes/Blog";
 
 const Blog = () => {
   return <BlogContent />;

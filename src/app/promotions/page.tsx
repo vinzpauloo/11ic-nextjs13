@@ -2,7 +2,7 @@
 import React from "react";
 
 // ** Custom Component Imports
-import PromotionsContent from "@/pages/Promotions";
+import PromotionsContent from "@/scenes/Promotions";
 
 const Promotions = () => {
   return <PromotionsContent />;

@@ -2,7 +2,7 @@
 import React from "react";
 
 // ** Custom Component Imports
-import DigitalWallet from "@/pages/Profile/DigitalWallet";
+import DigitalWallet from "@/scenes/Profile/DigitalWallet";
 
 const WalletManagement = () => {
   return <DigitalWallet />;

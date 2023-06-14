@@ -2,7 +2,7 @@
 import React from "react";
 
 // ** Custom Component Imports
-import DepositContent from "@/pages/Profile/Deposit";
+import DepositContent from "@/scenes/Profile/Deposit";
 
 const Deposit = () => {
   return <DepositContent />;

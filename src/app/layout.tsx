@@ -3,7 +3,6 @@ import "../styles/globals.css";
 
 // ** Next Imports
 import { Inter } from "next/font/google";
-import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 
 // ** Provider Imports
 import { MuiSetup } from "@/providers/MuiSetup";
@@ -23,7 +22,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "11iC.COM--the first cryptocurrency casino based on Web3.0",
-  description: "11iC.com",
+  description: "11iC.COM--the first cryptocurrency casino based on Web3.0",
 };
 export default function RootLayout({
   children,
@@ -35,11 +34,6 @@ export default function RootLayout({
       <body
         className={inter.className}
         style={{
-          // backgroundImage:
-          //   "url('https://j9.io/assets/PC-Background-d2a73e39.png')",
-          // backgroundRepeat: "no-repeat",
-          // backgroundSize: "cover",
-          // backgroundPosition: "center",
           backgroundColor: "#171717",
         }}
       >

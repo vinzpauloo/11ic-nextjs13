@@ -2,7 +2,7 @@
 import React from "react";
 
 // ** Custom Component Imports
-import InformationContent from "@/pages/Information";
+import InformationContent from "@/scenes/Information";
 
 const Information = () => {
   return <InformationContent />;

@@ -2,7 +2,7 @@
 import React from "react";
 
 // ** Custom Component Imports
-import VIPContent from "@/pages/VIP";
+import VIPContent from "@/scenes/VIP";
 
 const VIP = () => {
   return <VIPContent />;
