@@ -1,15 +1,7 @@
-import IconifyIcon from "@/shared-components/Icon";
-import { useAccountStore } from "@/zustand/account-store";
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  Typography,
-} from "@mui/material";
-import React from "react";
+// ** MUI Imports
+import { Box, Dialog, DialogContent } from "@mui/material";
+
+// ** Custom Component Imports
 import Title from "./components/Title";
 import LogoutAdsCard from "./components/Cards";
 import LogoutButtons from "./components/Buttons";
@@ -22,7 +14,7 @@ interface ModalProps {
 
 // ========================================================================
 
-const Logout = ({ open, onClose }: ModalProps) => {
+const LogoutModal = ({ open, onClose }: ModalProps) => {
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogContent sx={styles.container}>
@@ -61,7 +53,6 @@ const styles = {
     background: "linear-gradient(118.89deg, #474747 0%, #323631 100%);",
     position: "relative",
     height: {
-      //   xs: "800px",
       sm: "636px",
     },
     display: "flex",
@@ -77,4 +68,4 @@ const styles = {
   },
 };
 
-export default Logout;
+export default LogoutModal;

@@ -4,9 +4,13 @@ import React from "react";
 // ** MUI Imports
 import { Avatar } from "@mui/material";
 
-// ** Hooks
+// ** Custom Component Imports
+import LogoutModal from "@/components/Account/Logout";
+
+// ** Hooks Imports
 import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
-import Logout from "@/components/Account/Logout";
+
+// ** Zustand Imports
 import { useAccountStore } from "@/zustand/account-store";
 
 // ========================================================================
@@ -26,7 +30,10 @@ const ProfileAvatar = () => {
           height: "25px",
         }}
       />
-      <Logout open={isLogoutModalOpen} onClose={() => handleModalClose()} />
+      <LogoutModal
+        open={isLogoutModalOpen}
+        onClose={() => handleModalClose()}
+      />
     </>
   );
 };

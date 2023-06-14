@@ -7,27 +7,20 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 
 // ** MUI Imports
-import {
-  Avatar,
-  Box,
-  Button,
-  Chip,
-  Divider,
-  Stack,
-  Tab,
-  Tabs,
-  Typography,
-} from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 // ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";
 
 // ** Custom Components Imports
 import LoginSignUpModal from "../Account";
+import LogoutModal from "../Account/Logout";
 import LanguageDropdown from "./components/Language";
 import TopTabNavigation from "./components/TopTabNavigation";
 import DepositChip from "./components/DepositChip";
 import ProfileAvatar from "./components/ProfileAvatar";
+
+// ** Hooks Imports
 import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
 
 // ** Core Imports
@@ -35,7 +28,6 @@ import { useSettings } from "@/@core/hooks/useSettings";
 
 // ** Utility Imports
 import { useTranslateString } from "@/utils/TranslateString";
-import Logout from "../Account/Logout";
 
 // ========================================================================
 
@@ -142,7 +134,10 @@ const Header = () => {
           <LanguageDropdown settings={settings} saveSettings={saveSettings} />
         </Box>
         <LoginSignUpModal ref={modalRef} open={open} onClose={handleClose} />
-        <Logout open={isLogoutModalOpen} onClose={() => handleModalClose()} />
+        <LogoutModal
+          open={isLogoutModalOpen}
+          onClose={() => handleModalClose()}
+        />
       </Box>
       <TopTabNavigation />
     </Box>
