@@ -12,7 +12,7 @@ export default async function sitemap() {
     "/profile/betting-record",
     "/profile/withdraw",
   ].map((route) => ({
-    url: `http://localhost:3000${route}`,
+    url: `${process.env.NEXT_PUBLIC_SITE_URL}${route}`,
     lastModified: new Date().toISOString(),
   }));
 
