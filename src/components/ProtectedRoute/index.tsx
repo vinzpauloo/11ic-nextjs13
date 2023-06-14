@@ -13,8 +13,6 @@ export default function ProtectedRoute(Component: ComponentType) {
     const session = useSession();
     const router = useRouter();
 
-    console.log(`SESSION pRoute`, session);
-
     useEffect(() => {
       if (session?.status === "authenticated") {
         // If session exists and the user is authenticated, do nothing

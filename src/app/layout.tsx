@@ -3,6 +3,7 @@ import "../styles/globals.css";
 
 // ** Next Imports
 import { Inter } from "next/font/google";
+import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 
 // ** Provider Imports
 import { MuiSetup } from "@/providers/MuiSetup";
@@ -20,10 +21,23 @@ import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
+export const metadata: Metadata = {
+  metadataBase: new URL("http://localhost:3000"),
   title: "11iC.COM--the first cryptocurrency casino based on Web3.0",
   description: "11iC.COM--the first cryptocurrency casino based on Web3.0",
+  openGraph: {
+    type: "website",
+    url: "http://localhost:3000",
+    title: "11iC.COM--the first cryptocurrency casino based on Web3.0",
+    description: "11iC.COM--the first cryptocurrency casino based on Web3.0",
+    siteName: "11iC",
+    images: ["/images/seo/opengraph.png"],
+  },
+  twitter: {
+    images: "/images/seo/twitter.png",
+  },
 };
+
 export default function RootLayout({
   children,
 }: {
