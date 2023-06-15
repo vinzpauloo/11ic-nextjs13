@@ -18,7 +18,7 @@ const AnnouncementHeader = ({ onClose }: ModalProps) => {
   return (
     <Stack pb={2} gap={2}>
       <AnnouncementTitle onClose={onClose} />
-      <SelectAllRead onClose={onClose} />
+      <SelectAllRead />
     </Stack>
   );
 };
