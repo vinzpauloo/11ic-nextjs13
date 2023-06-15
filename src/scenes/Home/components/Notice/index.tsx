@@ -1,13 +1,33 @@
 // ** React Imports
 import React from "react";
-import Ticker from "react-ticker";
 
 // ** MUI Imports
 import { Box, Button, Typography } from "@mui/material";
 
+// ** Third Party Imports
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade, Navigation, Pagination } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
+
+// =================================================================
 const NoticeTicker = () => {
   const newsItems = [
-    "Virtual Currency is a currency that does not have a physical form and only exists in digital form, also known as digital currency.",
+    {
+      title:
+        "Virtual Currency is a currency that does not have a physical form and only exists in digital form, also known as digital currency.",
+    },
+    {
+      title: "lorem Ipsum is simply dummy",
+    },
+    {
+      title:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem voluptates a quos nisi quas enim ad voluptatibus facere provident voluptatem, quaerat, reprehenderit obcaecati alias temporibus doloribus porro minus quod sint!",
+    },
+    {
+      title:
+        " Utot Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum molestias dignissimos totam obcaecati aperiam, nam sequi nostrum tempore iusto tenetur incidunt voluptate praesentium distinctio et dolorem commodi! Consectetur, molestias iure?",
+    },
   ];
 
   return (
@@ -18,13 +38,26 @@ const NoticeTicker = () => {
         </Typography>
       </Box>
       <Box sx={styles.tickerWrapper}>
-        <Ticker offset="run-in" speed={10}>
-          {({ index }) => (
-            <>
-              <Typography>{newsItems[index % newsItems.length]}</Typography>
-            </>
-          )}
-        </Ticker>
+        <Swiper
+          direction="vertical"
+          style={{ height: "25px" }}
+          slidesPerView={1}
+          loop={true}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+          }}
+          pagination={{ clickable: true, type: undefined }}
+          modules={[Autoplay, EffectFade, Navigation, Pagination]}
+        >
+          {newsItems.map((item, index) => (
+            <SwiperSlide key={index}>
+              <Box sx={styles.slideWrapper}>
+                <Typography>{item.title}</Typography>
+              </Box>
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
         <Box sx={styles.buttonWrapper}>
           <Button>
@@ -81,11 +114,16 @@ const styles = {
       xs: 3,
     },
     right: 5,
+    zIndex: 2000,
   },
   checkMoreText: {
     fontSize: 8,
     color: "#000",
     fontWeight: 900,
+  },
+  slideWrapper: {
+    width: "100%",
+    height: "20px",
   },
 };
 
