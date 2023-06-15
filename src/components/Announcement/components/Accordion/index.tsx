@@ -15,31 +15,40 @@ import { useAnnouncementStore } from "@/zustand/announcement-store";
 
 const AnnouncementAccordion = () => {
   // ** Store **
-  const { page, announcementStateData } = useAnnouncementStore();
+  const { page, value, announcementStateData } = useAnnouncementStore();
 
   // ** Variables(For Pagination/Temporary) **
   const itemsPerPage = 10;
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const data = announcementStateData.slice(startIndex, endIndex);
+  // const data = announcementStateData.slice(startIndex, endIndex);
+  let data;
+  if (value === "All") {
+    data = announcementStateData.slice(startIndex, endIndex);
+  } else if (value === "Read") {
+    data = announcementStateData
+      .filter((a) => a.isRead)
+      .slice(startIndex, endIndex);
+  }
 
   return (
     <>
-      {data.map((item) => (
-        <Accordion key={item.id}>
-          <AccordionSummarized
-            id={item.id}
-            icon={item.icon}
-            title={item.title}
-            created_at={item.created_at}
-            description={item.description}
-          />
-          <AccordionDetailed
-            description={item.description}
-            image={item.image}
-          />
-        </Accordion>
-      ))}
+      {data &&
+        data.map((item) => (
+          <Accordion key={item.id}>
+            <AccordionSummarized
+              id={item.id}
+              icon={item.icon}
+              title={item.title}
+              created_at={item.created_at}
+              description={item.description}
+            />
+            <AccordionDetailed
+              description={item.description}
+              image={item.image}
+            />
+          </Accordion>
+        ))}
     </>
   );
 };
