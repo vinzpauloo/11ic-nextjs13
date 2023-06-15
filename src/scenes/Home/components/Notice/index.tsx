@@ -114,7 +114,7 @@ const styles = {
       xs: 3,
     },
     right: 5,
-    zIndex: 2000,
+    zIndex: 1,
   },
   checkMoreText: {
     fontSize: 8,
