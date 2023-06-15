@@ -8,13 +8,9 @@ import { signIn } from "next-auth/react";
 // ** MUI Imports
 import {
   Box,
-  Button,
   Dialog,
   DialogContent,
-  DialogTitle,
   IconButton,
-  Snackbar,
-  Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
@@ -28,7 +24,6 @@ import { useVisitorData } from "@fingerprintjs/fingerprintjs-pro-react";
 import { useMutation } from "@tanstack/react-query";
 
 // ** Custom Component Imports
-import InputField from "@/shared-components/InputField";
 import Registration from "@/components/Account/Registration";
 import IconifyIcon from "@/shared-components/Icon";
 import Login from "@/components/Account/Login";
@@ -128,13 +123,10 @@ const LoginSignUpModal = ({ open, onClose }: ModalProps, ref: any) => {
   } = useAccountStore();
 
   // ** Fingerprint JS **
-  const {
-    isLoading,
-    error,
-    data: fpjsData,
-    getData: getFpjsData,
-  } = useVisitorData({ extendedResult: true }, { immediate: true });
-  // console.log(`RegisterFPJS`, fpjsData);
+  const { data: fpjsData } = useVisitorData(
+    { extendedResult: true },
+    { immediate: true }
+  );
 
   // ** MUI Theme **
   const theme = useTheme();
@@ -143,8 +135,7 @@ const LoginSignUpModal = ({ open, onClose }: ModalProps, ref: any) => {
   // ** Functions **
   // ** Register Form Function **
   const handleFormSubmit = async (data: FormValues) => {
-    console.log(`SUCCESS SUBMIT FORM`, data);
-
+    // ** Data from Fingerprint JS **
     data.ipaddress = fpjsData?.ip ?? "No Ipaddress";
     data.fp = fpjsData?.visitorId ?? "No FP";
     data.device = fpjsData?.ipLocation?.accuracyRadius ?? 3;

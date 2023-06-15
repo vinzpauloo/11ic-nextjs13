@@ -8,6 +8,8 @@ export const theme = createTheme({
                 list: {
                     paddingTop: 0,
                     paddingBottom: 0,
+                    padding: 10,
+                    backgroundColor: '#333532',
                 },
             },
         },

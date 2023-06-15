@@ -20,14 +20,7 @@ import { AlertColor } from "@mui/material/Alert";
 // ** Third Party Imports
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  useForm,
-  Controller,
-  UseFormHandleSubmit,
-  Control,
-  FieldErrors,
-  FormState,
-} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import CryptoJS from "crypto-js";
 import { useVisitorData } from "@fingerprintjs/fingerprintjs-pro-react";
 
@@ -64,7 +57,6 @@ const Login = () => {
     control,
     handleSubmit,
     reset,
-    clearErrors,
     formState,
     formState: { errors },
   } = useForm<FormValues>({
@@ -79,12 +71,11 @@ const Login = () => {
     remember,
     setRemember,
     setButtonClicked,
-    fingerprintJsData,
-    setFingerprintJsData,
     setOpen,
     setSnackMessage,
     setSnackSeverity,
     setOpenSnack,
+    setAnnouncementModalOpen,
   } = useAccountStore();
 
   // ** Password Remember Me & Encryption
@@ -112,10 +103,12 @@ const Login = () => {
 
   // ** Functions
   const handleFormSubmit = async (data: FormValues) => {
+    // ** Data from Fingerprint JS **
     data.ipaddress = fpjsData ? fpjsData.ip : "No Ipaddress";
     data.fp = fpjsData ? fpjsData.visitorId : "No FP";
     data.device = fpjsData ? fpjsData.device : "No device";
 
+    // ** If remember me is checked, save user credentials to localStorage **
     if (remember) {
       // Encrypt and save user credentials to localStorage
       const userData = {
@@ -144,6 +137,7 @@ const Login = () => {
         handleClick(`Login Successful!`, "success");
         setTimeout(() => {
           setOpen(false);
+          setAnnouncementModalOpen(true);
         }, 500);
       }
     } catch (e: any) {

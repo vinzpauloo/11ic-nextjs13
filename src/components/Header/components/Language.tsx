@@ -31,7 +31,9 @@ const LanguageDropdown = ({ settings, saveSettings }: Props) => {
   // ** Vars
   const { layout } = settings;
 
-  const handleLangItemClick = (lang: "en" | "fr" | "ar" | "zh_CN") => {
+  const handleLangItemClick = (
+    lang: "en" | "fr" | "ar" | "zh_CN" | "hindi"
+  ) => {
     i18n.changeLanguage(lang);
   };
 
@@ -58,10 +60,17 @@ const LanguageDropdown = ({ settings, saveSettings }: Props) => {
           ),
           text: "",
           menuItemProps: {
-            sx: { py: 2 },
-            selected: i18n.language === "zh_CN",
+            sx: {
+              py: 2,
+              color: "#FFF",
+              "&.Mui-selected": {
+                backgroundColor: "#4a4b49",
+                color: "#F3B867",
+              },
+            },
+            selected: i18n.language === "hindi",
             onClick: () => {
-              handleLangItemClick("zh_CN");
+              handleLangItemClick("hindi");
               saveSettings({ ...settings, direction: "ltr" });
             },
           },
@@ -69,7 +78,14 @@ const LanguageDropdown = ({ settings, saveSettings }: Props) => {
         {
           text: "English",
           menuItemProps: {
-            sx: { py: 2 },
+            sx: {
+              py: 2,
+              color: "#FFF",
+              "&.Mui-selected": {
+                backgroundColor: "#4a4b49",
+                color: "#F3B867",
+              },
+            },
             selected: i18n.language === "en",
             onClick: () => {
               handleLangItemClick("en");
@@ -80,7 +96,14 @@ const LanguageDropdown = ({ settings, saveSettings }: Props) => {
         {
           text: "Chinese",
           menuItemProps: {
-            sx: { py: 2 },
+            sx: {
+              py: 2,
+              color: "#FFF",
+              "&.Mui-selected": {
+                backgroundColor: "#4a4b49",
+                color: "#F3B867",
+              },
+            },
             selected: i18n.language === "zh_CN",
             onClick: () => {
               handleLangItemClick("zh_CN");
@@ -91,7 +114,14 @@ const LanguageDropdown = ({ settings, saveSettings }: Props) => {
         {
           text: "French",
           menuItemProps: {
-            sx: { py: 2 },
+            sx: {
+              py: 2,
+              color: "#FFF",
+              "&.Mui-selected": {
+                backgroundColor: "#4a4b49",
+                color: "#F3B867",
+              },
+            },
             selected: i18n.language === "fr",
             onClick: () => {
               handleLangItemClick("fr");
@@ -102,7 +132,14 @@ const LanguageDropdown = ({ settings, saveSettings }: Props) => {
         {
           text: "Arabic",
           menuItemProps: {
-            sx: { py: 2 },
+            sx: {
+              py: 2,
+              color: "#FFF",
+              "&.Mui-selected": {
+                backgroundColor: "#4a4b49",
+                color: "#F3B867",
+              },
+            },
             selected: i18n.language === "ar",
             onClick: () => {
               handleLangItemClick("ar");

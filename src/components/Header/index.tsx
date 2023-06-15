@@ -14,6 +14,7 @@ import { useAccountStore } from "@/zustand/account-store";
 
 // ** Custom Components Imports
 import LoginSignUpModal from "../Account";
+import AnnouncementModal from "../Announcement";
 import LogoutModal from "../Account/Logout";
 import LanguageDropdown from "./components/Language";
 import TopTabNavigation from "./components/TopTabNavigation";
@@ -49,12 +50,12 @@ const Header = () => {
   const { isLogoutModalOpen, setLogoutModalOpen } = useAccountStore();
   const { settings, saveSettings } = useSettings();
   const {
-    buttonClicked,
-    setButtonClicked,
     headerBg,
     setHeaderBg,
     open,
     setOpen,
+    isAnnouncementModalOpen,
+    setAnnouncementModalOpen,
   } = useAccountStore();
   const { handleOpen } = useAccountStore((state) => ({
     handleOpen: state.handleOpen,
@@ -133,10 +134,16 @@ const Header = () => {
 
           <LanguageDropdown settings={settings} saveSettings={saveSettings} />
         </Box>
+
+        {/* Modals */}
         <LoginSignUpModal ref={modalRef} open={open} onClose={handleClose} />
         <LogoutModal
           open={isLogoutModalOpen}
           onClose={() => handleModalClose()}
+        />
+        <AnnouncementModal
+          open={isAnnouncementModalOpen}
+          onClose={() => setAnnouncementModalOpen(false)}
         />
       </Box>
       <TopTabNavigation />

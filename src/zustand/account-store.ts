@@ -13,6 +13,7 @@ interface AccountProps {
     openSnack: boolean
     snackMessage: string
     snackSeverity: AlertColor | undefined
+    isAnnouncementModalOpen: boolean
 
     // Defined actions
     setHeaderBg: (headerBg: string) => void;
@@ -25,6 +26,7 @@ interface AccountProps {
     setOpenSnack: (openSnack: boolean) => void;
     setSnackMessage: (snackMessage: string) => void;
     setSnackSeverity: (snackSeverity: AlertColor | undefined) => void;
+    setAnnouncementModalOpen: (isAnnouncementModalOpen: boolean) => void;
 
     // Functions
     handleOpen: (button: string) => void;
@@ -42,6 +44,7 @@ export const useAccountStore = create<AccountProps>((set) => ({
     openSnack: false,
     snackMessage: "",
     snackSeverity: "success",
+    isAnnouncementModalOpen: false,
 
     // Define actions
     setHeaderBg: (headerBg) => set({ headerBg }),
@@ -54,6 +57,7 @@ export const useAccountStore = create<AccountProps>((set) => ({
     setOpenSnack: (openSnack) => set({ openSnack }),
     setSnackMessage: (snackMessage) => set({ snackMessage }),
     setSnackSeverity: (snackSeverity) => set({ snackSeverity }),
+    setAnnouncementModalOpen: (isAnnouncementModalOpen) => set({ isAnnouncementModalOpen }),
 
     // Functions
     handleOpen: (button: string) => {
