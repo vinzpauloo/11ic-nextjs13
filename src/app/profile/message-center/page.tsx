@@ -1,7 +1,10 @@
+// ** React Imports
 import React from "react";
 
+import MessageCenterMobile from "@/scenes/Profile/MessageCenter/mobile";
+// =================================================================
 const MessageCenter = () => {
-  return <div>MessageCenter</div>;
+  return <MessageCenterMobile />;
 };
 
 export default MessageCenter;

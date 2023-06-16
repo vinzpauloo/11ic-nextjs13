@@ -24,6 +24,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import DigitalWallet from "../DigitalWallet";
 import TransactionRecord from "../TransactionRecord";
 import BettingRecord from "../BettingRecord";
+import MessageCenter from "../MessageCenter";
 
 // ** Zustand Store
 import { useProfileStore } from "@/zustand/profile-store";
@@ -103,7 +104,8 @@ const ListButtons = () => {
           text: "Message Center",
           icon: <SmsIcon />,
           navicon: <NavigateNextIcon />,
-          path: "/",
+          path: "/profile/message-center",
+          web: <MessageCenter />,
         },
       ].map((item, index) => (
         <ListItemButton
