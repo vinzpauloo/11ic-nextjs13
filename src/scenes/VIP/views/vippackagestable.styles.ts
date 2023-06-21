@@ -75,7 +75,8 @@ export const sxStyles : {[key : string] : SxProps} = {
         },
         '&:last-of-type > div:first-of-type' : {
             borderBottomLeftRadius : {
-                xs : '16px'
+                xs : '16px',
+                md : 0
             }
         }
     }
