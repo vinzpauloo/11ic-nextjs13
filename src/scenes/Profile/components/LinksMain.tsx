@@ -58,8 +58,7 @@ const LinksMain = () => {
         {
           title: "VIP",
           icon: <AddCardIcon sx={styles.iconStyle} />,
-          path: "/profile/transaction-record",
-          web: <TransactionRecord />,
+          path: "/vip",
         },
       ].map((item, index) => (
         <DepositWithdrawVIP
@@ -68,6 +67,9 @@ const LinksMain = () => {
           title={item.title}
           customOnClick={() => {
             if (isMobile && isAuthenticated) {
+              router.push(`${item.path}`);
+              setProfileHeader(`${item.title}`);
+            } else if ( !item.web ) {
               router.push(`${item.path}`);
               setProfileHeader(`${item.title}`);
             } else if (isAuthenticated) {

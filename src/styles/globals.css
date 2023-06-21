@@ -1,3 +1,15 @@
+:root {
+  --primary : rgba(71, 71, 71, 1);
+  --secondary : rgba(50, 54, 49, 1);
+  --accent : rgba(255, 255, 255, 0.6);
+  --clr-white-300 : rgba(255, 255, 255, 0.8);
+  --clr-white-400 : rgba(255, 255, 255, 1);
+
+  --bg-primary : linear-gradient(118.89deg, #474747 0%, #323631 100%);
+  --bg-secondary : #333633;
+  --border-clr-primary : rgba(255, 255, 255, 0.1)
+}
+
 html,
 body,
 div,
