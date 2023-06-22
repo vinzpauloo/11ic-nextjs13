@@ -35,7 +35,7 @@ import SnackbarAlert from "./components/SnackbarAlert";
 import { useAccountStore } from "@/zustand/account-store";
 
 // ** API Services Imports
-import { CreateAccount } from "@/services/api/CreateAccount"; // Client side API, uncomment in Services
+import { CreateAccount } from "@/services/api/AccountService"; // Client side API, uncomment in Services
 // import { postRegister } from "@/services/api/CreateAccount"; // Server side API
 
 // ** Types

@@ -10,6 +10,9 @@ import { Autoplay, EffectFade, Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 
+// ** Zustand Store Imports
+import { useHomeStore } from "@/zustand/home-store";
+
 // =================================================================
 const NoticeTicker = () => {
   const newsItems = [
@@ -29,6 +32,8 @@ const NoticeTicker = () => {
         " Utot Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum molestias dignissimos totam obcaecati aperiam, nam sequi nostrum tempore iusto tenetur incidunt voluptate praesentium distinctio et dolorem commodi! Consectetur, molestias iure?",
     },
   ];
+
+  const { webNotices } = useHomeStore();
 
   return (
     <Box sx={styles.container}>
@@ -50,10 +55,10 @@ const NoticeTicker = () => {
           pagination={{ clickable: true, type: undefined }}
           modules={[Autoplay, EffectFade, Navigation, Pagination]}
         >
-          {newsItems.map((item, index) => (
+          {webNotices.map((item: { title: string; body: string }, index) => (
             <SwiperSlide key={index}>
               <Box sx={styles.slideWrapper}>
-                <Typography>{item.title}</Typography>
+                <Typography>{`${item.title}: ${item.body}`}</Typography>
               </Box>
             </SwiperSlide>
           ))}

@@ -6,62 +6,68 @@ import { Box, Button, Typography } from "@mui/material";
 
 // ** Third Party Imports
 import CasinoRow from "./components/CasinoRow";
+import { useHomeStore } from "@/zustand/home-store";
 
-const firstRowSliderImages = [
-  {
-    image: `/images/casino-slider/Baccarat.png`,
-  },
-  {
-    image: `/images/casino-slider/Teen-Patti.png`,
-  },
-  {
-    image: `/images/casino-slider/Sicbo.png`,
-  },
-  {
-    image: `/images/casino-slider/DragonTiger.png`,
-  },
-  {
-    image: `/images/casino-slider/Three-card-poker.png`,
-  },
-  {
-    image: `/images/casino-slider/Roulette.png`,
-  },
-  {
-    image: `/images/casino-slider/BlackJack.png`,
-  },
-  {
-    image: `/images/casino-slider/Niuniu.png`,
-  },
-];
+// const firstRowSliderImages = [
+//   {
+//     image: `/images/casino-slider/Baccarat.png`,
+//   },
+//   {
+//     image: `/images/casino-slider/Teen-Patti.png`,
+//   },
+//   {
+//     image: `/images/casino-slider/Sicbo.png`,
+//   },
+//   {
+//     image: `/images/casino-slider/DragonTiger.png`,
+//   },
+//   {
+//     image: `/images/casino-slider/Three-card-poker.png`,
+//   },
+//   {
+//     image: `/images/casino-slider/Roulette.png`,
+//   },
+//   {
+//     image: `/images/casino-slider/BlackJack.png`,
+//   },
+//   {
+//     image: `/images/casino-slider/Niuniu.png`,
+//   },
+// ];
 
-const secondRowSliderImages = [
-  {
-    image: `/images/casino-slider/Lucky7.png`,
-  },
-  {
-    image: `/images/casino-slider/CrazyTime.png`,
-  },
-  {
-    image: `/images/casino-slider/Sidebet-city.png`,
-  },
-  {
-    image: `/images/casino-slider/Football-studio.png`,
-  },
-  {
-    image: `/images/casino-slider/32cards.png`,
-  },
-  {
-    image: `/images/casino-slider/Mega-Ball.png`,
-  },
-  {
-    image: `/images/casino-slider/Game-shows.png`,
-  },
-  {
-    image: `/images/casino-slider/Casinoholdem.png`,
-  },
-];
-
+// const secondRowSliderImages = [
+//   {
+//     image: `/images/casino-slider/Lucky7.png`,
+//   },
+//   {
+//     image: `/images/casino-slider/CrazyTime.png`,
+//   },
+//   {
+//     image: `/images/casino-slider/Sidebet-city.png`,
+//   },
+//   {
+//     image: `/images/casino-slider/Football-studio.png`,
+//   },
+//   {
+//     image: `/images/casino-slider/32cards.png`,
+//   },
+//   {
+//     image: `/images/casino-slider/Mega-Ball.png`,
+//   },
+//   {
+//     image: `/images/casino-slider/Game-shows.png`,
+//   },
+//   {
+//     image: `/images/casino-slider/Casinoholdem.png`,
+//   },
+// ];
+// =================================================================
 const Casino = () => {
+  const { liveCasino } = useHomeStore();
+
+  const firstRowSliderImages = liveCasino.slice(0, 8);
+  const secondRowSliderImages = liveCasino.slice(8);
+
   return (
     <Box sx={styles.container}>
       <Box>
