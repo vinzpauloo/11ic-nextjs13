@@ -10,6 +10,10 @@ import { Autoplay, EffectFade, Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 
+// ** Zustand Store Imports
+import { useHomeStore } from "@/zustand/home-store";
+
+// ** Mock Data
 const sliderImages = [
   {
     image: `https://rare-gallery.com/resol/1366x768/340841-TWICE-Kpop-Kpop-K-Pop-Girls-I-Cant-Stop-Me-Group-Members-Eyes-Wide-Open-Album-Mina-Tzuyu-Sana-Dahyun-Chaeyoung-Jeongyeon-Jihyo-Nayeon-Momo.jpg`,
@@ -25,7 +29,10 @@ const sliderImages = [
   },
 ];
 
+// =================================================================
 const Slider = () => {
+  const { banner } = useHomeStore();
+
   return (
     <Box sx={styles.container}>
       <Swiper
@@ -38,18 +45,21 @@ const Slider = () => {
         pagination={{ clickable: true, type: "bullets" }}
         modules={[Autoplay, EffectFade, Navigation, Pagination]}
       >
-        {sliderImages.map((item, index) => (
-          <SwiperSlide key={index}>
-            <Box sx={styles.slideWrapper}>
-              <Box
-                component="img"
-                sx={styles.image}
-                alt="main-slider-images"
-                src={item.image}
-              />
-            </Box>
-          </SwiperSlide>
-        ))}
+        {banner.length > 0 &&
+          banner.map((item: { image_link: string }, index) => {
+            return (
+              <SwiperSlide key={index}>
+                <Box sx={styles.slideWrapper}>
+                  <Box
+                    component="img"
+                    sx={styles.image}
+                    alt="main-slider-images"
+                    src={item.image_link}
+                  />
+                </Box>
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
     </Box>
   );

@@ -3,8 +3,11 @@ import React from "react";
 
 // ** MUI Imports
 import { Box, Typography } from "@mui/material";
+
+// ** Custom Component Imports
 import Cards from "./components/Cards";
 
+// ** Types
 interface GamesProps {
   title: string;
   firstBackground: string;
@@ -15,8 +18,11 @@ interface GamesProps {
   secondBackgroundImage: string;
   firstAltName: string;
   secondAltName: string;
+  firstOnClick: React.MouseEventHandler<HTMLDivElement> | undefined;
+  secondOnClick: React.MouseEventHandler<HTMLDivElement> | undefined;
 }
 
+// =================================================================
 const Games: React.FC<GamesProps> = ({
   title,
   firstBackground,
@@ -27,6 +33,8 @@ const Games: React.FC<GamesProps> = ({
   secondBackgroundImage,
   firstAltName,
   secondAltName,
+  firstOnClick,
+  secondOnClick,
 }) => {
   return (
     <Box sx={styles.container}>
@@ -37,12 +45,14 @@ const Games: React.FC<GamesProps> = ({
           gameTitle={firstGameTitle}
           backgroundImage={firstBackgroundImage}
           altName={firstAltName}
+          firstOnClick={firstOnClick}
         />
         <Cards
           background={secondBackground}
           gameTitle={secondGameTitle}
           backgroundImage={secondBackgroundImage}
           altName={secondAltName}
+          secondOnClick={secondOnClick}
         />
       </Box>
     </Box>

@@ -3,6 +3,7 @@ import { signOut, useSession } from "next-auth/react";
 
 // ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";
+import { decrypt } from "@/utils/encryption";
 
 // =================================================================
 export const useCheckAuthentication = () => {
@@ -27,5 +28,8 @@ export const useCheckAuthentication = () => {
     setLogoutModalOpen(false);
   };
 
-  return { isAuthenticated, handleLogout, handleModalClose };
+  const bearerToken =
+    session?.data?.acdivo.advP && decrypt(session?.data?.acdivo.advP);
+
+  return { isAuthenticated, handleLogout, handleModalClose, bearerToken };
 };
