@@ -2,7 +2,7 @@
 import "../styles/globals.css";
 
 // ** Next Imports
-import { Inter } from "next/font/google";
+import { Inter, Roboto } from "next/font/google";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 
 // ** Provider Imports
@@ -20,6 +20,10 @@ import FloatingActionButton from "@/components/FloatingAction";
 import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  subsets : ['latin'],
+  weight : ['400','700']
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_SITE_URL}`),
@@ -46,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={inter.className}
+        className={roboto.className}
         style={{
           backgroundColor: "#171717",
         }}
@@ -57,7 +61,7 @@ export default function RootLayout({
               <MuiSetup>
                 <Header />
                 <FloatingActionButton />
-                {children}
+                hahaha{children}
                 <Footer />
               </MuiSetup>
             </QueryProvider>
