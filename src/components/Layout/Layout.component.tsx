@@ -12,7 +12,7 @@ type LayoutProps = BoxProps & React.PropsWithChildren & {
 
 const Layout = (props: LayoutProps) => {
     const {children, sx, innerStyles, ...rest} = props
-    const mainStylesOverall = {...sx, ...styles.mainContainer}
+    const mainStylesOverall = {...styles.mainContainer, ...sx}
     const innerStylesOverall = {...innerStyles, ...styles.innerContainer}
 
     return (

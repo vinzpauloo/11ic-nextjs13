@@ -14,10 +14,16 @@ import BoxWrapper from "@/components/BoxWrapper/BoxWrapper.component";
 // ** Data imports
 import terms from "@/data/TermsConditions";
 import VIPPackagesTable from "./views/VIPPackagesTable";
+import SliderCards from "./components/SliderCards";
 
 const VIPContent = () => {
   return (
-    <Layout>
+    <Layout sx={{paddingTop : {
+      xs : '5rem',
+      md : '12rem'
+      }}}>
+
+      <SliderCards />
 
       <BoxWrapper mt={['1.5rem']}>
         <Typography sx={headingSx} color='white' component='h5'>Rebate</Typography>
