@@ -94,19 +94,23 @@ const Login = () => {
   }, [reset, setRemember]);
 
   // ** Fingerprint JS
-  const {
-    isLoading,
-    error,
-    data: fpjsData,
-    getData: getFpjsData,
-  } = useVisitorData({ extendedResult: true }, { immediate: true });
+  // const {
+  //   isLoading,
+  //   error,
+  //   data: fpjsData,
+  //   getData: getFpjsData,
+  // } = useVisitorData({ extendedResult: true }, { immediate: true });
 
   // ** Functions
   const handleFormSubmit = async (data: FormValues) => {
     // ** Data from Fingerprint JS **
-    data.ipaddress = fpjsData ? fpjsData.ip : "No Ipaddress";
-    data.fp = fpjsData ? fpjsData.visitorId : "No FP";
-    data.device = fpjsData ? fpjsData.device : "No device";
+    // data.ipaddress = fpjsData ? fpjsData.ip : "No Ipaddress";
+    // data.fp = fpjsData ? fpjsData.visitorId : "No FP";
+    // data.device = fpjsData ? fpjsData.device : "No device";
+
+    data.ipaddress = "No Ipaddress";
+    data.fp = "No FP";
+    data.device = "No device";
 
     // ** If remember me is checked, save user credentials to localStorage **
     if (remember) {

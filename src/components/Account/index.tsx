@@ -123,10 +123,10 @@ const LoginSignUpModal = ({ open, onClose }: ModalProps, ref: any) => {
   } = useAccountStore();
 
   // ** Fingerprint JS **
-  const { data: fpjsData } = useVisitorData(
-    { extendedResult: true },
-    { immediate: true }
-  );
+  // const { data: fpjsData } = useVisitorData(
+  //   { extendedResult: true },
+  //   { immediate: true }
+  // );
 
   // ** MUI Theme **
   const theme = useTheme();
@@ -136,10 +136,15 @@ const LoginSignUpModal = ({ open, onClose }: ModalProps, ref: any) => {
   // ** Register Form Function **
   const handleFormSubmit = async (data: FormValues) => {
     // ** Data from Fingerprint JS **
-    data.ipaddress = fpjsData?.ip ?? "No Ipaddress";
-    data.fp = fpjsData?.visitorId ?? "No FP";
-    data.device = fpjsData?.ipLocation?.accuracyRadius ?? 3;
-    data.origin_url = fpjsData?.ipLocation?.city?.name ?? "No Origin";
+    // data.ipaddress = fpjsData?.ip ?? "No Ipaddress";
+    // data.fp = fpjsData?.visitorId ?? "No FP";
+    // data.device = fpjsData?.ipLocation?.accuracyRadius ?? 3;
+    // data.origin_url = fpjsData?.ipLocation?.city?.name ?? "No Origin";
+
+    data.ipaddress = "No Ipaddress";
+    data.fp = "No FP";
+    data.device = 3;
+    data.origin_url = "No Origin";
 
     const form: any = {
       data: data,

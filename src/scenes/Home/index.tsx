@@ -27,10 +27,10 @@ import { useHomeStore } from "@/zustand/home-store";
 // =================================================================
 const Home = () => {
   // ** Fingerprint JS **
-  const { data: fpjsData } = useVisitorData(
-    { extendedResult: true },
-    { immediate: true }
-  );
+  // const { data: fpjsData } = useVisitorData(
+  //   { extendedResult: true },
+  //   { immediate: true }
+  // );
 
   // ** API **
   const { getHomePageInfo } = useHomeService();
@@ -54,9 +54,12 @@ const Home = () => {
       getHomePageInfo({
         params: {},
         data: {
-          ipaddress: fpjsData?.ip,
-          fp: fpjsData?.visitorId,
-          device: fpjsData?.ipLocation?.accuracyRadius,
+          // ipaddress: fpjsData?.ip,
+          // fp: fpjsData?.visitorId,
+          // device: fpjsData?.ipLocation?.accuracyRadius,
+          ipaddress: "No Ip",
+          fp: "No Visitor ID",
+          device: 3,
         },
       }),
     onSuccess: (response) => {
@@ -70,7 +73,7 @@ const Home = () => {
     onError: (error) => {
       console.log(error);
     },
-    enabled: !!fpjsData, // Only fetch when fpjsData is available
+    // enabled: !!fpjsData, // Only fetch when fpjsData is available
   });
 
   return (
