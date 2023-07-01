@@ -21,9 +21,9 @@ import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto({
-  subsets : ['latin'],
-  weight : ['400','700']
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_SITE_URL}`),
@@ -61,7 +61,7 @@ export default function RootLayout({
               <MuiSetup>
                 <Header />
                 <FloatingActionButton />
-                hahaha{children}
+                {children}
                 <Footer />
               </MuiSetup>
             </QueryProvider>
