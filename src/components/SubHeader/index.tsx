@@ -30,7 +30,9 @@ const SubHeader = () => {
   const header = localStorage.getItem("mainHeader");
 
   // ** Constants **
-  const basePaths = isWeb ? ["/vip", "/promotions", "/blog"] : [];
+  const basePaths = isWeb
+    ? ["/vip", "/promotions", "/blog", "/information/"]
+    : [];
   const noHeader = pathName === "/profile";
   const noHeaderInWeb = basePaths.some((basePaths) =>
     pathName?.startsWith(basePaths)
