@@ -42,7 +42,9 @@ const Header = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const basePaths = ["/profile/", "/addmoreifneeded"];
-  const mobileBasePaths = isMobile ? ["/vip", "/promotions", "/blog"] : [];
+  const mobileBasePaths = isMobile
+    ? ["/vip", "/promotions", "/blog", "/information/"]
+    : [];
 
   const noHeader = basePaths.some((basePath) => pathName?.startsWith(basePath));
   const noHeaderInMobile = mobileBasePaths.some((mobileBasePaths) =>
