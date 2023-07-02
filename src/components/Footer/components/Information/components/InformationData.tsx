@@ -57,7 +57,7 @@ const InformationData = () => {
       secondOnClick: () => {
         setSelected(2);
         setDisplay(<TOS />);
-        setTabSelected("tos");
+        setTabSelected("terms");
         setMainHeader("Help Center");
         localStorage.setItem("mainHeader", "Help Center");
         router.push("/information");
