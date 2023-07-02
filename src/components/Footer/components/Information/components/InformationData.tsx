@@ -1,8 +1,16 @@
 // ** Next Imports
 import { useRouter } from "next/navigation";
 
+// ** Custom Component Imports
+import About from "@/scenes/Information/About";
+import PrivacyPolicy from "@/scenes/Information/Privacy";
+import TOS from "@/scenes/Information/TermsAndConditions";
+import AffiliateTOS from "@/scenes/Information/Affiliate";
+import FAQ from "@/scenes/Information/FAQ";
+
 // ** Zustand Imports
 import { useMainStore } from "@/zustand/main-store";
+import { useInformationStore } from "@/zustand/information-store";
 
 // =================================================================
 const InformationData = () => {
@@ -11,6 +19,7 @@ const InformationData = () => {
 
   // ** Zustand Store **
   const { setMainHeader } = useMainStore();
+  const { setTabSelected, setDisplay, setSelected } = useInformationStore();
 
   return [
     {
@@ -19,14 +28,17 @@ const InformationData = () => {
       firstSxTitle: styles.blog,
       secondSxTitle: styles.titles,
       firstOnClick: () => {
-        setMainHeader("Blog");
-        localStorage.setItem("mainHeader", "Blog");
-        router.push("/information/blog");
+        setMainHeader("Help Center");
+        localStorage.setItem("mainHeader", "Help Center");
+        router.push("/information");
       },
       secondOnClick: () => {
-        setMainHeader("About Us");
-        localStorage.setItem("mainHeader", "About Us");
-        router.push("/information/about");
+        setSelected(0);
+        setDisplay(<About />);
+        setTabSelected("about");
+        setMainHeader("Help Center");
+        localStorage.setItem("mainHeader", "Help Center");
+        router.push("/information");
       },
     },
     {
@@ -35,14 +47,20 @@ const InformationData = () => {
       firstSxTitle: styles.titles,
       secondSxTitle: styles.titles,
       firstOnClick: () => {
-        setMainHeader("Privacy Policy");
-        localStorage.setItem("mainHeader", "Privacy Policy");
-        router.push("/information/privacy-policy");
+        setSelected(1);
+        setDisplay(<PrivacyPolicy />);
+        setTabSelected("privacy");
+        setMainHeader("Help Center");
+        localStorage.setItem("mainHeader", "Help Center");
+        router.push("/information");
       },
       secondOnClick: () => {
-        setMainHeader("Terms & Conditions");
-        localStorage.setItem("mainHeader", "Terms & Conditions");
-        router.push("/information/tos");
+        setSelected(2);
+        setDisplay(<TOS />);
+        setTabSelected("tos");
+        setMainHeader("Help Center");
+        localStorage.setItem("mainHeader", "Help Center");
+        router.push("/information");
       },
     },
     {
@@ -51,14 +69,20 @@ const InformationData = () => {
       firstSxTitle: styles.titles,
       secondSxTitle: styles.titles,
       firstOnClick: () => {
-        setMainHeader("FAQ");
-        localStorage.setItem("mainHeader", "FAQ");
-        router.push("/information/faq");
+        setSelected(3);
+        setDisplay(<FAQ />);
+        setTabSelected("faq");
+        setMainHeader("Help Center");
+        localStorage.setItem("mainHeader", "Help Center");
+        router.push("/information");
       },
       secondOnClick: () => {
-        setMainHeader("Affiliate");
-        localStorage.setItem("mainHeader", "Affiliate");
-        router.push("/information/affiliate");
+        setSelected(4);
+        setDisplay(<AffiliateTOS />);
+        setTabSelected("affiliate");
+        setMainHeader("Help Center");
+        localStorage.setItem("mainHeader", "Help Center");
+        router.push("/information");
       },
     },
   ];

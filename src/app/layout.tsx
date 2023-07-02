@@ -53,6 +53,9 @@ export default function RootLayout({
         className={roboto.className}
         style={{
           backgroundColor: "#171717",
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
         }}
       >
         <AuthContext>
@@ -61,7 +64,7 @@ export default function RootLayout({
               <MuiSetup>
                 <Header />
                 <FloatingActionButton />
-                {children}
+                <div style={{ flex: "1 0 auto" }}>{children}</div>
                 <Footer />
               </MuiSetup>
             </QueryProvider>

@@ -43,7 +43,7 @@ const Header = () => {
 
   const basePaths = ["/profile/", "/addmoreifneeded"];
   const mobileBasePaths = isMobile
-    ? ["/vip", "/promotions", "/blog", "/information/"]
+    ? ["/vip", "/promotions", "/blog", "/information", "/information/"]
     : [];
 
   const noHeader = basePaths.some((basePath) => pathName?.startsWith(basePath));

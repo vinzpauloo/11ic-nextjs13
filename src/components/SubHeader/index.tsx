@@ -31,7 +31,7 @@ const SubHeader = () => {
 
   // ** Constants **
   const basePaths = isWeb
-    ? ["/vip", "/promotions", "/blog", "/information/"]
+    ? ["/vip", "/promotions", "/blog", "/information", "/information/"]
     : [];
   const noHeader = pathName === "/profile";
   const noHeaderInWeb = basePaths.some((basePaths) =>
