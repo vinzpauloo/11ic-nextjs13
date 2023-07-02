@@ -59,16 +59,16 @@ export default function RootLayout({
         }}
       >
         <AuthContext>
-          <FingerprintJSProvider>
-            <QueryProvider>
-              <MuiSetup>
-                <Header />
-                <FloatingActionButton />
-                <div style={{ flex: "1 0 auto" }}>{children}</div>
-                <Footer />
-              </MuiSetup>
-            </QueryProvider>
-          </FingerprintJSProvider>
+          {/* <FingerprintJSProvider> */}
+          <QueryProvider>
+            <MuiSetup>
+              <Header />
+              <FloatingActionButton />
+              <div style={{ flex: "1 0 auto" }}>{children}</div>
+              <Footer />
+            </MuiSetup>
+          </QueryProvider>
+          {/* </FingerprintJSProvider> */}
         </AuthContext>
       </body>
     </html>
