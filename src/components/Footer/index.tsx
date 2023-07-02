@@ -17,10 +17,18 @@ import SupportPayment from "./components/SupportPayment";
 import Licenses from "./components/Licenses";
 import OurApp from "./components/OurApp";
 
+// =================================================================
 const Footer = () => {
+  // ** NextJS Path **
   const pathName = usePathname();
 
-  const basePaths = ["/profile/", "/addmoreifneeded"];
+  const basePaths = [
+    "/profile/",
+    "/vip",
+    "/promotions",
+    "/blog",
+    "/addmoreifneeded",
+  ];
   const noFooter = basePaths.some((basePath) => pathName?.startsWith(basePath));
 
   return !noFooter ? (

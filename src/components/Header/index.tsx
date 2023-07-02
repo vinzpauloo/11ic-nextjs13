@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 
 // ** MUI Imports
-import { Box, Button } from "@mui/material";
+import { Box, Button, useMediaQuery, useTheme } from "@mui/material";
 
 // ** Zustand Store Imports
 import { useAccountStore } from "@/zustand/account-store";
@@ -37,8 +37,17 @@ const Header = () => {
   const router = useRouter();
   const pathName = usePathname();
 
+  // ** MUI **
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const basePaths = ["/profile/", "/addmoreifneeded"];
+  const mobileBasePaths = isMobile ? ["/vip", "/promotions", "/blog"] : [];
+
   const noHeader = basePaths.some((basePath) => pathName?.startsWith(basePath));
+  const noHeaderInMobile = mobileBasePaths.some((mobileBasePaths) =>
+    pathName?.startsWith(mobileBasePaths)
+  );
 
   // * Utils
   const TranslateString = useTranslateString();
@@ -86,7 +95,7 @@ const Header = () => {
     setLogoutModalOpen(true);
   };
 
-  return !noHeader ? (
+  return !noHeader && !noHeaderInMobile ? (
     <Box sx={{ ...styles.container, backgroundColor: headerBg }}>
       <Box sx={styles.firstWrapper}>
         <Box sx={styles.fillerContainer} />

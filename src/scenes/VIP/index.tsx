@@ -18,51 +18,60 @@ import SliderCards from "./components/SliderCards";
 
 const VIPContent = () => {
   return (
-    <Layout sx={{paddingTop : {
-      xs : '5rem',
-      md : '12rem'
-      }}}>
-
+    <Layout
+      sx={{
+        paddingTop: {
+          xs: "5rem",
+          md: "12rem",
+        },
+      }}
+    >
       <SliderCards />
 
-      <BoxWrapper mt={['1.5rem']}>
-        <Typography sx={headingSx} color='white' component='h5'>Rebate</Typography>
-        <TextBody>Daily turnover requirements ≥ 5,000 INR, Daily cash back bonus based on the proportion of net losses.</TextBody>
+      <BoxWrapper mt={["1.5rem"]}>
+        <Typography sx={headingSx} color="white" component="h5">
+          Rebate
+        </Typography>
+        <TextBody>
+          Daily turnover requirements ≥ 5,000 INR, Daily cash back bonus based
+          on the proportion of net losses.
+        </TextBody>
 
         <VIPPackagesTable />
-        
       </BoxWrapper>
 
       <BoxWrapper>
-        <Typography sx={headingSx} color='white' component='h5'>Terms and Conditions</Typography>
-          <ol style={olStyles.orderedListWrapper}>
-            {terms.map( (item, index) => (
-              <li key={index} style={olStyles.orderedList}><TextBody>{item}</TextBody></li>
-            ))}
-          </ol>
+        <Typography sx={headingSx} color="white" component="h5">
+          Terms and Conditions
+        </Typography>
+        <ol style={olStyles.orderedListWrapper}>
+          {terms.map((item, index) => (
+            <li key={index} style={olStyles.orderedList}>
+              <TextBody>{item}</TextBody>
+            </li>
+          ))}
+        </ol>
       </BoxWrapper>
-
     </Layout>
   );
 };
 
 export default ProtectedRoute(VIPContent);
 
-const headingSx : SxProps = {
-  marginBottom : {
-    xs : '.5rem',
-    sm : '1.5rem'
-  }
-}
-
-const olStyles : { [key : string ] : React.CSSProperties } = {
-  orderedListWrapper : {
-    paddingLeft: '1rem',
-    display: 'grid',
-    gap : '.7rem'
+const headingSx: SxProps = {
+  marginBottom: {
+    xs: ".5rem",
+    sm: "1.5rem",
   },
-  orderedList : {
-    color : 'var(--accent)'
-  }
-  
-}
+};
+
+const olStyles: { [key: string]: React.CSSProperties } = {
+  orderedListWrapper: {
+    paddingLeft: "1rem",
+    display: "grid",
+    gap: ".7rem",
+  },
+  orderedList: {
+    color: "var(--accent)",
+  },
+};

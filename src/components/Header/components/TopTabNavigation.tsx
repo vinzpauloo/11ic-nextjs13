@@ -10,13 +10,22 @@ import { Box, Tab, Tabs } from "@mui/material";
 
 // ** Custom Component Imports
 import { useCheckAuthentication } from "@/hooks/useCheckAuthentication";
-import { useAccountStore } from "@/zustand/account-store";
 
 // ** Utils Imports
 import { decrypt } from "@/utils/encryption";
 
-// ========================================================================
+// ** Zustand Imports
+import { useAccountStore } from "@/zustand/account-store";
+import { useMainStore } from "@/zustand/main-store";
 
+// ** Constant Imports
+import {
+  tabLabels,
+  tabRoutes,
+  restrictedValues,
+} from "@/constants/TopTabNavConstants";
+
+// ========================================================================
 const TopTabNavigation = () => {
   // ** Next **
   const router = useRouter();
@@ -26,6 +35,7 @@ const TopTabNavigation = () => {
   const { handleOpen } = useAccountStore((state) => ({
     handleOpen: state.handleOpen,
   }));
+  const { setMainHeader } = useMainStore();
 
   // ** States **
   const [selectedTab, setSelectedTab] = React.useState("1");
@@ -38,85 +48,33 @@ const TopTabNavigation = () => {
     event: React.SyntheticEvent,
     newValue: string
   ) => {
-    const restrictedValues = ["2", "3", "4", "5", "6", "7", "8", "9", "10"];
+    // Define the list of unavailable tabs
+    const unavailableTabs = ["2", "3", "4", "5", "6", "9"];
+
+    // Check if newValue is in the list of unavailable tabs
+    if (isAuthenticated && unavailableTabs.includes(newValue)) {
+      alert("Not available at the moment");
+      return;
+    }
+
     // Check for restricted tabs for unauthenticated users
     if (!isAuthenticated && restrictedValues.includes(newValue)) {
       handleOpen("login");
-
       return;
     }
 
     setSelectedTab(newValue);
 
-    switch (newValue) {
-      case "1":
-        router.push("/");
-        break;
-      case "2":
-        if (isAuthenticated) {
-          alert(`Not yet available`);
-        } else {
-          router.push("/");
-        }
-        break;
-      case "3":
-        if (isAuthenticated) {
-          alert(`Not yet available`);
-        } else {
-          router.push("/");
-        }
-        break;
-      case "4":
-        if (isAuthenticated) {
-          alert(`Not yet available`);
-        } else {
-          router.push("/");
-        }
-        break;
-      case "5":
-        if (isAuthenticated) {
-          alert(`Not yet available`);
-        } else {
-          router.push("/");
-        }
-        break;
-      case "6":
-        if (isAuthenticated) {
-          alert(`Not yet available`);
-        } else {
-          router.push("/");
-        }
-        break;
-      case "7":
-        if (isAuthenticated) {
-          router.push("/vip");
-        } else {
-          router.push("/");
-        }
-        break;
-      case "8":
-        if (isAuthenticated) {
-          router.push("/promotions");
-        } else {
-          router.push("/");
-        }
-        break;
-      case "9":
-        if (isAuthenticated) {
-          alert(`Not yet available`);
-        } else {
-          router.push("/");
-        }
-        break;
-      case "10":
-        if (isAuthenticated) {
-          router.push("/blog");
-        } else {
-          router.push("/");
-        }
-        break;
-      default:
-        break;
+    /* The condition is checking if the user is not authenticated (`!isAuthenticated`) or if the `newValue` (selected
+   tab) does not have a corresponding route in the `tabRoutes` object (`!tabRoutes[newValue as keyof
+   typeof tabRoutes]`). */
+    if (!isAuthenticated || !tabRoutes[newValue as keyof typeof tabRoutes]) {
+      router.push("/");
+    } else {
+      const label = tabLabels[newValue as keyof typeof tabLabels];
+      localStorage.setItem("mainHeader", label);
+      setMainHeader(label);
+      router.push(tabRoutes[newValue as keyof typeof tabRoutes]);
     }
   };
 
